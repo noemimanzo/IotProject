@@ -1,12 +1,12 @@
 
  
-#include "RadioRoute.h"
+#include "LoraWAN.h"
 
 
-configuration RadioRouteAppC {}
+configuration LoraWANAppC {}
 implementation {
 /****** COMPONENTS *****/
-  components MainC, RadioRouteC as App;
+  components MainC, LoraWANC as App;
   //add the other components here
   
   
