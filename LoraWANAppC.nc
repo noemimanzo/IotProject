@@ -13,10 +13,10 @@ implementation {
   components new TimerMilliC() as Timer0;
   components new TimerMilliC() as Timer1;
   components ActiveMessageC;
+  components RandomC;
   
   
   /****** INTERFACES *****/
-  //Boot interface
   App.Boot -> MainC.Boot;
   App.Receive -> AMReceiverC;
   App.AMSend -> AMSenderC;
@@ -24,8 +24,7 @@ implementation {
   App.Timer0 -> Timer0;
   App.Timer1 -> Timer1;
   App.Packet -> AMSenderC;
-  /****** Wire the other interfaces down here *****/
-
+  App.Random -> RandomC;
 }
 
 

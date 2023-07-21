@@ -193,6 +193,7 @@ implementation {
 					actual_send(server_node, &packet);
 				
 				}
+				return bufPtr;
 				break;
 			
 			case 1: //ack case
@@ -213,15 +214,18 @@ implementation {
 					flag_ack=false; 
 					}
 				}
+				return bufPtr;
 				break;
 		}
     
+  	}
   }
 
   event void AMSend.sendDone(message_t* bufPtr, error_t error) {
-	/* This event is triggered when a message is sent 
-	*  Check if the packet is sent 
-	*/ 
+	if (&packet==bufPtr ) {
+      locked = FALSE;
+      dbg("radio_send", "Packet sent successfully!\n");
+    }
   }
 }
 
