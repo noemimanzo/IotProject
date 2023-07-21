@@ -36,20 +36,28 @@ implementation {
  
   bool locked;
   
+  // Variables to handle the messages sent
+  uint8_t id_index=1;
+  lora_msg_t current_msg;
+  
+  
   bool actual_send (uint16_t address, message_t* packet);
   
+  
+  /**** FUNCTIONS ****/
+   
   bool actual_send (uint16_t address, message_t* packet){
   /*
   * This function is responsible for the actual transmission of a packet using the tinyOS interfaces. 
   * It checks if the sending process is currently locked and proceeds to send the packet if it is not. 
   * Upon successful transmission, it sets the lock flag. 
   */
-  	radio_route_msg_t* packet_to_send = (radio_route_msg_t*) call Packet.getPayload(packet, sizeof(radio_route_msg_t));
+  	lora_msg_t* packet_to_send = (lora_msg_t*) call Packet.getPayload(packet, sizeof(lora_msg_t));
 	if (locked){ 
 		return;
 	} 
 	else {	
-		if (call AMSend.send(address, packet, sizeof(radio_route_msg_t))== SUCCESS) {
+		if (call AMSend.send(address, packet, sizeof(lora_msg_t))== SUCCESS) {
 			locked=TRUE;
 			dbg("radio_send", "Sending packet of type %d at time %s\n",packet_to_send->type,sim_time_string());
 
@@ -57,6 +65,20 @@ implementation {
 	}
   }
   
+  void fill_pkt(lora_msg_t* packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content){
+  /*
+  * This function fills a packet by populating the fields of the `packet_to_fill` structure with the provided values according to its type.
+  * In case of REQ, the sender and the cost_val are set to 0. 
+  */
+  	packet_to_fill -> type = type;
+  	packet_to_fill -> id = id;
+  	packet_to_fill -> sender = sender;
+  	if (type == MSG){
+  		packet_to_fill -> content = content;
+  	}
+  }
+  
+  /******* EVENTS ******/
   event void Boot.booted() {
     dbg("boot","Application booted.\n"); 
     call AMControl.start();
@@ -81,9 +103,23 @@ implementation {
   }
   
   event void Timer0.fired() { // invio periodico
-	// creazione pack
-	// salvo messaggio 
-	// invio broadcast +start timer1 (one shot)
+	// 1. creazione pack
+	lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+	if (msg_to_send == NULL) {
+			return;
+	}
+	//msg_val = 
+	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val);
+	
+	// 2. salvo messaggio 
+	current_msg.type = msg_to_send.type
+	current_msg.id = msg_to_send.id
+	current_msg.sender = msg_to_send.sender
+	current_msg.content = msg_to_send.content
+	
+	// 3. invio broadcast +start timer1 (one shot)
+	actual_send(AM_BROADCAST_ADDR, &packet);
+	id_index++;
   }
   
    event void Timer1.fired() { // check arrivo ack
