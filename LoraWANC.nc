@@ -36,6 +36,8 @@ implementation {
  
   bool locked;
   
+  uint8_t server_node =8;
+  
   bool actual_send (uint16_t address, message_t* packet);
   
   bool actual_send (uint16_t address, message_t* packet){
@@ -121,23 +123,27 @@ implementation {
 		lora_msg_t* current_pkt = (lora_msg_t*)payload;
 		switch(current_pkt -> type) {
 			case 0: //msg case
-				if (TOS_NODE_ID == 8) { //if i am the server
+				lora_msg_t* packet_to_send= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+				if (packet_to_send== NULL) {
+					return;
+				}
+				if (TOS_NODE_ID == server_node) { //if i am the server
 					//check duplicates and store message
 					
 					//create ACK
-					lora_msg_t* ack_pkt= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
-					if (ack_pkt== NULL) {
-						return;
-					}
-					ack_pkt -> type = ACK;
-					ack_pkt -> id = current_pkt-> id;
-					ack_pkt -> sender = current_pkt-> sender;
+					packet_to_send -> type = ACK;
+					packet_to_send -> id = current_pkt-> id;
+					packet_to_send -> sender = current_pkt-> sender;
 					//send ACK to the gateway
 					actual_send(current_pkt->gateway, &packet);
-
 				
 				} else { //if i am a gateway (not possible that a msg arrive to a sensor
-				actual_send(8, &packet);
+					packet_to_send -> type = MSG;
+					packet_to_send -> id = current_pkt-> id;
+					packet_to_send -> sender = current_pkt-> sender;
+					packet_to_send -> content = current_pkt -> content;
+					actual_send(server_node, &packet);
+				
 				}
 				break;
 			
