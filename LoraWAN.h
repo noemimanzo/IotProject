@@ -9,6 +9,7 @@ typedef nx_struct lora_msg {
 	nx_uint8_t id;
 	nx_uint8_t sender;
 	nx_uint8_t content;	
+	nx_uint8_t gateway;
 } lora_msg_t;
 
 #define MSG 0

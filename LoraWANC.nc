@@ -116,7 +116,38 @@ implementation {
 			se no flag sempre falso 	
 			
 	*/
-	
+	if (len != sizeof(lora_msg_t)) {return bufPtr;}
+    else {
+		lora_msg_t* current_pkt = (lora_msg_t*)payload;
+		switch(current_pkt -> type) {
+			case 0: //msg case
+				if (TOS_NODE_ID == 8) { //if i am the server
+					//check duplicates and store message
+					
+					//create ACK
+					lora_msg_t* ack_pkt= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+					if (ack_pkt== NULL) {
+						return;
+					}
+					ack_pkt -> type = ACK;
+					ack_pkt -> id = current_pkt-> id;
+					ack_pkt -> sender = current_pkt-> sender;
+					//send ACK to the gateway
+					actual_send(current_pkt->gateway, &packet);
+
+				
+				} else { //if i am a gateway (not possible that a msg arrive to a sensor
+				actual_send(8, &packet);
+				}
+				break;
+			
+			case 1: //ack case
+				if (TOS_NODE_ID == 6 || TOS_NODE_ID ==7) { //if i am a gatway
+				
+				} else { //if i am a sensor (not possible that a msg arrive to the server
+				}
+				break;
+		}
     
   }
 
