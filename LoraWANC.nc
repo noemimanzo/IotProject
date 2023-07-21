@@ -40,6 +40,9 @@ implementation {
   uint8_t id_index=1;
   lora_msg_t current_msg;
   
+  uint8_t server_node =8;
+  uint8_t current_msg_id;
+  bool flag_ack = false;
   
   bool actual_send (uint16_t address, message_t* packet);
   
@@ -152,7 +155,56 @@ implementation {
 			se no flag sempre falso 	
 			
 	*/
-	
+	if (len != sizeof(lora_msg_t)) {return bufPtr;}
+    else {
+		lora_msg_t* current_pkt = (lora_msg_t*)payload;
+		switch(current_pkt -> type) {
+			case 0: //msg case
+				lora_msg_t* packet_to_send= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+				if (packet_to_send== NULL) {
+					return;
+				}
+				current_msg_id=current_pkt->id; 
+				if (TOS_NODE_ID == server_node) { //if i am the server
+					//check duplicates and store message
+					
+					//create ACK
+					packet_to_send -> type = ACK;
+					packet_to_send -> id = current_pkt-> id;
+					packet_to_send -> sender = current_pkt-> sender;
+					//send ACK to the gateway
+					actual_send(current_pkt->gateway, &packet);
+
+				} else { //if i am a gateway (not possible that a msg arrive to a sensor
+					packet_to_send -> type = MSG;
+					packet_to_send -> id = current_pkt-> id;
+					packet_to_send -> sender = current_pkt-> sender;
+					packet_to_send -> content = current_pkt -> content;
+					actual_send(server_node, &packet);
+				
+				}
+				break;
+			
+			case 1: //ack case
+				lora_msg_t* packet_to_send= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+				if (packet_to_send== NULL) {
+					return;
+				}
+				if (TOS_NODE_ID == 6 || TOS_NODE_ID ==7) { //if i am a gateway
+					packet_to_send -> type = ACK;
+					packet_to_send -> id = current_pkt-> id;
+					packet_to_send -> sender = current_pkt-> sender;
+					//send ACK to the sensor
+					actual_send(current_pkt->sender, &packet);
+				} else { //if i am a sensor (not possible that a msg arrive to the server
+					if(current_msg_id == current_pkt -> id && current_pkt->sender ==TOS_NODE_ID) {
+					flag_ack=true;
+					} else {
+					flag_ack=false; 
+					}
+				}
+				break;
+		}
     
   }
 
