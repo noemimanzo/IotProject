@@ -72,7 +72,6 @@ implementation {
   void fill_pkt(lora_msg_t* packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content){
   /*
   * This function fills a packet by populating the fields of the `packet_to_fill` structure with the provided values according to its type.
-  * In case of REQ, the sender and the cost_val are set to 0. 
   */
   	packet_to_fill -> type = type;
   	packet_to_fill -> id = id;
