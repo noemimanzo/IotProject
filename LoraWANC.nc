@@ -104,11 +104,11 @@ implementation {
 			fowarded to server
 		node = server
 			(check duplicati + salvataggio+invio nodered)
-			ack
+			invio ack
 	
 	case 2: ricezione ack
 		node = gat
-			fowarded (al sender del ack/msg)
+			fowarded ack (al sender del ack/msg)
 		
 		node = sensor
 			check se ack è quello relativo al messaggio appena inviato
