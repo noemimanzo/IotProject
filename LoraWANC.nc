@@ -16,6 +16,7 @@ module LoraWANC @safe() {
   
  	 /****** INTERFACES *****/
 	interface Boot;
+	interface Random;
 
     //Interfaces for communication
     interface Receive;
@@ -111,7 +112,7 @@ implementation {
 	if (msg_to_send == NULL) {
 			return;
 	}
-	//msg_val = 
+	msg_val= Random.rand16()% 100;
 	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val);
 	
 	// 2. salvo messaggio 
@@ -122,6 +123,7 @@ implementation {
 	
 	// 3. invio broadcast +start timer1 (one shot)
 	actual_send(AM_BROADCAST_ADDR, &packet);
+	call Timer1.startOneShot(1000);
 	id_index++;
   }
   
@@ -131,8 +133,16 @@ implementation {
 	   altrimenti
 	   		rinvio messaggio broadcast + start timer 1(one shot) 	
 	*/
-			
+	if (!flag_ack){ // flag = false msg is resent
+		lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+		if (msg_to_send == NULL) {
+				return;
+		}
+		fill_pkt(msg_to_send, current_msg.type, current_msg.id, current_msg.sender, current_msg.content);
+		actual_send(AM_BROADCAST_ADDR, &packet);
+		call Timer1.startOneShot(1000);
 		
+	}
   }
 
   event message_t* Receive.receive(message_t* bufPtr, 
