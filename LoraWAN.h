@@ -1,18 +1,21 @@
 
 
-#ifndef RADIO_ROUTE_H
-#define RADIO_ROUTE_H
+#ifndef LORAWAN_H
+#define LORAWAN_H
 
-typedef nx_struct radio_route_msg {
-	//field 1
-	//field 2
-	//field 3
-	//....
-	//field n
-} radio_route_msg_t;
+//message structure
+typedef nx_struct lora_msg {
+	nx_uint8_t type;
+	nx_uint8_t id;
+	nx_uint8_t sender;
+	nx_uint8_t content;	
+} lora_msg_t;
+
+#define MSG 0
+#define ACK 1
 
 enum {
-  AM_RADIO_COUNT_MSG = 10,
+  AM_LORA_COUNT_MSG = 10,
 };
 
 #endif
