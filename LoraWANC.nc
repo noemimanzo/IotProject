@@ -36,16 +36,13 @@ implementation {
 
   message_t packet;
  
-  bool locked;
+  bool locked= FALSE;
   
   // Variables to handle the messages sent
   uint8_t id_index=1;
   lora_msg_t current_msg;
   
-  message_t queued_packet;
-  uint16_t queue_addr;
-  uint16_t time_delays[5]={61,173,267,371,479}; //Time delay in milli seconds 
-  
+    
   uint8_t server_node =8;
   uint8_t current_msg_id;
   bool flag_ack = FALSE;
@@ -74,7 +71,7 @@ implementation {
 	}
   }
   
-  void fill_pkt(lora_msg_t* packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content){
+  void fill_pkt(lora_msg_t* packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content, uint8_t gateway){
   /*
   * This function fills a packet by populating the fields of the `packet_to_fill` structure with the provided values according to its type.
   */
@@ -83,6 +80,7 @@ implementation {
   	packet_to_fill -> sender = sender;
   	if (type == MSG){
   		packet_to_fill -> content = content;
+  		packet_to_fill -> gateway = gateway;
   	}
   }
   
@@ -119,7 +117,7 @@ implementation {
 			return;
 	}
 	dbg("radio_rec","random value at node %d: %d\n", TOS_NODE_ID, msg_val);	
-	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val);
+	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val,0);
 	
 	
 	// 2. salvo messaggio 
@@ -146,7 +144,7 @@ implementation {
 		if (msg_to_send == NULL) {
 				return;
 		}
-		fill_pkt(msg_to_send, current_msg.type, current_msg.id, current_msg.sender, current_msg.content);
+		fill_pkt(msg_to_send, current_msg.type, current_msg.id, current_msg.sender, current_msg.content,0);
 		actual_send(AM_BROADCAST_ADDR, &packet);
 		call Timer1.startOneShot(1000);
 		
@@ -193,9 +191,7 @@ implementation {
 					//check duplicates and store message
 
 					//create ACK
-					packet_to_send -> type = ACK;
-					packet_to_send -> id = current_pkt-> id;
-					packet_to_send -> sender = current_pkt-> sender;
+					fill_pkt(packet_to_send, ACK, current_pkt-> id, current_pkt-> sender, 0, 0);
 					//send ACK to the gateway
 					dbg("radio_rec","msg arrived at server %d\n", TOS_NODE_ID);
 					actual_send(current_pkt->gateway, &packet);
@@ -203,10 +199,7 @@ implementation {
 
 				} else { //if i am a gateway (not possible that a msg arrive to a sensor
 					dbg("radio_rec","msg arrived at gat %d from node %d\n", TOS_NODE_ID, current_pkt-> sender );
-					packet_to_send -> type = MSG;
-					packet_to_send -> id = current_pkt-> id;
-					packet_to_send -> sender = current_pkt-> sender;
-					packet_to_send -> content = current_pkt -> content;
+					fill_pkt(packet_to_send, MSG, current_pkt-> id, current_pkt-> sender,current_pkt -> content , TOS_NODE_ID);
 					actual_send(server_node, &packet);
 					dbg("radio_rec","msg sent from gat %d\n", TOS_NODE_ID);
 				
@@ -219,9 +212,7 @@ implementation {
 					return;
 				}
 				if (TOS_NODE_ID == 6 || TOS_NODE_ID ==7) { //if i am a gateway
-					packet_to_send -> type = ACK;
-					packet_to_send -> id = current_pkt-> id;
-					packet_to_send -> sender = current_pkt-> sender;
+					fill_pkt(packet_to_send, ACK, current_pkt-> id, current_pkt-> sender, 0, 0);
 					dbg("radio_rec","ACK arrived at gat %d\n", TOS_NODE_ID);
 					//send ACK to the sensor
 					actual_send(current_pkt->sender, &packet);
