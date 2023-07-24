@@ -25,6 +25,7 @@ module LoraWANC @safe() {
 	//Interfaces for timers
 	interface Timer<TMilli> as Timer0;
 	interface Timer<TMilli> as Timer1;
+	//interface Timer<TMilli> as Timer2;
 	
     //Other Interfaces;
     interface SplitControl as AMControl;
@@ -41,15 +42,19 @@ implementation {
   uint8_t id_index=1;
   lora_msg_t current_msg;
   
+  message_t queued_packet;
+  uint16_t queue_addr;
+  uint16_t time_delays[5]={61,173,267,371,479}; //Time delay in milli seconds 
+  
   uint8_t server_node =8;
   uint8_t current_msg_id;
-  bool flag_ack = false;
+  bool flag_ack = FALSE;
   
   bool actual_send (uint16_t address, message_t* packet);
   
   
   /**** FUNCTIONS ****/
-   
+  
   bool actual_send (uint16_t address, message_t* packet){
   /*
   * This function is responsible for the actual transmission of a packet using the tinyOS interfaces. 
@@ -92,7 +97,7 @@ implementation {
 		dbg("radio","Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
 	
 		// Just in case of NODE=1,2,3,4,5 the timer is started
-		if (TOS_NODE_ID != 6 || TOS_NODE_ID != 7 || TOS_NODE_ID != 8){
+		if (TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5 ){
 	  		call Timer0.startPeriodic(10000);
 	  	}
 	}
@@ -107,26 +112,30 @@ implementation {
   
   event void Timer0.fired() { // invio periodico
 	// 1. creazione pack
+	uint8_t msg_val= (call Random.rand16())% 100;
 	lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+	lora_msg_t* current_msg = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
 	if (msg_to_send == NULL) {
 			return;
 	}
-	msg_val= Random.rand16()% 100;
+	dbg("radio_rec","random value at node %d: %d\n", TOS_NODE_ID, msg_val);	
 	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val);
 	
+	
 	// 2. salvo messaggio 
-	current_msg.type = msg_to_send.type
-	current_msg.id = msg_to_send.id
-	current_msg.sender = msg_to_send.sender
-	current_msg.content = msg_to_send.content
+	current_msg -> type = msg_to_send -> type;
+	current_msg -> id = msg_to_send -> id;
+	current_msg -> sender = msg_to_send -> sender;
+	current_msg -> content = msg_to_send -> content;
 	
 	// 3. invio broadcast +start timer1 (one shot)
 	actual_send(AM_BROADCAST_ADDR, &packet);
+	dbg("radio_rec","	msg sent at node %d\n", TOS_NODE_ID);	
 	call Timer1.startOneShot(1000);
 	id_index++;
   }
   
-   event void Timer1.fired() { // check arrivo ack
+  event void Timer1.fired() { // check arrivo ack
 	/* se flag = true (mi è arrivato in tempo)
 			nulla
 	   altrimenti
@@ -143,6 +152,11 @@ implementation {
 		
 	}
   }
+  
+  /*event void Timer2.fired() {
+ 	actual_send (queue_addr, &queued_packet);
+  }
+  */
 
   event message_t* Receive.receive(message_t* bufPtr, 
 				   void* payload, uint8_t len) {
@@ -167,36 +181,40 @@ implementation {
 	if (len != sizeof(lora_msg_t)) {return bufPtr;}
     else {
 		lora_msg_t* current_pkt = (lora_msg_t*)payload;
+		lora_msg_t* packet_to_send= (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
 		switch(current_pkt -> type) {
 			case 0: //msg case
-				lora_msg_t* packet_to_send= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+				//lora_msg_t* packet_to_send= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
 				if (packet_to_send== NULL) {
 					return;
 				}
 				current_msg_id=current_pkt->id; 
 				if (TOS_NODE_ID == server_node) { //if i am the server
 					//check duplicates and store message
-					
+
 					//create ACK
 					packet_to_send -> type = ACK;
 					packet_to_send -> id = current_pkt-> id;
 					packet_to_send -> sender = current_pkt-> sender;
 					//send ACK to the gateway
+					dbg("radio_rec","msg arrived at server %d\n", TOS_NODE_ID);
 					actual_send(current_pkt->gateway, &packet);
+					dbg("radio_rec","ACK sent from server %d\n", TOS_NODE_ID);
 
 				} else { //if i am a gateway (not possible that a msg arrive to a sensor
+					dbg("radio_rec","msg arrived at gat %d from node %d\n", TOS_NODE_ID, current_pkt-> sender );
 					packet_to_send -> type = MSG;
 					packet_to_send -> id = current_pkt-> id;
 					packet_to_send -> sender = current_pkt-> sender;
 					packet_to_send -> content = current_pkt -> content;
 					actual_send(server_node, &packet);
+					dbg("radio_rec","msg sent from gat %d\n", TOS_NODE_ID);
 				
 				}
-				return bufPtr;
 				break;
 			
 			case 1: //ack case
-				lora_msg_t* packet_to_send= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+				//lora_msg_t* packet_to_send= (lora_msg*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
 				if (packet_to_send== NULL) {
 					return;
 				}
@@ -204,24 +222,27 @@ implementation {
 					packet_to_send -> type = ACK;
 					packet_to_send -> id = current_pkt-> id;
 					packet_to_send -> sender = current_pkt-> sender;
+					dbg("radio_rec","ACK arrived at gat %d\n", TOS_NODE_ID);
 					//send ACK to the sensor
 					actual_send(current_pkt->sender, &packet);
+					dbg("radio_rec","ACK sent from gat %d\n", TOS_NODE_ID);
 				} else { //if i am a sensor (not possible that a msg arrive to the server
+					dbg("radio_rec","ACK arrived at node %d\n", TOS_NODE_ID);
 					if(current_msg_id == current_pkt -> id && current_pkt->sender ==TOS_NODE_ID) {
-					flag_ack=true;
+					flag_ack=TRUE;
 					} else {
-					flag_ack=false; 
+					flag_ack=FALSE; 
 					}
 				}
-				return bufPtr;
 				break;
 		}
+		return bufPtr;
     
   	}
   }
 
   event void AMSend.sendDone(message_t* bufPtr, error_t error) {
-	if (&packet==bufPtr ) {
+	if (&packet==bufPtr) {
       locked = FALSE;
       dbg("radio_send", "Packet sent successfully!\n");
     }

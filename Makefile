@@ -1,4 +1,5 @@
-COMPONENT=RadioRouteAppC
+COMPONENT=LoraWANAppC
 
 include $(MAKERULES)
+
 
