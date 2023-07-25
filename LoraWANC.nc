@@ -1,12 +1,3 @@
-
-/*
-*	IMPORTANT:
-*	The code will be avaluated based on:
-*		Code design  
-*
-*/
- 
- 
 #include "Timer.h"
 #include "LoraWAN.h"
 
@@ -44,6 +35,7 @@ implementation {
   lora_msg_t current_msg;
   uint8_t msg_val;
   uint16_t time_delays[5]={61,173,267,371,479};
+  saved_msg_t saved_msg;
   
   uint8_t current_type;
   uint8_t current_id;
@@ -128,12 +120,19 @@ implementation {
   event void Timer0.fired() { // invio periodico
 	// 1. creazione pack
 	lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+	uint8_t i=0;
 	if (msg_to_send == NULL) {
 			return;
 	}
 	msg_val= (call Random.rand16())% 100;
 	//call TimerDelay.startOneShot(time_delays[TOS_NODE_ID-1]);
-	
+
+	for (i=0; i<5; i++){
+    	saved_msg.node[i]=0;
+    	saved_msg.id[i]=0;
+    	saved_msg.content[i]=0;
+    }
+
 	dbg("radio_rec","random value at node %d: %d\n", TOS_NODE_ID, msg_val);	
 	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val,0);
 	
@@ -206,7 +205,10 @@ implementation {
 	*/
 	if (len != sizeof(lora_msg_t) || locked ) {return bufPtr;}
     else {
+	
 		lora_msg_t* received_pkt = (lora_msg_t*)payload;
+		//printf("Packet received at node %d from node %d\n",TOS_NODE_ID, received_pkt->sender);
+		//printfflush();
 		//MSG CASE
 		if (received_pkt -> type == MSG){
  			lora_msg_t* packet_to_send= (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
@@ -217,15 +219,25 @@ implementation {
 			if (TOS_NODE_ID == server_node) {
 				if(locked){return bufPtr;} 
 				else{//if i am the server
+					dbg("radio_rec","MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> id, received_pkt->sender,received_pkt-> content );
 					//check duplicates and store message
-
+					if(saved_msg.node[received_pkt-> sender-1] != received_pkt-> sender && saved_msg.id[received_pkt-> sender-1] != received_pkt-> id){
+						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
+						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
+						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
+						//printf("NODE:%d,ID:%d,CONTENT:%d!\n",saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1],saved_msg.content[received_pkt-> sender -1]);
+						//printfflush();
+					} else {
+						dbg("radio_rec", "DUPLICATE FOUND!!!\n");
+					}
+					dbg("radio_rec", "MSG SAVED TABLE \n\t\t\tNODE:%d\n\t\t\tID:%d\n\t\t\tCONTENT:%d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1],saved_msg.content[received_pkt-> sender -1]);
 					//create ACK
-					dbg("radio_rec","MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> id, received_pkt->sender,received_pkt-> content ); 
 					fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender,received_pkt-> content , received_pkt -> gateway);
 					//send ACK to the gateway
 					actual_send(received_pkt->gateway, &packet);
 					dbg("radio_rec","GATEWAY: %d\n",received_pkt->gateway); 
 					//dbg("radio_rec","ACK sent from server %d\n", TOS_NODE_ID);
+
 				}
 
 			} 

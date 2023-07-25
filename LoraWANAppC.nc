@@ -15,7 +15,7 @@ implementation {
   //components new TimerMilliC() as TimerDelay;
   components ActiveMessageC;
   components RandomC;
-  
+  //components SerialPrintfC;
   
   /****** INTERFACES *****/
   App.Boot -> MainC.Boot;
