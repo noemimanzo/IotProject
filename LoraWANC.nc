@@ -41,6 +41,10 @@ implementation {
   // Variables to handle the messages sent
   uint8_t id_index=1;
   lora_msg_t current_msg;
+  uint8_t current_type;
+  uint8_t current_id;
+  uint8_t current_sender;
+  uint8_t current_content;
   
     
   uint8_t server_node =8;
@@ -95,8 +99,12 @@ implementation {
 		dbg("radio","Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
 	
 		// Just in case of NODE=1,2,3,4,5 the timer is started
-		if (TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5 ){
+		/*if (TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5 ){
 	  		call Timer0.startPeriodic(10000);
+	  	}
+	  	*/
+	  	if (TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5 ){
+	  		call Timer0.startOneShot(10000);
 	  	}
 	}
 	else {
@@ -112,7 +120,6 @@ implementation {
 	// 1. creazione pack
 	uint8_t msg_val= (call Random.rand16())% 100;
 	lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
-	lora_msg_t* current_msg = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
 	if (msg_to_send == NULL) {
 			return;
 	}
@@ -121,15 +128,18 @@ implementation {
 	
 	
 	// 2. salvo messaggio 
-	current_msg -> type = msg_to_send -> type;
-	current_msg -> id = msg_to_send -> id;
-	current_msg -> sender = msg_to_send -> sender;
-	current_msg -> content = msg_to_send -> content;
+	current_type = msg_to_send->type;
+	current_id = msg_to_send->id;
+	current_sender = msg_to_send->sender;
+	current_content = msg_to_send->content;
+	
+	dbg("radio_rec","current msg -> type: %d id: %d sender: %d content: %d\n", current_type, current_id, current_sender, current_content);	
+	
 	
 	// 3. invio broadcast +start timer1 (one shot)
 	actual_send(AM_BROADCAST_ADDR, &packet);
 	dbg("radio_rec","	msg sent at node %d\n", TOS_NODE_ID);	
-	call Timer1.startOneShot(1000);
+	call Timer1.startOneShot(3000);
 	id_index++;
   }
   
@@ -139,15 +149,20 @@ implementation {
 	   altrimenti
 	   		rinvio messaggio broadcast + start timer 1(one shot) 	
 	*/
+	dbg("radio_rec","	flag : %d\n", flag_ack);	
 	if (!flag_ack){ // flag = false msg is resent
-		lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
+		lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));	
 		if (msg_to_send == NULL) {
 				return;
 		}
-		fill_pkt(msg_to_send, current_msg.type, current_msg.id, current_msg.sender, current_msg.content,0);
+		dbg("radio_rec","TIME EXPIRED\n");
+		dbg("radio_rec","RESEND MSG: type: %d id: %d sender: %d content: %d\n", current_type, current_id, current_sender, current_content);
+		fill_pkt(msg_to_send, current_type, current_id, current_sender, current_content,0);
 		actual_send(AM_BROADCAST_ADDR, &packet);
-		call Timer1.startOneShot(1000);
+		call Timer1.startOneShot(3000);
 		
+	} else {
+	dbg("radio_rec","ACK arrived corrected\n");	
 	}
   }
   
@@ -191,17 +206,17 @@ implementation {
 					//check duplicates and store message
 
 					//create ACK
+					dbg("radio_rec","msg arrived at server %d from gateway %d\n", TOS_NODE_ID,current_pkt -> gateway);
 					fill_pkt(packet_to_send, ACK, current_pkt-> id, current_pkt-> sender, 0, 0);
 					//send ACK to the gateway
-					dbg("radio_rec","msg arrived at server %d\n", TOS_NODE_ID);
 					actual_send(current_pkt->gateway, &packet);
-					dbg("radio_rec","ACK sent from server %d\n", TOS_NODE_ID);
+					//dbg("radio_rec","ACK sent from server %d\n", TOS_NODE_ID);
 
 				} else { //if i am a gateway (not possible that a msg arrive to a sensor
 					dbg("radio_rec","msg arrived at gat %d from node %d\n", TOS_NODE_ID, current_pkt-> sender );
 					fill_pkt(packet_to_send, MSG, current_pkt-> id, current_pkt-> sender,current_pkt -> content , TOS_NODE_ID);
 					actual_send(server_node, &packet);
-					dbg("radio_rec","msg sent from gat %d\n", TOS_NODE_ID);
+					//dbg("radio_rec","msg sent from gat %d\n", TOS_NODE_ID);
 				
 				}
 				break;
@@ -211,18 +226,22 @@ implementation {
 				if (packet_to_send== NULL) {
 					return;
 				}
+				current_msg_id=current_pkt->id; 
 				if (TOS_NODE_ID == 6 || TOS_NODE_ID ==7) { //if i am a gateway
 					fill_pkt(packet_to_send, ACK, current_pkt-> id, current_pkt-> sender, 0, 0);
 					dbg("radio_rec","ACK arrived at gat %d\n", TOS_NODE_ID);
 					//send ACK to the sensor
 					actual_send(current_pkt->sender, &packet);
-					dbg("radio_rec","ACK sent from gat %d\n", TOS_NODE_ID);
-				} else { //if i am a sensor (not possible that a msg arrive to the server
+					//dbg("radio_rec","ACK sent from gat %d\n", TOS_NODE_ID);
+				} else { //if i am a sensor (not possible that a ack arrive to the server
 					dbg("radio_rec","ACK arrived at node %d\n", TOS_NODE_ID);
+					dbg("radio_rec","current_msg_id: %d\n current_pkt_id: %d\n sender: %d\n node: %d\n",current_msg_id, current_pkt -> id, current_pkt->sender, TOS_NODE_ID);
 					if(current_msg_id == current_pkt -> id && current_pkt->sender ==TOS_NODE_ID) {
-					flag_ack=TRUE;
+						flag_ack=TRUE;
+						dbg("radio_rec","flag check %d\n", flag_ack);
 					} else {
-					flag_ack=FALSE; 
+						flag_ack=FALSE; 
+						dbg("radio_rec","flag check %d\n", flag_ack);
 					}
 				}
 				break;
@@ -235,7 +254,7 @@ implementation {
   event void AMSend.sendDone(message_t* bufPtr, error_t error) {
 	if (&packet==bufPtr) {
       locked = FALSE;
-      dbg("radio_send", "Packet sent successfully!\n");
+      //dbg("radio_send", "Packet sent successfully!\n");
     }
   }
 }
