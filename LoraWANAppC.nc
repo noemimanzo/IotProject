@@ -12,7 +12,7 @@ implementation {
   components new AMReceiverC(AM_LORA_COUNT_MSG);
   components new TimerMilliC() as Timer0;
   components new TimerMilliC() as Timer1;
-  //components new TimerMilliC() as Timer2;
+  //components new TimerMilliC() as TimerDelay;
   components ActiveMessageC;
   components RandomC;
   
@@ -24,7 +24,7 @@ implementation {
   App.AMControl -> ActiveMessageC;
   App.Timer0 -> Timer0;
   App.Timer1 -> Timer1;
-  //sApp.Timer2 -> Timer2;
+  //App.TimerDelay -> TimerDelay;
   App.Packet -> AMSenderC;
   App.Random -> RandomC;
 }

@@ -898,7 +898,7 @@ extern void *malloc(size_t __size) __attribute((__leaf__)) __attribute((__nothro
 #line 483
 extern void free(void *__ptr) __attribute((__leaf__)) __attribute((__nothrow__)) ;
 #line 741
-typedef int (*__compar_fn_t)(const void *arg_0xb7bd7458, const void *arg_0xb7bd75f0);
+typedef int (*__compar_fn_t)(const void *arg_0xb7bc0458, const void *arg_0xb7bc05f0);
 #line 779
 __extension__ 
 #line 796
@@ -917,7 +917,7 @@ extern double sqrt(double __x) __attribute((__leaf__)) __attribute((__nothrow__)
 #line 184
 extern double floor(double __x) __attribute((__leaf__)) __attribute((__nothrow__)) __attribute((const)) ;
 #line 260
-extern double erfc(double arg_0xb7b888c8) __attribute((__leaf__)) __attribute((__nothrow__)) ;
+extern double erfc(double arg_0xb7b718c8) __attribute((__leaf__)) __attribute((__nothrow__)) ;
 #line 336
 __extension__ 
 
@@ -1312,8 +1312,8 @@ typedef struct hashtable hashtable_t;
 #line 78
 struct hashtable *
 create_hashtable(unsigned int minsize, 
-unsigned int (*hashfunction)(void *arg_0xb7a32840), 
-int (*key_eq_fn)(void *arg_0xb7a32c88, void *arg_0xb7a32e00));
+unsigned int (*hashfunction)(void *arg_0xb7a1b840), 
+int (*key_eq_fn)(void *arg_0xb7a1bc88, void *arg_0xb7a1be00));
 #line 103
 #line 102
 int 
@@ -1349,7 +1349,7 @@ typedef struct sim_log_channel {
 } sim_log_channel_t;
 
 enum __nesc_unnamed4273 {
-  SIM_LOG_OUTPUT_COUNT = 198U
+  SIM_LOG_OUTPUT_COUNT = 200U
 };
 
 sim_log_output_t outputs[SIM_LOG_OUTPUT_COUNT];
@@ -1926,7 +1926,7 @@ struct tm;
 
 struct tm;
 # 46 "/opt/tinyos-main-2.1.2/tos/lib/tossim/randomlib.h"
-static inline void RandomInitialise(int arg_0xb79019b8, int arg_0xb7901b10);
+static inline void RandomInitialise(int arg_0xb78ea9b8, int arg_0xb78eab10);
 static double RandomUniform(void );
 # 51 "/opt/tinyos-main-2.1.2/tos/lib/tossim/sim_noise.c"
 int numCase1 = 0;
@@ -3753,11 +3753,11 @@ static error_t MeasureClockC$Init$init(void );
 # 67 "/opt/tinyos-main-2.1.2/tos/interfaces/TaskBasic.nc"
 static error_t SimSchedulerBasicP$TaskBasic$postTask(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0xb785d650);
+uint8_t arg_0xb7846650);
 # 75 "/opt/tinyos-main-2.1.2/tos/interfaces/TaskBasic.nc"
 static void SimSchedulerBasicP$TaskBasic$default$runTask(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0xb785d650);
+uint8_t arg_0xb7846650);
 # 57 "/opt/tinyos-main-2.1.2/tos/interfaces/Scheduler.nc"
 static void SimSchedulerBasicP$Scheduler$init(void );
 
@@ -3787,7 +3787,7 @@ static long long int SimMoteP$SimMote$getStartTime(void );
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static error_t TossimActiveMessageC$AMSend$send(
 # 47 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb76b18b0, 
+am_id_t arg_0xb769a8b0, 
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -3810,7 +3810,7 @@ message_t *
 
 TossimActiveMessageC$Snoop$default$receive(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb76a2930, 
+am_id_t arg_0xb768b930, 
 # 71 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -3857,7 +3857,7 @@ message_t *
 
 TossimActiveMessageC$Receive$default$receive(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb76a2298, 
+am_id_t arg_0xb768b298, 
 # 71 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4015,7 +4015,7 @@ error_t error);
 # 110 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(
 # 48 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0xb7535730, 
+am_id_t arg_0xb75180a0, 
 # 103 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4028,7 +4028,7 @@ error_t error);
 # 75 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$send(
 # 46 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0xb7538ca8, 
+uint8_t arg_0xb75196a8, 
 # 67 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4042,7 +4042,7 @@ uint8_t len);
 #line 100
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(
 # 46 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0xb7538ca8, 
+uint8_t arg_0xb75196a8, 
 # 96 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4119,11 +4119,17 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$TimerFrom$fire
 #line 83
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0xb73b53a8);
-# 73 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
+uint8_t arg_0xb73993a8);
+# 114 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
+static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startPeriodicAt(
+# 48 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
+uint8_t arg_0xb73993a8, 
+# 114 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
+uint32_t t0, uint32_t dt);
+#line 73
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startOneShot(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0xb73b53a8, 
+uint8_t arg_0xb73993a8, 
 # 73 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
 uint32_t dt);
 # 82 "/opt/tinyos-main-2.1.2/tos/lib/timer/Counter.nc"
@@ -4178,7 +4184,7 @@ int sim_main_start_mote(void )   ;
 # 75 "/opt/tinyos-main-2.1.2/tos/interfaces/TaskBasic.nc"
 static void SimSchedulerBasicP$TaskBasic$runTask(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0xb785d650);
+uint8_t arg_0xb7846650);
 
 
 
@@ -4346,7 +4352,7 @@ static am_addr_t TossimActiveMessageC$amAddress(void );
 # 110 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static void TossimActiveMessageC$AMSend$sendDone(
 # 47 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb76b18b0, 
+am_id_t arg_0xb769a8b0, 
 # 103 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4365,7 +4371,7 @@ message_t *
 
 TossimActiveMessageC$Snoop$receive(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb76a2930, 
+am_id_t arg_0xb768b930, 
 # 71 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4384,7 +4390,7 @@ message_t *
 
 TossimActiveMessageC$Receive$receive(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb76a2298, 
+am_id_t arg_0xb768b298, 
 # 71 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4744,8 +4750,8 @@ am_addr_t ActiveMessageAddressC$addr[1000];
 static am_addr_t ActiveMessageAddressC$ActiveMessageAddress$amAddress(void );
 #line 88
 static inline am_addr_t ActiveMessageAddressC$amAddress(void );
-# 73 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
-static void LoraWANC$Timer0$startOneShot(uint32_t dt);
+# 114 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
+static void LoraWANC$Timer0$startPeriodicAt(uint32_t t0, uint32_t dt);
 # 104 "/opt/tinyos-main-2.1.2/tos/interfaces/SplitControl.nc"
 static error_t LoraWANC$AMControl$start(void );
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
@@ -4779,13 +4785,16 @@ message_t * msg,
 uint8_t len);
 # 73 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
 static void LoraWANC$Timer1$startOneShot(uint32_t dt);
-# 37 "LoraWANC.nc"
+# 38 "LoraWANC.nc"
 message_t LoraWANC$packet[1000];
 
 bool LoraWANC$locked[1000];
 
 
 uint8_t LoraWANC$id_index[1000];
+
+uint8_t LoraWANC$msg_val[1000];
+
 
 uint8_t LoraWANC$current_type[1000];
 uint8_t LoraWANC$current_id[1000];
@@ -4794,7 +4803,7 @@ uint8_t LoraWANC$current_content[1000];
 
 
 uint8_t LoraWANC$server_node[1000];
-uint8_t LoraWANC$current_msg_id[1000];
+
 bool LoraWANC$flag_ack[1000];
 
 static bool LoraWANC$actual_send(uint16_t address, message_t *packet);
@@ -4803,27 +4812,32 @@ static bool LoraWANC$actual_send(uint16_t address, message_t *packet);
 
 
 static bool LoraWANC$actual_send(uint16_t address, message_t *packet);
-#line 78
+#line 83
 static void LoraWANC$fill_pkt(lora_msg_t *packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content, uint8_t gateway);
-#line 92
+#line 96
 static inline void LoraWANC$Boot$booted(void );
 
 
 
 
 static inline void LoraWANC$AMControl$startDone(error_t err);
-#line 115
+#line 119
 static inline void LoraWANC$AMControl$stopDone(error_t err);
 
 
 
+
+
+
+
+
 static inline void LoraWANC$Timer0$fired(void );
-#line 146
+#line 158
 static inline void LoraWANC$Timer1$fired(void );
-#line 174
+#line 187
 static inline message_t *LoraWANC$Receive$receive(message_t *bufPtr, 
 void *payload, uint8_t len);
-#line 254
+#line 273
 static inline void LoraWANC$AMSend$sendDone(message_t *bufPtr, error_t error);
 # 110 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static void /*LoraWANAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP$0$AMSend$sendDone(
@@ -4881,7 +4895,7 @@ static inline void /*LoraWANAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP$
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(
 # 48 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0xb7535730, 
+am_id_t arg_0xb75180a0, 
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -4898,7 +4912,7 @@ uint8_t len);
 # 100 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(
 # 46 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0xb7538ca8, 
+uint8_t arg_0xb75196a8, 
 # 96 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -5298,7 +5312,7 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$TimerFrom$stop
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0xb73b53a8);
+uint8_t arg_0xb73993a8);
 #line 71
 enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4338 {
 #line 71
@@ -5344,9 +5358,11 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$TimerFr
 
 
 
-static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot);
+static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot);
 #line 159
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startOneShot(uint8_t num, uint32_t dt);
+#line 179
+static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startPeriodicAt(uint8_t num, uint32_t t0, uint32_t dt);
 #line 204
 static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(uint8_t num);
 # 58 "/opt/tinyos-main-2.1.2/tos/lib/timer/CounterToLocalTimeC.nc"
@@ -5763,77 +5779,92 @@ inline static void * LoraWANC$Packet$getPayload(message_t * msg, uint8_t len){
 #line 126
 }
 #line 126
-# 174 "LoraWANC.nc"
+# 187 "LoraWANC.nc"
 static inline message_t *LoraWANC$Receive$receive(message_t *bufPtr, 
 void *payload, uint8_t len)
-#line 175
+#line 188
 {
-#line 194
-  if (len != sizeof(lora_msg_t )) {
-#line 194
+#line 207
+  if (len != sizeof(lora_msg_t ) || LoraWANC$locked[sim_node()]) {
+#line 207
       return bufPtr;
     }
   else 
-#line 195
+#line 208
     {
-      lora_msg_t *current_pkt = (lora_msg_t *)payload;
-      lora_msg_t *packet_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
+      lora_msg_t *received_pkt = (lora_msg_t *)payload;
 
-#line 198
-      switch (__nesc_ntoh_uint8(current_pkt->type.nxdata)) {
-          case 0: 
+      if (__nesc_ntoh_uint8(received_pkt->type.nxdata) == 0) {
+          lora_msg_t *packet_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
 
-            if (packet_to_send == (void *)0) {
-                return;
-              }
-          LoraWANC$current_msg_id[sim_node()] = __nesc_ntoh_uint8(current_pkt->id.nxdata);
+#line 213
+          if (packet_to_send == (void *)0) {
+              return;
+            }
+
           if (TOS_NODE_ID == LoraWANC$server_node[sim_node()]) {
-
-
-
-              sim_log_debug(159U, "radio_rec", "msg arrived at server %d from gateway %d\n", TOS_NODE_ID, __nesc_ntoh_uint8(current_pkt->gateway.nxdata));
-              LoraWANC$fill_pkt(packet_to_send, 1, __nesc_ntoh_uint8(current_pkt->id.nxdata), __nesc_ntoh_uint8(current_pkt->sender.nxdata), 0, 0);
-
-              LoraWANC$actual_send(__nesc_ntoh_uint8(current_pkt->gateway.nxdata), &LoraWANC$packet[sim_node()]);
-            }
-          else 
-            {
-              sim_log_debug(160U, "radio_rec", "msg arrived at gat %d from node %d\n", TOS_NODE_ID, __nesc_ntoh_uint8(current_pkt->sender.nxdata));
-              LoraWANC$fill_pkt(packet_to_send, 0, __nesc_ntoh_uint8(current_pkt->id.nxdata), __nesc_ntoh_uint8(current_pkt->sender.nxdata), __nesc_ntoh_uint8(current_pkt->content.nxdata), TOS_NODE_ID);
-              LoraWANC$actual_send(LoraWANC$server_node[sim_node()], &LoraWANC$packet[sim_node()]);
-            }
-
-
-          break;
-
-          case 1: 
-
-            if (packet_to_send == (void *)0) {
-                return;
-              }
-          LoraWANC$current_msg_id[sim_node()] = __nesc_ntoh_uint8(current_pkt->id.nxdata);
-          if (TOS_NODE_ID == 6 || TOS_NODE_ID == 7) {
-              LoraWANC$fill_pkt(packet_to_send, 1, __nesc_ntoh_uint8(current_pkt->id.nxdata), __nesc_ntoh_uint8(current_pkt->sender.nxdata), 0, 0);
-              sim_log_debug(161U, "radio_rec", "ACK arrived at gat %d\n", TOS_NODE_ID);
-
-              LoraWANC$actual_send(__nesc_ntoh_uint8(current_pkt->sender.nxdata), &LoraWANC$packet[sim_node()]);
-            }
-          else {
-              sim_log_debug(162U, "radio_rec", "ACK arrived at node %d\n", TOS_NODE_ID);
-              sim_log_debug(163U, "radio_rec", "current_msg_id: %d\n current_pkt_id: %d\n sender: %d\n node: %d\n", LoraWANC$current_msg_id[sim_node()], __nesc_ntoh_uint8(current_pkt->id.nxdata), __nesc_ntoh_uint8(current_pkt->sender.nxdata), TOS_NODE_ID);
-              if (LoraWANC$current_msg_id[sim_node()] == __nesc_ntoh_uint8(current_pkt->id.nxdata) && __nesc_ntoh_uint8(current_pkt->sender.nxdata) == TOS_NODE_ID) {
-                  LoraWANC$flag_ack[sim_node()] = TRUE;
-                  sim_log_debug(164U, "radio_rec", "flag check %d\n", LoraWANC$flag_ack[sim_node()]);
+              if (LoraWANC$locked[sim_node()]) {
+#line 218
+                  return bufPtr;
                 }
               else 
-#line 242
+#line 219
                 {
-                  LoraWANC$flag_ack[sim_node()] = FALSE;
-                  sim_log_debug(165U, "radio_rec", "flag check %d\n", LoraWANC$flag_ack[sim_node()]);
+
+
+
+                  sim_log_debug(160U, "radio_rec", "MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->gateway.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
+                  LoraWANC$fill_pkt(packet_to_send, 1, __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata), __nesc_ntoh_uint8(received_pkt->gateway.nxdata));
+
+                  LoraWANC$actual_send(__nesc_ntoh_uint8(received_pkt->gateway.nxdata), &LoraWANC$packet[sim_node()]);
+                  sim_log_debug(161U, "radio_rec", "GATEWAY: %d\n", __nesc_ntoh_uint8(received_pkt->gateway.nxdata));
                 }
             }
-          break;
+          else 
+
+
+            {
+              sim_log_debug(162U, "radio_rec", "MSG arrived at gat %d from node %d\n \t\t\tid: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
+              LoraWANC$fill_pkt(packet_to_send, 0, __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata), TOS_NODE_ID);
+              LoraWANC$actual_send(LoraWANC$server_node[sim_node()], &LoraWANC$packet[sim_node()]);
+            }
         }
+      else 
+
+
+        {
+          lora_msg_t *packet_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
+
+#line 244
+          if (packet_to_send == (void *)0) {
+              return;
+            }
+
+          if (TOS_NODE_ID == 6 || TOS_NODE_ID == 7) {
+              sim_log_debug(163U, "radio_rec", "ACK arrived at gat %d\n \t\t\tgateway: %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent: %d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->gateway.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
+              LoraWANC$fill_pkt(packet_to_send, 1, __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), 0, 0);
+
+              LoraWANC$actual_send(__nesc_ntoh_uint8(received_pkt->sender.nxdata), &LoraWANC$packet[sim_node()]);
+            }
+          else {
+
+            if ((((TOS_NODE_ID == 1 || TOS_NODE_ID == 2) || TOS_NODE_ID == 3) || TOS_NODE_ID == 4) || TOS_NODE_ID == 5) {
+                sim_log_debug(164U, "radio_rec", "ACK arrived at node %d\n \t\t\tsender: %d\n \t\t\tid: %d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata));
+                sim_log_debug(165U, "radio_rec", "CHECK ID ACK: id_msgSent: %d  id_ackReceived: %d\n", LoraWANC$current_id[sim_node()], __nesc_ntoh_uint8(received_pkt->id.nxdata));
+                if (LoraWANC$current_id[sim_node()] == __nesc_ntoh_uint8(received_pkt->id.nxdata) && __nesc_ntoh_uint8(received_pkt->sender.nxdata) == TOS_NODE_ID) {
+                    LoraWANC$flag_ack[sim_node()] = TRUE;
+                    sim_log_debug(166U, "radio_rec", "flag check %d\n", LoraWANC$flag_ack[sim_node()]);
+                  }
+                else 
+#line 262
+                  {
+                    LoraWANC$flag_ack[sim_node()] = FALSE;
+                    sim_log_debug(167U, "radio_rec", "flag check %d\n", LoraWANC$flag_ack[sim_node()]);
+                  }
+              }
+            }
+        }
+#line 268
       return bufPtr;
     }
 }
@@ -5846,13 +5877,13 @@ static inline message_t *TossimActiveMessageC$Receive$default$receive(am_id_t id
 }
 
 # 78 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
-inline static message_t * TossimActiveMessageC$Receive$receive(am_id_t arg_0xb76a2298, message_t * msg, void * payload, uint8_t len){
+inline static message_t * TossimActiveMessageC$Receive$receive(am_id_t arg_0xb768b298, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-  switch (arg_0xb76a2298) {
+  switch (arg_0xb768b298) {
 #line 78
     case 10:
 #line 78
@@ -5862,7 +5893,7 @@ inline static message_t * TossimActiveMessageC$Receive$receive(am_id_t arg_0xb76
 #line 78
     default:
 #line 78
-      __nesc_result = TossimActiveMessageC$Receive$default$receive(arg_0xb76a2298, msg, payload, len);
+      __nesc_result = TossimActiveMessageC$Receive$default$receive(arg_0xb768b298, msg, payload, len);
 #line 78
       break;
 #line 78
@@ -5875,13 +5906,13 @@ inline static message_t * TossimActiveMessageC$Receive$receive(am_id_t arg_0xb76
 }
 #line 78
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
-inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(am_id_t arg_0xb7535730, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(am_id_t arg_0xb75180a0, am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
   unsigned char __nesc_result;
 #line 80
 
 #line 80
-  __nesc_result = TossimActiveMessageC$AMSend$send(arg_0xb7535730, addr, msg, len);
+  __nesc_result = TossimActiveMessageC$AMSend$send(arg_0xb75180a0, addr, msg, len);
 #line 80
 
 #line 80
@@ -5962,7 +5993,7 @@ uint8_t len)
   if (/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg != (void *)0) {
       return EBUSY;
     }
-  sim_log_debug(166U, "AMQueue", "AMQueue: request to send from %hhu (%p): passed checks\n", clientId, msg);
+  sim_log_debug(168U, "AMQueue", "AMQueue: request to send from %hhu (%p): passed checks\n", clientId, msg);
 
   /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg = msg;
   /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Packet$setPayloadLength(msg, len);
@@ -5972,12 +6003,12 @@ uint8_t len)
       am_id_t amId = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMPacket$type(msg);
       am_addr_t dest = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMPacket$destination(msg);
 
-      sim_log_debug(167U, "AMQueue", "%s: request to send from %hhu (%p): queue empty\n", __FUNCTION__, clientId, msg);
+      sim_log_debug(169U, "AMQueue", "%s: request to send from %hhu (%p): queue empty\n", __FUNCTION__, clientId, msg);
       /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()] = clientId;
 
       err = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(amId, dest, msg, len);
       if (err != SUCCESS) {
-          sim_log_debug(168U, "AMQueue", "%s: underlying send failed.\n", __FUNCTION__);
+          sim_log_debug(170U, "AMQueue", "%s: underlying send failed.\n", __FUNCTION__);
           /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()] = 1;
           /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg = (void *)0;
         }
@@ -5985,7 +6016,7 @@ uint8_t len)
       return err;
     }
   else {
-      sim_log_debug(169U, "AMQueue", "AMQueue: request to send from %hhu (%p): queue not empty\n", clientId, msg);
+      sim_log_debug(171U, "AMQueue", "AMQueue: request to send from %hhu (%p): queue not empty\n", clientId, msg);
     }
   return SUCCESS;
 }
@@ -6078,9 +6109,9 @@ inline static error_t LoraWANC$AMSend$send(am_addr_t addr, message_t * msg, uint
 }
 #line 80
 #line 110
-inline static void TossimActiveMessageC$AMSend$sendDone(am_id_t arg_0xb76b18b0, message_t * msg, error_t error){
+inline static void TossimActiveMessageC$AMSend$sendDone(am_id_t arg_0xb769a8b0, message_t * msg, error_t error){
 #line 110
-  /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(arg_0xb76b18b0, msg, error);
+  /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(arg_0xb769a8b0, msg, error);
 #line 110
 }
 #line 110
@@ -6910,13 +6941,13 @@ static inline message_t *TossimActiveMessageC$Snoop$default$receive(am_id_t id, 
 }
 
 # 78 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
-inline static message_t * TossimActiveMessageC$Snoop$receive(am_id_t arg_0xb76a2930, message_t * msg, void * payload, uint8_t len){
+inline static message_t * TossimActiveMessageC$Snoop$receive(am_id_t arg_0xb768b930, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-    __nesc_result = TossimActiveMessageC$Snoop$default$receive(arg_0xb76a2930, msg, payload, len);
+    __nesc_result = TossimActiveMessageC$Snoop$default$receive(arg_0xb768b930, msg, payload, len);
 #line 78
 
 #line 78
@@ -7046,19 +7077,25 @@ inline static error_t LoraWANC$AMControl$start(void ){
 #line 104
 }
 #line 104
-# 73 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
-inline static void LoraWANC$Timer0$startOneShot(uint32_t dt){
-#line 73
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startOneShot(0U, dt);
-#line 73
+# 179 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
+static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startPeriodicAt(uint8_t num, uint32_t t0, uint32_t dt)
+{
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$startTimer(num, t0, dt, FALSE);
 }
-#line 73
-# 97 "LoraWANC.nc"
+
+# 114 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
+inline static void LoraWANC$Timer0$startPeriodicAt(uint32_t t0, uint32_t dt){
+#line 114
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startPeriodicAt(0U, t0, dt);
+#line 114
+}
+#line 114
+# 101 "LoraWANC.nc"
 static inline void LoraWANC$AMControl$startDone(error_t err)
-#line 97
+#line 101
 {
   if (err == SUCCESS) {
-      sim_log_debug(150U, "radio", "Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
+      sim_log_debug(151U, "radio", "Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
 
 
 
@@ -7066,7 +7103,7 @@ static inline void LoraWANC$AMControl$startDone(error_t err)
 
 
       if ((((TOS_NODE_ID == 1 || TOS_NODE_ID == 2) || TOS_NODE_ID == 3) || TOS_NODE_ID == 4) || TOS_NODE_ID == 5) {
-          LoraWANC$Timer0$startOneShot(10000);
+          LoraWANC$Timer0$startPeriodicAt(0, 10000);
         }
     }
   else {
@@ -7089,11 +7126,11 @@ static inline void TossimPacketModelC$startDoneTask$runTask(void )
   TossimPacketModelC$Control$startDone(SUCCESS);
 }
 
-# 115 "LoraWANC.nc"
+# 119 "LoraWANC.nc"
 static inline void LoraWANC$AMControl$stopDone(error_t err)
-#line 115
+#line 119
 {
-  sim_log_debug(151U, "boot", "Radio stopped\n");
+  sim_log_debug(152U, "boot", "Radio stopped\n");
 }
 
 # 138 "/opt/tinyos-main-2.1.2/tos/interfaces/SplitControl.nc"
@@ -7126,9 +7163,9 @@ static inline void TossimPacketModelC$sendDoneTask$runTask(void )
   TossimPacketModelC$Packet$sendDone(msg, TossimPacketModelC$running[sim_node()] ? SUCCESS : EOFF);
 }
 
-# 254 "LoraWANC.nc"
+# 273 "LoraWANC.nc"
 static inline void LoraWANC$AMSend$sendDone(message_t *bufPtr, error_t error)
-#line 254
+#line 273
 {
   if (&LoraWANC$packet[sim_node()] == bufPtr) {
       LoraWANC$locked[sim_node()] = FALSE;
@@ -7156,9 +7193,9 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone
 }
 
 # 100 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
-inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t arg_0xb7538ca8, message_t * msg, error_t error){
+inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t arg_0xb75196a8, message_t * msg, error_t error){
 #line 100
-  switch (arg_0xb7538ca8) {
+  switch (arg_0xb75196a8) {
 #line 100
     case 0U:
 #line 100
@@ -7168,7 +7205,7 @@ inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t
 #line 100
     default:
 #line 100
-      /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(arg_0xb7538ca8, msg, error);
+      /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(arg_0xb75196a8, msg, error);
 #line 100
       break;
 #line 100
@@ -7443,9 +7480,9 @@ static inline void SimSchedulerBasicP$TaskBasic$default$runTask(uint8_t id)
 }
 
 # 75 "/opt/tinyos-main-2.1.2/tos/interfaces/TaskBasic.nc"
-inline static void SimSchedulerBasicP$TaskBasic$runTask(uint8_t arg_0xb785d650){
+inline static void SimSchedulerBasicP$TaskBasic$runTask(uint8_t arg_0xb7846650){
 #line 75
-  switch (arg_0xb785d650) {
+  switch (arg_0xb7846650) {
 #line 75
     case TossimPacketModelC$startDoneTask:
 #line 75
@@ -7491,7 +7528,7 @@ inline static void SimSchedulerBasicP$TaskBasic$runTask(uint8_t arg_0xb785d650){
 #line 75
     default:
 #line 75
-      SimSchedulerBasicP$TaskBasic$default$runTask(arg_0xb785d650);
+      SimSchedulerBasicP$TaskBasic$default$runTask(arg_0xb7846650);
 #line 75
       break;
 #line 75
@@ -7566,20 +7603,22 @@ inline static uint16_t LoraWANC$Random$rand16(void ){
 #line 52
 }
 #line 52
-# 119 "LoraWANC.nc"
+# 128 "LoraWANC.nc"
 static inline void LoraWANC$Timer0$fired(void )
-#line 119
+#line 128
 {
 
-  uint8_t msg_val = LoraWANC$Random$rand16() % 100;
   lora_msg_t *msg_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
 
-#line 123
+#line 131
   if (msg_to_send == (void *)0) {
       return;
     }
-  sim_log_debug(152U, "radio_rec", "random value at node %d: %d\n", TOS_NODE_ID, msg_val);
-  LoraWANC$fill_pkt(msg_to_send, 0, LoraWANC$id_index[sim_node()], TOS_NODE_ID, msg_val, 0);
+  LoraWANC$msg_val[sim_node()] = LoraWANC$Random$rand16() % 100;
+
+
+  sim_log_debug(153U, "radio_rec", "random value at node %d: %d\n", TOS_NODE_ID, LoraWANC$msg_val[sim_node()]);
+  LoraWANC$fill_pkt(msg_to_send, 0, LoraWANC$id_index[sim_node()], TOS_NODE_ID, LoraWANC$msg_val[sim_node()], 0);
 
 
 
@@ -7588,40 +7627,42 @@ static inline void LoraWANC$Timer0$fired(void )
   LoraWANC$current_sender[sim_node()] = __nesc_ntoh_uint8(msg_to_send->sender.nxdata);
   LoraWANC$current_content[sim_node()] = __nesc_ntoh_uint8(msg_to_send->content.nxdata);
 
-  sim_log_debug(153U, "radio_rec", "current msg -> type: %d id: %d sender: %d content: %d\n", LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()]);
+  sim_log_debug(154U, "radio_rec", "current msg -> type: %d id: %d sender: %d content: %d\n", LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()]);
 
 
 
   LoraWANC$actual_send(AM_BROADCAST_ADDR, &LoraWANC$packet[sim_node()]);
-  sim_log_debug(154U, "radio_rec", "	msg sent at node %d\n", TOS_NODE_ID);
-  LoraWANC$Timer1$startOneShot(3000);
+  sim_log_debug(155U, "radio_rec", "	msg sent at node %d\n", TOS_NODE_ID);
+  LoraWANC$Timer1$startOneShot(1000);
   LoraWANC$id_index[sim_node()]++;
 }
 
+
 static inline void LoraWANC$Timer1$fired(void )
-#line 146
+#line 158
 {
 
 
 
 
 
-  sim_log_debug(155U, "radio_rec", "	flag : %d\n", LoraWANC$flag_ack[sim_node()]);
+  sim_log_debug(156U, "radio_rec", "	flag : %d\n", LoraWANC$flag_ack[sim_node()]);
   if (!LoraWANC$flag_ack[sim_node()]) {
       lora_msg_t *msg_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
 
-#line 155
+#line 167
       if (msg_to_send == (void *)0) {
           return;
         }
-      sim_log_debug(156U, "radio_rec", "TIME EXPIRED\n");
-      sim_log_debug(157U, "radio_rec", "RESEND MSG: type: %d id: %d sender: %d content: %d\n", LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()]);
+      sim_log_debug(157U, "radio_rec", "TIME EXPIRED\n");
+      sim_log_debug(158U, "radio_rec", "RESEND MSG: type: %d id: %d sender: %d content: %d\n", LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()]);
       LoraWANC$fill_pkt(msg_to_send, LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()], 0);
       LoraWANC$actual_send(AM_BROADCAST_ADDR, &LoraWANC$packet[sim_node()]);
-      LoraWANC$Timer1$startOneShot(3000);
+      LoraWANC$Timer1$startOneShot(1000);
     }
   else {
-      sim_log_debug(158U, "radio_rec", "ACK arrived corrected\n");
+      sim_log_debug(159U, "radio_rec", "ACK arrived corrected \n");
+      LoraWANC$flag_ack[sim_node()] = FALSE;
     }
 }
 
@@ -7631,9 +7672,9 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$d
 }
 
 # 83 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
-inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(uint8_t arg_0xb73b53a8){
+inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(uint8_t arg_0xb73993a8){
 #line 83
-  switch (arg_0xb73b53a8) {
+  switch (arg_0xb73993a8) {
 #line 83
     case 0U:
 #line 83
@@ -7649,7 +7690,7 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$f
 #line 83
     default:
 #line 83
-      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(arg_0xb73b53a8);
+      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(arg_0xb73993a8);
 #line 83
       break;
 #line 83
@@ -7672,19 +7713,6 @@ inline static error_t /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$upda
 #line 67
 }
 #line 67
-# 144 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot)
-{
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer_t *timer = &/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$m_timers[sim_node()][num];
-
-#line 147
-  timer->t0 = t0;
-  timer->dt = dt;
-  timer->isoneshot = isoneshot;
-  timer->isrunning = TRUE;
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$updateFromTimer$postTask();
-}
-
 # 54 "/opt/tinyos-main-2.1.2/tos/chips/atm128/timer/HplAtm128Compare.nc"
 inline static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$Compare$set(/*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$Compare$size_type t){
 #line 54
@@ -7751,7 +7779,7 @@ static inline void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm
 static inline void HplAtm128Timer0AsyncP$cancel_compare(void )
 #line 577
 {
-  sim_log_debug(197U, "HplAtm128CompareC", "Cancelling compare at 0x%p\n", HplAtm128Timer0AsyncP$compare[sim_node()]);
+  sim_log_debug(199U, "HplAtm128CompareC", "Cancelling compare at 0x%p\n", HplAtm128Timer0AsyncP$compare[sim_node()]);
   if (HplAtm128Timer0AsyncP$compare[sim_node()] != (void *)0) {
       HplAtm128Timer0AsyncP$compare[sim_node()]->cancelled = 1;
       HplAtm128Timer0AsyncP$compare[sim_node()]->cleanup = sim_queue_cleanup_total;
@@ -7780,7 +7808,7 @@ static inline void HplAtm128Timer0AsyncP$cancel_overflow(void )
 {
   if (HplAtm128Timer0AsyncP$overflow[sim_node()] != (void *)0) {
       HplAtm128Timer0AsyncP$overflow[sim_node()]->cancelled = 1;
-      sim_log_debug(196U, "HplAtm128Timer0AsyncP", "Cancelling overflow %p.\n", HplAtm128Timer0AsyncP$overflow[sim_node()]);
+      sim_log_debug(198U, "HplAtm128Timer0AsyncP", "Cancelling overflow %p.\n", HplAtm128Timer0AsyncP$overflow[sim_node()]);
       HplAtm128Timer0AsyncP$overflow[sim_node()]->cleanup = sim_queue_cleanup_total;
     }
 }
@@ -7795,11 +7823,11 @@ static inline void HplAtm128Timer0AsyncP$timer0_overflow_handle(sim_event_t *evt
   else {
       if ((atm128RegFile[sim_node()][ATM128_TIMSK] & (1 << TOIE0)) != 0) {
           atm128RegFile[sim_node()][ATM128_TIFR] &= ~(1 << TOV0);
-          sim_log_debug(193U, "HplAtm128Timer0AsyncP", "Overflow interrupt at %s\n", sim_time_string());
+          sim_log_debug(195U, "HplAtm128Timer0AsyncP", "Overflow interrupt at %s\n", sim_time_string());
           INTERRUPT_16();
         }
       else {
-          sim_log_debug(194U, "HplAtm128Timer0AsyncP", "Setting overflow bit at %s\n", sim_time_string());
+          sim_log_debug(196U, "HplAtm128Timer0AsyncP", "Setting overflow bit at %s\n", sim_time_string());
           atm128RegFile[sim_node()][ATM128_TIFR] |= 1 << TOV0;
         }
       HplAtm128Timer0AsyncP$configure_overflow(evt);
@@ -7849,7 +7877,7 @@ static inline void HplAtm128Timer0AsyncP$Timer0$set(uint8_t newVal)
   uint8_t curVal = HplAtm128Timer0AsyncP$Timer0$get();
 
 #line 299
-  sim_log_debug(186U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting timer: %hhu\n", newVal);
+  sim_log_debug(188U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting timer: %hhu\n", newVal);
   if (newVal == curVal) {
       return;
     }
@@ -7876,7 +7904,7 @@ static inline void HplAtm128Timer0AsyncP$Timer0$set(uint8_t newVal)
 static inline void HplAtm128Timer0AsyncP$timer0_compare_handle(sim_event_t *evt)
 #line 187
 {
-  sim_log_debug(176U, "HplAtm128Timer0AsyncP", "Beginning compare 0x%p at %s\n", evt, sim_time_string());
+  sim_log_debug(178U, "HplAtm128Timer0AsyncP", "Beginning compare 0x%p at %s\n", evt, sim_time_string());
   if (evt->cancelled) {
       return;
     }
@@ -7885,21 +7913,21 @@ static inline void HplAtm128Timer0AsyncP$timer0_compare_handle(sim_event_t *evt)
 
 #line 194
       sim_print_now(timeStr, 128);
-      sim_log_debug(177U, "HplAtm128Timer0AsyncP", "Handling compare at 0x%p @ %s\n", evt, sim_time_string());
+      sim_log_debug(179U, "HplAtm128Timer0AsyncP", "Handling compare at 0x%p @ %s\n", evt, sim_time_string());
 
       if ((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0 && !((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0)) {
-          sim_log_debug(178U, "HplAtm128Timer0AsyncP", "%s: CTC is set, clear timer.\n", __FUNCTION__);
+          sim_log_debug(180U, "HplAtm128Timer0AsyncP", "%s: CTC is set, clear timer.\n", __FUNCTION__);
           HplAtm128Timer0AsyncP$Timer0$set(0);
         }
       else {
-          sim_log_debug(179U, "HplAtm128Timer0AsyncP", "%s: TCCR is 0x%hhx, %i, %i\n", __FUNCTION__, * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33], (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0), (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0));
+          sim_log_debug(181U, "HplAtm128Timer0AsyncP", "%s: TCCR is 0x%hhx, %i, %i\n", __FUNCTION__, * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33], (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0), (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0));
         }
 
       if ((atm128RegFile[sim_node()][ATM128_TIMSK] & (1 << OCIE0)) != 0) {
-          sim_log_debug(180U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
+          sim_log_debug(182U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
           atm128RegFile[sim_node()][ATM128_TIFR] &= ~(1 << OCF0);
-          sim_log_debug(181U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
-          sim_log_debug(182U, "HplAtm128Timer0AsyncP", "Compare interrupt @ %s\n", timeStr);
+          sim_log_debug(183U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
+          sim_log_debug(184U, "HplAtm128Timer0AsyncP", "Compare interrupt @ %s\n", timeStr);
           INTERRUPT_15();
         }
       else {
@@ -7919,7 +7947,7 @@ static inline sim_event_t *HplAtm128Timer0AsyncP$allocate_compare(void )
   sim_event_t *newEvent = sim_queue_allocate_event();
 
 #line 225
-  sim_log_debug(183U, "HplAtm128Timer0AsyncP", "Allocated compare at 0x%p\n", newEvent);
+  sim_log_debug(185U, "HplAtm128Timer0AsyncP", "Allocated compare at 0x%p\n", newEvent);
   newEvent->handle = HplAtm128Timer0AsyncP$timer0_compare_handle;
   newEvent->cleanup = sim_queue_cleanup_none;
   return newEvent;
@@ -8227,7 +8255,7 @@ inline static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm
 static inline void HplAtm128Timer0AsyncP$Timer0Ctrl$setControl(Atm128TimerControl_t x)
 #line 364
 {
-  sim_log_debug(188U, "HplAtm128Timer0AsyncP", "Setting control to be 0x%hhx\n", x.flat);
+  sim_log_debug(190U, "HplAtm128Timer0AsyncP", "Setting control to be 0x%hhx\n", x.flat);
   * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33] = x.flat;
 }
 
@@ -8302,11 +8330,11 @@ inline static error_t SimMainP$SoftwareInit$init(void ){
 #line 62
 }
 #line 62
-# 92 "LoraWANC.nc"
+# 96 "LoraWANC.nc"
 static inline void LoraWANC$Boot$booted(void )
-#line 92
+#line 96
 {
-  sim_log_debug(149U, "boot", "Application booted.\n");
+  sim_log_debug(150U, "boot", "Application booted.\n");
   LoraWANC$AMControl$start();
 }
 
@@ -9859,9 +9887,9 @@ static am_id_t TossimActiveMessageC$AMPacket$type(message_t *amsg)
   return __nesc_ntoh_uint8(header->type.nxdata);
 }
 
-# 78 "LoraWANC.nc"
+# 83 "LoraWANC.nc"
 static void LoraWANC$fill_pkt(lora_msg_t *packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content, uint8_t gateway)
-#line 78
+#line 83
 {
 
 
@@ -9869,15 +9897,13 @@ static void LoraWANC$fill_pkt(lora_msg_t *packet_to_fill, uint8_t type, uint8_t 
   __nesc_hton_uint8(packet_to_fill->type.nxdata, type);
   __nesc_hton_uint8(packet_to_fill->id.nxdata, id);
   __nesc_hton_uint8(packet_to_fill->sender.nxdata, sender);
-  if (type == 0) {
-      __nesc_hton_uint8(packet_to_fill->content.nxdata, content);
-      __nesc_hton_uint8(packet_to_fill->gateway.nxdata, gateway);
-    }
+  __nesc_hton_uint8(packet_to_fill->content.nxdata, content);
+  __nesc_hton_uint8(packet_to_fill->gateway.nxdata, gateway);
 }
 
-#line 59
+#line 63
 static bool LoraWANC$actual_send(uint16_t address, message_t *packet)
-#line 59
+#line 63
 {
 
 
@@ -9886,14 +9912,15 @@ static bool LoraWANC$actual_send(uint16_t address, message_t *packet)
 
   lora_msg_t *packet_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(packet, sizeof(lora_msg_t ));
 
-#line 66
+#line 70
   if (LoraWANC$locked[sim_node()]) {
+      sim_log_debug(148U, "radio_send", "LOCKED!!!!\n");
       return;
     }
   else {
       if (LoraWANC$AMSend$send(address, packet, sizeof(lora_msg_t )) == SUCCESS) {
           LoraWANC$locked[sim_node()] = TRUE;
-          sim_log_debug(148U, "radio_send", "Sending packet of type %d at time %s\n", __nesc_ntoh_uint8(packet_to_send->type.nxdata), sim_time_string());
+          sim_log_debug(149U, "radio_send", "Sending packet of type %d at time %s toward node %d gateInPkt: %d sender: %d content %d\n", __nesc_ntoh_uint8(packet_to_send->type.nxdata), sim_time_string(), address, __nesc_ntoh_uint8(packet_to_send->gateway.nxdata), __nesc_ntoh_uint8(packet_to_send->sender.nxdata), __nesc_ntoh_uint8(packet_to_send->content.nxdata));
         }
     }
 }
@@ -9974,7 +10001,7 @@ static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(am_id_t id, 
       /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$sendDone(/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()], msg, err);
     }
   else {
-      sim_log_debug(170U, "PointerBug", "%s received send done for %p, signaling for %p.\n", __FUNCTION__, msg, /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()]].msg);
+      sim_log_debug(172U, "PointerBug", "%s received send done for %p, signaling for %p.\n", __FUNCTION__, msg, /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()]].msg);
     }
 }
 
@@ -10224,7 +10251,7 @@ static uint8_t HplAtm128Timer0AsyncP$Timer0$get(void )
   elapsed = HplAtm128Timer0AsyncP$sim_to_clock(elapsed);
   elapsed = elapsed >> HplAtm128Timer0AsyncP$shiftFromScale();
   rval = (uint8_t )(elapsed & 0xff);
-  sim_log_debug(185U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting timer: %hhu\n", rval);
+  sim_log_debug(187U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting timer: %hhu\n", rval);
   return rval;
 }
 
@@ -10303,7 +10330,7 @@ static Atm128_TIFR_t HplAtm128Timer0AsyncP$Timer0Ctrl$getInterruptFlag(void )
 static uint8_t HplAtm128Timer0AsyncP$Compare$get(void )
 #line 457
 {
-  sim_log_debug(191U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting compare: %hhu\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31]);
+  sim_log_debug(193U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting compare: %hhu\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31]);
   return * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31];
 }
 
@@ -10341,6 +10368,19 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$fireTimers(uin
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startOneShot(uint8_t num, uint32_t dt)
 {
   /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$startTimer(num, /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$TimerFrom$getNow(), dt, TRUE);
+}
+
+#line 144
+static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot)
+{
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer_t *timer = &/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$m_timers[sim_node()][num];
+
+#line 147
+  timer->t0 = t0;
+  timer->dt = dt;
+  timer->isoneshot = isoneshot;
+  timer->isrunning = TRUE;
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$updateFromTimer$postTask();
 }
 
 # 69 "/opt/tinyos-main-2.1.2/tos/system/RandomMlcgC.nc"
@@ -10404,13 +10444,13 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
       uint8_t tifr = (uint8_t )/*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$TimerCtrl$getInterruptFlag().flat;
 
 #line 101
-      sim_log_debug(171U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: TIFR is %hhx\n", tifr);
+      sim_log_debug(173U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: TIFR is %hhx\n", tifr);
       if ((interrupt_in != 0 && interrupt_in < /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MINDT) || tifr & (1 << OCF0)) {
           if (interrupt_in < /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MINDT) {
-              sim_log_debug(172U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: under min: %hhu.\n", interrupt_in);
+              sim_log_debug(174U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: under min: %hhu.\n", interrupt_in);
             }
           else {
-              sim_log_debug(173U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: OCF set.\n");
+              sim_log_debug(175U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: OCF set.\n");
             }
           {
 #line 109
@@ -10422,14 +10462,14 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
 
       if (!/*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$set[sim_node()]) {
           newOcr0 = /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MAXT;
-          sim_log_debug(174U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: no alarm set, set at max.\n");
+          sim_log_debug(176U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: no alarm set, set at max.\n");
         }
       else 
         {
           uint32_t now = /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$Counter$get();
 
 #line 120
-          sim_log_debug(175U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: now-t0 = %llu, dt = %llu\n", now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()], /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]);
+          sim_log_debug(177U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: now-t0 = %llu, dt = %llu\n", now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()], /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]);
 
           if ((uint32_t )(now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()]) >= /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]) 
             {
@@ -10473,7 +10513,7 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
 static void HplAtm128Timer0AsyncP$Compare$set(uint8_t t)
 #line 463
 {
-  sim_log_debug(192U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting compare: %hhu\n", t);
+  sim_log_debug(194U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting compare: %hhu\n", t);
   /* atomic removed: atomic calls only */
 #line 465
   {
@@ -10554,7 +10594,7 @@ static void HplAtm128Timer0AsyncP$configure_overflow(sim_event_t *evt)
   overflowTime += sim_time();
   overflowTime -= (sim_time() - HplAtm128Timer0AsyncP$last_zero()) % (1 << HplAtm128Timer0AsyncP$shiftFromScale());
 
-  sim_log_debug(195U, "HplAtm128Timer0AsyncP", "Scheduling new overflow for %i at time %llu\n", sim_node(), overflowTime);
+  sim_log_debug(197U, "HplAtm128Timer0AsyncP", "Scheduling new overflow for %i at time %llu\n", sim_node(), overflowTime);
 
   evt->time = overflowTime;
 }
@@ -10601,7 +10641,7 @@ static void HplAtm128Timer0AsyncP$configure_compare(sim_event_t *evt)
   phaseOffset %= HplAtm128Timer0AsyncP$clock_to_sim(1 << HplAtm128Timer0AsyncP$shiftFromScale());
   compareTime -= phaseOffset;
 
-  sim_log_debug(184U, "HplAtm128Timer0AsyncP", "Configuring new compare of %i for %i at time %llu  (@ %llu)\n", (int )compareVal, sim_node(), compareTime, sim_time());
+  sim_log_debug(186U, "HplAtm128Timer0AsyncP", "Configuring new compare of %i for %i at time %llu  (@ %llu)\n", (int )compareVal, sim_node(), compareTime, sim_time());
 
   evt->time = compareTime;
 }
@@ -11115,6 +11155,12 @@ static int __nesc_nido_resolve(int __nesc_mote,
     *size = sizeof(LoraWANC$id_index[__nesc_mote]);
     return 0;
   }
+  if (!strcmp(varname, "LoraWANC$msg_val"))
+  {
+    *addr = (uintptr_t)&LoraWANC$msg_val[__nesc_mote];
+    *size = sizeof(LoraWANC$msg_val[__nesc_mote]);
+    return 0;
+  }
   if (!strcmp(varname, "LoraWANC$current_type"))
   {
     *addr = (uintptr_t)&LoraWANC$current_type[__nesc_mote];
@@ -11143,12 +11189,6 @@ static int __nesc_nido_resolve(int __nesc_mote,
   {
     *addr = (uintptr_t)&LoraWANC$server_node[__nesc_mote];
     *size = sizeof(LoraWANC$server_node[__nesc_mote]);
-    return 0;
-  }
-  if (!strcmp(varname, "LoraWANC$current_msg_id"))
-  {
-    *addr = (uintptr_t)&LoraWANC$current_msg_id[__nesc_mote];
-    *size = sizeof(LoraWANC$current_msg_id[__nesc_mote]);
     return 0;
   }
   if (!strcmp(varname, "LoraWANC$flag_ack"))
@@ -11452,12 +11492,12 @@ static void __nesc_nido_initialise(int __nesc_mote)
   memset((void *)&LoraWANC$packet[__nesc_mote], 0, sizeof LoraWANC$packet[__nesc_mote]);
   LoraWANC$locked[__nesc_mote] = FALSE;
   LoraWANC$id_index[__nesc_mote] = 1;
+  memset((void *)&LoraWANC$msg_val[__nesc_mote], 0, sizeof LoraWANC$msg_val[__nesc_mote]);
   memset((void *)&LoraWANC$current_type[__nesc_mote], 0, sizeof LoraWANC$current_type[__nesc_mote]);
   memset((void *)&LoraWANC$current_id[__nesc_mote], 0, sizeof LoraWANC$current_id[__nesc_mote]);
   memset((void *)&LoraWANC$current_sender[__nesc_mote], 0, sizeof LoraWANC$current_sender[__nesc_mote]);
   memset((void *)&LoraWANC$current_content[__nesc_mote], 0, sizeof LoraWANC$current_content[__nesc_mote]);
   LoraWANC$server_node[__nesc_mote] = 8;
-  memset((void *)&LoraWANC$current_msg_id[__nesc_mote], 0, sizeof LoraWANC$current_msg_id[__nesc_mote]);
   LoraWANC$flag_ack[__nesc_mote] = FALSE;
 
   /* Module AMQueueEntryP$0 */
