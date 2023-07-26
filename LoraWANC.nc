@@ -147,7 +147,7 @@ implementation {
 		dbg("radio","Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
 	
 	  	if (TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5 ){
-	  		call Timer0.startPeriodicAt(0,10000);
+	  		call Timer0.startPeriodicAt(0,5000);
 	  	}
 	}
 	else {
@@ -166,7 +166,7 @@ implementation {
 	if (msg_to_send == NULL) {
 			return;
 	}
-	msg_val= (call Random.rand16())% 100;
+	msg_val= (call Random.rand16()%200);
 	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val,0);
 	
 	
@@ -248,14 +248,14 @@ implementation {
 				if(locked){return bufPtr;} 
 				else{//if i am the server
     				
-					dbg("radio_rec","MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> id, received_pkt->sender,received_pkt-> content );
+					dbg("server_node","MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> id, received_pkt->sender,received_pkt-> content );
 					
 					//check duplicates and store message
 					if(saved_msg.node[received_pkt-> sender-1]==0 && saved_msg.id[received_pkt-> sender-1]==0){
 						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
 						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
 						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
-						sprintf(message, "NODE:%d ID:%d CONTENT:%d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1], saved_msg.content[received_pkt-> sender -1]);
+						sprintf(message, "NODE: %d ID: %d CONTENT: %d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1], saved_msg.content[received_pkt-> sender -1]);
 						message_len = strlen(message);
 						send(new_socket, message, message_len, 0);
 						
@@ -269,23 +269,23 @@ implementation {
 						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
 						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
 						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
-						sprintf(message, "NODE:%d ID:%d CONTENT:%d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1], saved_msg.content[received_pkt-> sender -1]);
+						sprintf(message, "NODE: %d ID: %d CONTENT: %d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1], saved_msg.content[received_pkt-> sender -1]);
 						message_len = strlen(message);
 						send(new_socket, message, message_len, 0);
 					}
 					else{
-						dbg("radio_rec", "DUPLICATE FOUND!!!\n");
+						dbg("server_node", "DUPLICATE FOUND!!!\n");
 					}
 					
-					dbg("radio_rec", "MSG SAVED TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", saved_msg.node[0],saved_msg.node[1],saved_msg.node[2],saved_msg.node[3],saved_msg.node[4]);
-					dbg_clear("radio_rec","\t\t\tID:%d,%d,%d,%d,%d\n",saved_msg.id[0],saved_msg.id[1],saved_msg.id[2],saved_msg.id[3],saved_msg.id[4]);
-					dbg_clear("radio_rec","\t\t\tCONTENT:%d,%d,%d,%d,%d\n",saved_msg.content[0],saved_msg.content[1],saved_msg.content[2],saved_msg.content[3],saved_msg.content[4]);
+					dbg("server_node", "MSG SAVED TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", saved_msg.node[0],saved_msg.node[1],saved_msg.node[2],saved_msg.node[3],saved_msg.node[4]);
+					dbg_clear("server_node","\t\t\tID:%d,%d,%d,%d,%d\n",saved_msg.id[0],saved_msg.id[1],saved_msg.id[2],saved_msg.id[3],saved_msg.id[4]);
+					dbg_clear("server_node","\t\t\tCONTENT:%d,%d,%d,%d,%d\n",saved_msg.content[0],saved_msg.content[1],saved_msg.content[2],saved_msg.content[3],saved_msg.content[4]);
 					
 					//create ACK
 					fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender,received_pkt-> content , received_pkt -> gateway);
 					//send ACK to the gateway
 					actual_send(received_pkt->gateway, &packet);
-					dbg("radio_rec","GATEWAY: %d\n",received_pkt->gateway); 
+					dbg("server_node","GATEWAY: %d\n",received_pkt->gateway); 
 				}
 			} 
 			//case2

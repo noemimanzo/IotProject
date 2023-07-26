@@ -34,26 +34,21 @@ t.init();
 out = sys.stdout;
 
 #Add debug channel
-print "Activate debug message on channel init"
-t.addChannel("init",out);
-print "Activate debug message on channel boot"
-t.addChannel("boot",out);
-print "Activate debug message on channel timer"
-t.addChannel("timer",out);
-print "Activate debug message on channel led_0"
-t.addChannel("led_0",out);
-print "Activate debug message on channel led_1"
-t.addChannel("led_1",out);
-print "Activate debug message on channel led_2"
-t.addChannel("led_2",out);
-print "Activate debug message on channel radio"
-t.addChannel("radio",out);
+#print "Activate debug message on channel init"
+#t.addChannel("init",out);
+#print "Activate debug message on channel boot"
+#t.addChannel("boot",out);
+#print "Activate debug message on channel timer"
+#t.addChannel("timer",out);
+#print "Activate debug message on channel radio"
+#t.addChannel("radio",out);
 print "Activate debug message on channel radio_send"
 t.addChannel("radio_send",out);
 print "Activate debug message on channel radio_rec"
 t.addChannel("radio_rec",out);
-print "Activate debug message on channel radio_pack"
-t.addChannel("radio_pack",out);
+print "Activate debug message on channel server_node"
+t.addChannel("server_node",out);
+
 
 #Creation of the 8 nodes
 for i in range(1, 9):
@@ -102,7 +97,7 @@ for i in range(1, 9):
 
 print "Start simulation with TOSSIM! \n\n\n";
 
-for i in range(0,3000):
+for i in range(0,10000):
 	t.runNextEvent()
 	
 print "\n\n\nSimulation finished!";
