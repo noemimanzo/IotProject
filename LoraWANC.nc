@@ -42,7 +42,8 @@ implementation {
   uint8_t current_sender;
   uint8_t current_content;
   
-    
+  uint8_t i=0;
+  
   uint8_t server_node =8;
  // uint8_t current_msg_id;
   bool flag_ack = FALSE;
@@ -87,6 +88,13 @@ implementation {
   /******* EVENTS ******/
   event void Boot.booted() {
     dbg("boot","Application booted.\n"); 
+    if (TOS_NODE_ID == 8){
+		for (i=0; i<5; i++){
+			saved_msg.node[i]=0;
+			saved_msg.id[i]=0;
+			saved_msg.content[i]=0;
+    	}
+    }
     call AMControl.start();
   }
 
@@ -120,18 +128,11 @@ implementation {
   event void Timer0.fired() { // invio periodico
 	// 1. creazione pack
 	lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
-	uint8_t i=0;
 	if (msg_to_send == NULL) {
 			return;
 	}
 	msg_val= (call Random.rand16())% 100;
 	//call TimerDelay.startOneShot(time_delays[TOS_NODE_ID-1]);
-
-	for (i=0; i<5; i++){
-    	saved_msg.node[i]=0;
-    	saved_msg.id[i]=0;
-    	saved_msg.content[i]=0;
-    }
 
 	dbg("radio_rec","random value at node %d: %d\n", TOS_NODE_ID, msg_val);	
 	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val,0);
@@ -183,6 +184,7 @@ implementation {
   }
   */
 
+ 
   event message_t* Receive.receive(message_t* bufPtr, 
 				   void* payload, uint8_t len) {
 	/*
@@ -220,8 +222,32 @@ implementation {
 				if(locked){return bufPtr;} 
 				else{//if i am the server
 					dbg("radio_rec","MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> id, received_pkt->sender,received_pkt-> content );
+					
 					//check duplicates and store message
-					if(saved_msg.node[received_pkt-> sender-1] != received_pkt-> sender && saved_msg.id[received_pkt-> sender-1] != received_pkt-> id){
+					if(saved_msg.node[received_pkt-> sender-1]==0 && saved_msg.id[received_pkt-> sender-1]==0){
+						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
+						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
+						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
+						//printf("NODE:%d,ID:%d,CONTENT:%d!\n",saved_msg.node[received_pkt->sender-1], saved_msg.id[received_pkt-> sender -1],saved_msg.content[received_pkt-> sender -1]);
+						//printfflush();
+					}
+					else if (saved_msg.id[received_pkt-> sender-1] != received_pkt->id){
+						for (i=0; i<5; i++){
+							saved_msg.node[i]=0;
+							saved_msg.id[i]=0;
+							saved_msg.content[i]=0;
+						}
+						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
+						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
+						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
+						//printf("NODE:%d,ID:%d,CONTENT:%d!\n",saved_msg.node[received_pkt->sender-1], saved_msg.id[received_pkt-> sender -1],saved_msg.content[received_pkt-> sender -1]);
+						//printfflush();
+					}
+					else{
+						dbg("radio_rec", "DUPLICATE FOUND!!!\n");
+					}
+						
+					/*if(saved_msg.node[received_pkt-> sender-1] != received_pkt-> sender && saved_msg.id[received_pkt-> sender-1] != received_pkt-> id){
 						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
 						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
 						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
@@ -229,17 +255,18 @@ implementation {
 						//printfflush();
 					} else {
 						dbg("radio_rec", "DUPLICATE FOUND!!!\n");
-					}
-					dbg("radio_rec", "MSG SAVED TABLE \n\t\t\tNODE:%d\n\t\t\tID:%d\n\t\t\tCONTENT:%d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1],saved_msg.content[received_pkt-> sender -1]);
+					}*/
+					dbg("radio_rec", "MSG SAVED TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", saved_msg.node[0],saved_msg.node[1],saved_msg.node[2],saved_msg.node[3],saved_msg.node[4]);
+					dbg_clear("radio_rec","\t\t\tID:%d,%d,%d,%d,%d\n",saved_msg.id[0],saved_msg.id[1],saved_msg.id[2],saved_msg.id[3],saved_msg.id[4]);
+					dbg_clear("radio_rec","\t\t\tCONTENT:%d,%d,%d,%d,%d\n",saved_msg.content[0],saved_msg.content[1],saved_msg.content[2],saved_msg.content[3],saved_msg.content[4]);
+					
 					//create ACK
 					fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender,received_pkt-> content , received_pkt -> gateway);
 					//send ACK to the gateway
 					actual_send(received_pkt->gateway, &packet);
 					dbg("radio_rec","GATEWAY: %d\n",received_pkt->gateway); 
 					//dbg("radio_rec","ACK sent from server %d\n", TOS_NODE_ID);
-
 				}
-
 			} 
 			//case2
 			else { //if i am a gateway (not possible that a msg arrive to a sensor
@@ -280,6 +307,7 @@ implementation {
 		return bufPtr;
     
   	}
+  
   }
 
   event void AMSend.sendDone(message_t* bufPtr, error_t error) {
