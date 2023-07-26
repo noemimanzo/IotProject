@@ -60,7 +60,7 @@ implementation {
   bool actual_send (uint16_t address, message_t* packet);
   
   
-  /**** FUNCTIONS ****/
+//******************************** FUNCTIONS ********************************//
   
   bool actual_send (uint16_t address, message_t* packet){
   /*
@@ -70,13 +70,13 @@ implementation {
   */
   	lora_msg_t* packet_to_send = (lora_msg_t*) call Packet.getPayload(packet, sizeof(lora_msg_t));
 	if (locked){ 
-		dbg("radio_send", "LOCKED!!!!\n");
+		dbg("radio_send", "LOCKED!!\n");
 		return;
 	} 
 	else {	
 		if (call AMSend.send(address, packet, sizeof(lora_msg_t))== SUCCESS) {
 			locked=TRUE;
-			dbg("radio_send", "Sending packet of type %d at time %s toward node %d",packet_to_send->type,sim_time_string(), address, packet_to_send->gateway);
+			dbg("radio_send", "Sending packet of type %d at time %s toward node %d\n",packet_to_send->type,sim_time_string(), address, packet_to_send->gateway);
 
 		}
 	}
@@ -128,7 +128,38 @@ implementation {
     
   }
   
-  /******* EVENTS ******/
+  void save_send_msg(saved_msg_t save_msg,lora_msg_t* received_pkt, uint8_t index){
+  	saved_msg.node[index] = received_pkt-> sender;
+	saved_msg.id[index] = received_pkt-> id;
+	saved_msg.content[index] = received_pkt -> content;
+	
+	sprintf(message, "NODE: %d ID: %d CONTENT: %d\n", saved_msg.node[index], saved_msg.id[index], saved_msg.content[index]);
+	message_len = strlen(message);
+	send(new_socket, message, message_len, 0);
+  }
+  
+  void handle_msg(saved_msg_t save_msg,lora_msg_t* received_pkt){
+  	uint8_t sensor_index;
+  	
+  	sensor_index = received_pkt-> sender-1;
+  	if(saved_msg.node[sensor_index]==0 && saved_msg.id[sensor_index]==0){
+		save_send_msg(saved_msg,received_pkt,sensor_index);
+				
+	}
+	else if (saved_msg.id[sensor_index] != received_pkt->id){
+		for (i=0; i<5; i++){
+			saved_msg.node[i]=0;
+			saved_msg.id[i]=0;
+			saved_msg.content[i]=0;
+		}
+		save_send_msg(saved_msg,received_pkt,sensor_index);
+	}
+	else{
+		dbg("server_node", "DUPLICATE FOUND!!!\n");
+	}
+  }
+  
+//********************************** EVENTS **********************************//
   event void Boot.booted() {
     dbg("boot","Application booted.\n"); 
     if (TOS_NODE_ID == 8){
@@ -146,8 +177,8 @@ implementation {
 	if (err == SUCCESS) {
 		dbg("radio","Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
 	
-	  	if (TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5 ){
-	  		call Timer0.startPeriodicAt(0,5000);
+	  	if (TOS_NODE_ID < 6 ){
+	  		call Timer0.startPeriodicAt(0,10000);
 	  	}
 	}
 	else {
@@ -176,7 +207,7 @@ implementation {
 	current_sender = msg_to_send->sender;
 	current_content = msg_to_send->content;
 	
-	dbg("radio_rec","current msg -> type: %d id: %d sender: %d content: %d\n", current_type, current_id, current_sender, current_content);	
+	dbg("sensor_node","CREATE MESSAGE\n\t\t\tTYPE: %d\n\t\t\tID: %d\n\t\t\tSENDER: %d\n\t\t\tCONTENT: %d\n", current_type, current_id, current_sender, current_content);	
 	
 	
 	// 3. invio broadcast +start timer1 (one shot)
@@ -197,14 +228,14 @@ implementation {
 		if (msg_to_send == NULL) {
 				return;
 		}
-		dbg("radio_rec","TIME EXPIRED\n");
-		dbg("radio_rec","RESEND MSG: id: %d content: %d\n", current_id, current_content);
+		dbg("sensor_node","TIME EXPIRED\n");
+		dbg("sensor_node","RESEND MSG with ID: %d and CONTENT: %d\n", current_id, current_content);
 		fill_pkt(msg_to_send, current_type, current_id, current_sender, current_content,0);
 		actual_send(AM_BROADCAST_ADDR, &packet);
 		call Timer1.startOneShot(1000);
 		
 	} else {
-	dbg("radio_rec","ACK ARRIVED CORRECTLY!\n");
+	dbg("sensor_node","ACK ARRIVED CORRECTLY!\n");
 	flag_ack= FALSE;	
 	}
   }
@@ -228,36 +259,12 @@ implementation {
 				if(locked){return bufPtr;} 
 				else{//if i am the server
     				
-					dbg("server_node","MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> id, received_pkt->sender,received_pkt-> content );
+					dbg("server_node","MSG arrived at server %d from gateway %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n \t\t\tCONTENT:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> sender, received_pkt-> id,received_pkt-> content );
 					
 					//check duplicates and store message
-					if(saved_msg.node[received_pkt-> sender-1]==0 && saved_msg.id[received_pkt-> sender-1]==0){
-						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
-						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
-						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
-						sprintf(message, "NODE: %d ID: %d CONTENT: %d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1], saved_msg.content[received_pkt-> sender -1]);
-						message_len = strlen(message);
-						send(new_socket, message, message_len, 0);
-						
-					}
-					else if (saved_msg.id[received_pkt-> sender-1] != received_pkt->id){
-						for (i=0; i<5; i++){
-							saved_msg.node[i]=0;
-							saved_msg.id[i]=0;
-							saved_msg.content[i]=0;
-						}
-						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
-						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
-						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
-						sprintf(message, "NODE: %d ID: %d CONTENT: %d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1], saved_msg.content[received_pkt-> sender -1]);
-						message_len = strlen(message);
-						send(new_socket, message, message_len, 0);
-					}
-					else{
-						dbg("server_node", "DUPLICATE FOUND!!!\n");
-					}
+					handle_msg(saved_msg,received_pkt);
 					
-					dbg("server_node", "MSG SAVED TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", saved_msg.node[0],saved_msg.node[1],saved_msg.node[2],saved_msg.node[3],saved_msg.node[4]);
+					dbg("server_node", "MSG SAVED IN TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", saved_msg.node[0],saved_msg.node[1],saved_msg.node[2],saved_msg.node[3],saved_msg.node[4]);
 					dbg_clear("server_node","\t\t\tID:%d,%d,%d,%d,%d\n",saved_msg.id[0],saved_msg.id[1],saved_msg.id[2],saved_msg.id[3],saved_msg.id[4]);
 					dbg_clear("server_node","\t\t\tCONTENT:%d,%d,%d,%d,%d\n",saved_msg.content[0],saved_msg.content[1],saved_msg.content[2],saved_msg.content[3],saved_msg.content[4]);
 					
@@ -269,7 +276,7 @@ implementation {
 			} 
 			//case2
 			else { //if i am a gateway (not possible that a msg arrive to a sensor
-				dbg("radio_rec","MSG arrived at gat %d from node %d\n \t\t\tid: %d\n \t\t\tcontent:%d\n",TOS_NODE_ID,received_pkt-> sender,received_pkt-> id, received_pkt-> content );
+				dbg("gateway_node","MSG arrived at gat %d from node %d\n \t\t\tID: %d\n \t\t\tCONTENT:%d\n",TOS_NODE_ID,received_pkt-> sender,received_pkt-> id, received_pkt-> content );
 				fill_pkt(packet_to_send, MSG, received_pkt-> id, received_pkt-> sender,received_pkt -> content , TOS_NODE_ID);
 				actual_send(server_node, &packet);
 			}
@@ -283,14 +290,14 @@ implementation {
 			}
 			//case1
 			if (TOS_NODE_ID == 6 || TOS_NODE_ID ==7) { //if i am a gateway
-				dbg("radio_rec","ACK arrived at gat %d\n \t\t\tgateway: %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent: %d\n", TOS_NODE_ID, received_pkt-> gateway, received_pkt-> id, received_pkt-> sender, received_pkt-> content);
+				dbg("gateway_node","ACK ARRIVED at gateway %d\n \t\t\tGATEWAY: %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n \t\t\tCONTENT: %d\n",TOS_NODE_ID, received_pkt-> gateway, received_pkt-> sender, received_pkt-> id , received_pkt-> content);
 				fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender, 0, 0);
 				//send ACK to the sensor
 				actual_send(received_pkt->sender, &packet);
 			} 
 			//case2
-			else if(TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5){ //if i am a sensor (not possible that a ack arrive to the server
-				dbg("radio_rec","ACK arrived at node %d\n \t\t\tsender: %d\n \t\t\tid: %d\n", TOS_NODE_ID,received_pkt->sender,received_pkt -> id );
+			else { //if i am a sensor (not possible that a ack arrive to the server
+				dbg("sensor_node","ACK ARRIVED at node %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n", TOS_NODE_ID,received_pkt->sender,received_pkt -> id );
 				if(current_id == received_pkt -> id && received_pkt->sender ==TOS_NODE_ID) {
 					flag_ack=TRUE;
 				} else {

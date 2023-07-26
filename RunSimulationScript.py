@@ -42,13 +42,21 @@ out = sys.stdout;
 #t.addChannel("timer",out);
 #print "Activate debug message on channel radio"
 #t.addChannel("radio",out);
+#Add debug channel
+print "Activate debug message on channel init"
+t.addChannel("init",out);
+print "Activate debug message on channel boot"
+t.addChannel("boot",out);
+print "Activate debug message on channel radio"
+t.addChannel("radio",out);
 print "Activate debug message on channel radio_send"
 t.addChannel("radio_send",out);
-print "Activate debug message on channel radio_rec"
-t.addChannel("radio_rec",out);
+print "Activate debug message on channel sensor_node"
+t.addChannel("sensor_node",out);
+print "Activate debug message on channel gateway_node"
+t.addChannel("gateway_node",out);
 print "Activate debug message on channel server_node"
 t.addChannel("server_node",out);
-
 
 #Creation of the 8 nodes
 for i in range(1, 9):

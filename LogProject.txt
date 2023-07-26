@@ -1,0 +1,1953 @@
+********************************************
+*                                          *
+*             TOSSIM Script                *
+*                                          *
+********************************************
+Initializing mac....
+Initializing radio channels....
+    using topology file: topology.txt
+    using noise file: meyer-heavy.txt
+Initializing simulator....
+Activate debug message on channel init
+Activate debug message on channel boot
+Activate debug message on channel radio
+Activate debug message on channel radio_send
+Activate debug message on channel sensor_node
+Activate debug message on channel gateway_node
+Activate debug message on channel server_node
+Creating node 1 ...
+>>>Will boot at time 0 [sec]
+Creating node 2 ...
+>>>Will boot at time 0 [sec]
+Creating node 3 ...
+>>>Will boot at time 0 [sec]
+Creating node 4 ...
+>>>Will boot at time 0 [sec]
+Creating node 5 ...
+>>>Will boot at time 0 [sec]
+Creating node 6 ...
+>>>Will boot at time 0 [sec]
+Creating node 7 ...
+>>>Will boot at time 0 [sec]
+Creating node 8 ...
+>>>Will boot at time 0 [sec]
+Creating radio channels...
+>>>Setting radio channel from node  1  to node  6  with gain  -60.0  dBm
+>>>Setting radio channel from node  6  to node  1  with gain  -60.0  dBm
+>>>Setting radio channel from node  2  to node  6  with gain  -60.0  dBm
+>>>Setting radio channel from node  6  to node  2  with gain  -60.0  dBm
+>>>Setting radio channel from node  2  to node  7  with gain  -60.0  dBm
+>>>Setting radio channel from node  7  to node  2  with gain  -60.0  dBm
+>>>Setting radio channel from node  3  to node  7  with gain  -60.0  dBm
+>>>Setting radio channel from node  7  to node  3  with gain  -60.0  dBm
+>>>Setting radio channel from node  4  to node  6  with gain  -60.0  dBm
+>>>Setting radio channel from node  6  to node  4  with gain  -60.0  dBm
+>>>Setting radio channel from node  4  to node  7  with gain  -60.0  dBm
+>>>Setting radio channel from node  7  to node  4  with gain  -60.0  dBm
+>>>Setting radio channel from node  5  to node  7  with gain  -60.0  dBm
+>>>Setting radio channel from node  7  to node  5  with gain  -60.0  dBm
+>>>Setting radio channel from node  6  to node  8  with gain  -60.0  dBm
+>>>Setting radio channel from node  8  to node  6  with gain  -60.0  dBm
+>>>Setting radio channel from node  7  to node  8  with gain  -60.0  dBm
+>>>Setting radio channel from node  8  to node  7  with gain  -60.0  dBm
+Initializing Closest Pattern Matching (CPM)...
+Reading noise model data file: meyer-heavy.txt
+Loading:##Done!
+>>>Creating noise model for node: 1
+>>>Creating noise model for node: 2
+>>>Creating noise model for node: 3
+>>>Creating noise model for node: 4
+>>>Creating noise model for node: 5
+>>>Creating noise model for node: 6
+>>>Creating noise model for node: 7
+>>>Creating noise model for node: 8
+Start simulation with TOSSIM! 
+
+
+
+DEBUG (1): Application booted.
+DEBUG (8): Application booted.
+DEBUG (3): Application booted.
+DEBUG (7): Application booted.
+DEBUG (6): Application booted.
+DEBUG (2): Application booted.
+DEBUG (5): Application booted.
+DEBUG (4): Application booted.
+DEBUG (3): Radio on on node 3! at time 0:0:0.000000010
+DEBUG (1): Radio on on node 1! at time 0:0:0.000000010
+DEBUG (8): Radio on on node 8! at time 0:0:0.000000010
+DEBUG (4): Radio on on node 4! at time 0:0:0.000000010
+DEBUG (2): Radio on on node 2! at time 0:0:0.000000010
+DEBUG (5): Radio on on node 5! at time 0:0:0.000000010
+DEBUG (6): Radio on on node 6! at time 0:0:0.000000010
+DEBUG (7): Radio on on node 7! at time 0:0:0.000000010
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 1
+			SENDER: 4
+			CONTENT: 99
+DEBUG (4): Sending packet of type 0 at time 0:0:9.765625010 toward node 65535
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 1
+			SENDER: 1
+			CONTENT: 14
+DEBUG (1): Sending packet of type 0 at time 0:0:9.765625010 toward node 65535
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 1
+			SENDER: 2
+			CONTENT: 21
+DEBUG (2): Sending packet of type 0 at time 0:0:9.765625010 toward node 65535
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 1
+			SENDER: 5
+			CONTENT: 106
+DEBUG (5): Sending packet of type 0 at time 0:0:9.765625010 toward node 65535
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 1
+			SENDER: 3
+			CONTENT: 92
+DEBUG (3): Sending packet of type 0 at time 0:0:9.765625010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 4
+ 			ID: 1
+ 			CONTENT:99
+DEBUG (7): Sending packet of type 0 at time 0:0:9.767028810 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 4
+ 			ID: 1
+ 			CONTENT:99
+DEBUG (6): Sending packet of type 0 at time 0:0:9.767028810 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 4
+ 			ID: 1
+ 			CONTENT:99
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,0
+			ID:0,0,0,1,0
+			CONTENT:0,0,0,99,0
+DEBUG (8): Sending packet of type 1 at time 0:0:9.774414021 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 4
+ 			ID: 1
+ 			CONTENT: 99
+DEBUG (6): Sending packet of type 1 at time 0:0:9.781249918 toward node 4
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 1
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 1 and CONTENT: 21
+DEBUG (2): Sending packet of type 0 at time 0:0:10.742187510 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 1 and CONTENT: 92
+DEBUG (3): Sending packet of type 0 at time 0:0:10.742187510 toward node 65535
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 1 and CONTENT: 106
+DEBUG (5): Sending packet of type 0 at time 0:0:10.742187510 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 1 and CONTENT: 14
+DEBUG (1): Sending packet of type 0 at time 0:0:10.742187510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 1
+ 			CONTENT:106
+DEBUG (7): Sending packet of type 0 at time 0:0:10.748168920 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 1
+ 			CONTENT:106
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,5
+			ID:0,0,0,1,1
+			CONTENT:0,0,0,99,106
+DEBUG (8): Sending packet of type 1 at time 0:0:10.754348693 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 1
+ 			CONTENT: 106
+DEBUG (7): Sending packet of type 1 at time 0:0:10.758285438 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 1
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 1 and CONTENT: 92
+DEBUG (3): Sending packet of type 0 at time 0:0:11.718750010 toward node 65535
+DEBUG (5): ACK ARRIVED CORRECTLY!
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 1 and CONTENT: 14
+DEBUG (1): Sending packet of type 0 at time 0:0:11.718750010 toward node 65535
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 1 and CONTENT: 21
+DEBUG (2): Sending packet of type 0 at time 0:0:11.718750010 toward node 65535
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 1
+ 			CONTENT:14
+DEBUG (6): Sending packet of type 0 at time 0:0:11.720993038 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 1
+ 			CONTENT:21
+DEBUG (7): Sending packet of type 0 at time 0:0:11.723571759 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 1
+ 			CONTENT:14
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,0,0,4,5
+			ID:1,0,0,1,1
+			CONTENT:14,0,0,99,106
+DEBUG (8): Sending packet of type 1 at time 0:0:11.725158664 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 1
+ 			CONTENT: 14
+DEBUG (6): Sending packet of type 1 at time 0:0:11.734771645 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 1
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 1 and CONTENT: 21
+DEBUG (2): Sending packet of type 0 at time 0:0:12.695312510 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 1 and CONTENT: 92
+DEBUG (3): Sending packet of type 0 at time 0:0:12.695312510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 1
+ 			CONTENT:21
+DEBUG (7): Sending packet of type 0 at time 0:0:12.697448728 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 1
+ 			CONTENT:21
+DEBUG (6): Sending packet of type 0 at time 0:0:12.697448728 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 2
+ 			ID: 1
+ 			CONTENT:21
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,5
+			ID:1,1,0,1,1
+			CONTENT:14,21,0,99,106
+DEBUG (8): Sending packet of type 1 at time 0:0:12.704833938 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 2
+ 			ID: 1
+ 			CONTENT: 21
+DEBUG (7): Sending packet of type 1 at time 0:0:12.707122743 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 1
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 1 and CONTENT: 92
+DEBUG (3): Sending packet of type 0 at time 0:0:13.671875010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 1
+ 			CONTENT:92
+DEBUG (7): Sending packet of type 0 at time 0:0:13.676483137 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 1
+ 			CONTENT:92
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:1,1,1,1,1
+			CONTENT:14,21,92,99,106
+DEBUG (8): Sending packet of type 1 at time 0:0:13.681365921 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 1
+ 			CONTENT: 92
+DEBUG (7): Sending packet of type 1 at time 0:0:13.689651395 toward node 3
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 1
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 2
+			SENDER: 4
+			CONTENT: 109
+DEBUG (4): Sending packet of type 0 at time 0:0:19.531250010 toward node 65535
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 2
+			SENDER: 1
+			CONTENT: 178
+DEBUG (1): Sending packet of type 0 at time 0:0:19.531250010 toward node 65535
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 2
+			SENDER: 2
+			CONTENT: 67
+DEBUG (2): Sending packet of type 0 at time 0:0:19.531250010 toward node 65535
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 2
+			SENDER: 3
+			CONTENT: 156
+DEBUG (3): Sending packet of type 0 at time 0:0:19.531250010 toward node 65535
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 2
+			SENDER: 5
+			CONTENT: 198
+DEBUG (5): Sending packet of type 0 at time 0:0:19.531250010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 4
+ 			ID: 2
+ 			CONTENT:109
+DEBUG (7): Sending packet of type 0 at time 0:0:19.532714845 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 4
+ 			ID: 2
+ 			CONTENT:109
+DEBUG (6): Sending packet of type 0 at time 0:0:19.532714845 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 4
+ 			ID: 2
+ 			CONTENT:109
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,0
+			ID:0,0,0,2,0
+			CONTENT:0,0,0,109,0
+DEBUG (8): Sending packet of type 1 at time 0:0:19.540817214 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 4
+ 			ID: 2
+ 			CONTENT: 109
+DEBUG (7): Sending packet of type 1 at time 0:0:19.542846622 toward node 4
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 2
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 2 and CONTENT: 67
+DEBUG (2): Sending packet of type 0 at time 0:0:20.507812510 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 2 and CONTENT: 198
+DEBUG (5): Sending packet of type 0 at time 0:0:20.507812510 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 2 and CONTENT: 178
+DEBUG (1): Sending packet of type 0 at time 0:0:20.507812510 toward node 65535
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 2 and CONTENT: 156
+DEBUG (3): Sending packet of type 0 at time 0:0:20.507812510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 2
+ 			CONTENT:198
+DEBUG (7): Sending packet of type 0 at time 0:0:20.511154165 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 2
+ 			CONTENT:178
+DEBUG (6): Sending packet of type 0 at time 0:0:20.512176498 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 2
+ 			CONTENT:198
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,5
+			ID:0,0,0,2,2
+			CONTENT:0,0,0,109,198
+DEBUG (8): Sending packet of type 1 at time 0:0:20.512603741 toward node 7
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 2
+ 			CONTENT:178
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,0,0,4,5
+			ID:2,0,0,2,2
+			CONTENT:178,0,0,109,198
+DEBUG (8): Sending packet of type 1 at time 0:0:20.520294126 toward node 6
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 2 and CONTENT: 156
+DEBUG (3): Sending packet of type 0 at time 0:0:21.484375010 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 2 and CONTENT: 178
+DEBUG (1): Sending packet of type 0 at time 0:0:21.484375010 toward node 65535
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 2 and CONTENT: 67
+DEBUG (2): Sending packet of type 0 at time 0:0:21.484375010 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 2 and CONTENT: 198
+DEBUG (5): Sending packet of type 0 at time 0:0:21.484375010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 2
+ 			CONTENT:67
+DEBUG (7): Sending packet of type 0 at time 0:0:21.486831660 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 2
+ 			CONTENT:67
+DEBUG (6): Sending packet of type 0 at time 0:0:21.486831660 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 2
+ 			ID: 2
+ 			CONTENT:67
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,5
+			ID:2,2,0,2,2
+			CONTENT:178,67,0,109,198
+DEBUG (8): Sending packet of type 1 at time 0:0:21.491668668 toward node 7
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 2
+ 			CONTENT:178
+DEBUG (6): Sending packet of type 0 at time 0:0:21.494216871 toward node 8
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 2
+ 			ID: 2
+ 			CONTENT: 67
+DEBUG (7): Sending packet of type 1 at time 0:0:21.495986880 toward node 2
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 2
+ 			CONTENT:178
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,5
+			ID:2,2,0,2,2
+			CONTENT:178,67,0,109,198
+DEBUG (8): Sending packet of type 1 at time 0:0:21.502838037 toward node 6
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 2
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 2
+ 			CONTENT: 178
+DEBUG (6): Sending packet of type 1 at time 0:0:21.512954555 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 2
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 2 and CONTENT: 156
+DEBUG (3): Sending packet of type 0 at time 0:0:22.460937510 toward node 65535
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 2 and CONTENT: 198
+DEBUG (5): Sending packet of type 0 at time 0:0:22.460937510 toward node 65535
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 2
+ 			CONTENT:198
+DEBUG (7): Sending packet of type 0 at time 0:0:22.465820294 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 2
+ 			CONTENT:198
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,5
+			ID:2,2,0,2,2
+			CONTENT:178,67,0,109,198
+DEBUG (8): Sending packet of type 1 at time 0:0:22.471877997 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 2
+ 			CONTENT: 198
+DEBUG (7): Sending packet of type 1 at time 0:0:22.477325353 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 2
+DEBUG (5): ACK ARRIVED CORRECTLY!
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 2 and CONTENT: 156
+DEBUG (3): Sending packet of type 0 at time 0:0:23.437500010 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 2 and CONTENT: 156
+DEBUG (3): Sending packet of type 0 at time 0:0:24.414062510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 2
+ 			CONTENT:156
+DEBUG (7): Sending packet of type 0 at time 0:0:24.416992180 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 2
+ 			CONTENT:156
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:2,2,2,2,2
+			CONTENT:178,67,156,109,198
+DEBUG (8): Sending packet of type 1 at time 0:0:24.419006328 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 2
+ 			CONTENT: 156
+DEBUG (7): Sending packet of type 1 at time 0:0:24.420883148 toward node 3
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 2
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 3
+			SENDER: 3
+			CONTENT: 127
+DEBUG (3): Sending packet of type 0 at time 0:0:29.296875010 toward node 65535
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 3
+			SENDER: 2
+			CONTENT: 77
+DEBUG (2): Sending packet of type 0 at time 0:0:29.296875010 toward node 65535
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 3
+			SENDER: 4
+			CONTENT: 40
+DEBUG (4): Sending packet of type 0 at time 0:0:29.296875010 toward node 65535
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 3
+			SENDER: 5
+			CONTENT: 154
+DEBUG (5): Sending packet of type 0 at time 0:0:29.296875010 toward node 65535
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 3
+			SENDER: 1
+			CONTENT: 163
+DEBUG (1): Sending packet of type 0 at time 0:0:29.296875010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 4
+ 			ID: 3
+ 			CONTENT:40
+DEBUG (7): Sending packet of type 0 at time 0:0:29.299423212 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 4
+ 			ID: 3
+ 			CONTENT:40
+DEBUG (6): Sending packet of type 0 at time 0:0:29.299423212 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 4
+ 			ID: 3
+ 			CONTENT:40
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,0
+			ID:0,0,0,3,0
+			CONTENT:0,0,0,40,0
+DEBUG (8): Sending packet of type 1 at time 0:0:29.304275479 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 4
+ 			ID: 3
+ 			CONTENT: 40
+DEBUG (6): Sending packet of type 1 at time 0:0:29.314468291 toward node 4
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 3
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 3 and CONTENT: 77
+DEBUG (2): Sending packet of type 0 at time 0:0:30.273437510 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 3 and CONTENT: 163
+DEBUG (1): Sending packet of type 0 at time 0:0:30.273437510 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 3 and CONTENT: 127
+DEBUG (3): Sending packet of type 0 at time 0:0:30.273437510 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 3 and CONTENT: 154
+DEBUG (5): Sending packet of type 0 at time 0:0:30.273437510 toward node 65535
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 3
+ 			CONTENT:77
+DEBUG (6): Sending packet of type 0 at time 0:0:30.281784018 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 3
+ 			CONTENT:127
+DEBUG (7): Sending packet of type 0 at time 0:0:30.282501177 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 3
+ 			CONTENT:127
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,3,4,0
+			ID:0,0,3,3,0
+			CONTENT:0,0,127,40,0
+DEBUG (8): Sending packet of type 1 at time 0:0:30.285980161 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 3
+ 			CONTENT: 127
+DEBUG (7): Sending packet of type 1 at time 0:0:30.296371336 toward node 3
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 3
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 3 and CONTENT: 77
+DEBUG (2): Sending packet of type 0 at time 0:0:31.250000010 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 3 and CONTENT: 163
+DEBUG (1): Sending packet of type 0 at time 0:0:31.250000010 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 3 and CONTENT: 154
+DEBUG (5): Sending packet of type 0 at time 0:0:31.250000010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 3
+ 			CONTENT:77
+DEBUG (7): Sending packet of type 0 at time 0:0:31.252883904 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 3
+ 			CONTENT:77
+DEBUG (6): Sending packet of type 0 at time 0:0:31.252883904 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 2
+ 			ID: 3
+ 			CONTENT:77
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,2,3,4,0
+			ID:0,3,3,3,0
+			CONTENT:0,77,127,40,0
+DEBUG (8): Sending packet of type 1 at time 0:0:31.260421702 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 2
+ 			ID: 3
+ 			CONTENT: 77
+DEBUG (6): Sending packet of type 1 at time 0:0:31.270080459 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 3
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 3 and CONTENT: 163
+DEBUG (1): Sending packet of type 0 at time 0:0:32.226562510 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 3 and CONTENT: 154
+DEBUG (5): Sending packet of type 0 at time 0:0:32.226562510 toward node 65535
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 3
+ 			CONTENT:163
+DEBUG (6): Sending packet of type 0 at time 0:0:32.230133045 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 3
+ 			CONTENT:154
+DEBUG (7): Sending packet of type 0 at time 0:0:32.236297560 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 3
+ 			CONTENT:163
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,0
+			ID:3,3,3,3,0
+			CONTENT:163,77,127,40,0
+DEBUG (8): Sending packet of type 1 at time 0:0:32.237197823 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 3
+ 			CONTENT: 163
+DEBUG (6): Sending packet of type 1 at time 0:0:32.247299083 toward node 1
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 3 and CONTENT: 163
+DEBUG (1): Sending packet of type 0 at time 0:0:33.203125010 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 3 and CONTENT: 154
+DEBUG (5): Sending packet of type 0 at time 0:0:33.203125010 toward node 65535
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 3
+ 			CONTENT:163
+DEBUG (6): Sending packet of type 0 at time 0:0:33.204284671 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 3
+ 			CONTENT:163
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,0
+			ID:3,3,3,3,0
+			CONTENT:163,77,127,40,0
+DEBUG (8): Sending packet of type 1 at time 0:0:33.205856317 toward node 6
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 3
+ 			CONTENT:154
+DEBUG (7): Sending packet of type 0 at time 0:0:33.210754360 toward node 8
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 3
+ 			CONTENT: 163
+DEBUG (6): Sending packet of type 1 at time 0:0:33.211868245 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 3
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 3
+ 			CONTENT:154
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:3,3,3,3,3
+			CONTENT:163,77,127,40,154
+DEBUG (8): Sending packet of type 1 at time 0:0:33.220931912 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 3
+ 			CONTENT: 154
+DEBUG (7): Sending packet of type 1 at time 0:0:33.222244161 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 3
+DEBUG (5): ACK ARRIVED CORRECTLY!
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 4
+			SENDER: 5
+			CONTENT: 86
+DEBUG (5): Sending packet of type 0 at time 0:0:39.062500010 toward node 65535
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 4
+			SENDER: 4
+			CONTENT: 172
+DEBUG (4): Sending packet of type 0 at time 0:0:39.062500010 toward node 65535
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 4
+			SENDER: 1
+			CONTENT: 28
+DEBUG (1): Sending packet of type 0 at time 0:0:39.062500010 toward node 65535
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 4
+			SENDER: 2
+			CONTENT: 143
+DEBUG (2): Sending packet of type 0 at time 0:0:39.062500010 toward node 65535
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 4
+			SENDER: 3
+			CONTENT: 57
+DEBUG (3): Sending packet of type 0 at time 0:0:39.062500010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 4
+ 			CONTENT:57
+DEBUG (7): Sending packet of type 0 at time 0:0:39.064422606 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 4
+ 			CONTENT:57
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,3,0,0
+			ID:0,0,4,0,0
+			CONTENT:0,0,57,0,0
+DEBUG (8): Sending packet of type 1 at time 0:0:39.069519012 toward node 7
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 4
+ 			CONTENT:28
+DEBUG (6): Sending packet of type 0 at time 0:0:39.071395832 toward node 8
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 4
+ 			CONTENT: 57
+DEBUG (7): Sending packet of type 1 at time 0:0:39.079727082 toward node 3
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 4
+ 			CONTENT:28
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,0,3,0,0
+			ID:4,0,4,0,0
+			CONTENT:28,0,57,0,0
+DEBUG (8): Sending packet of type 1 at time 0:0:39.080612086 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 4
+ 			CONTENT: 28
+DEBUG (6): Sending packet of type 1 at time 0:0:39.086624014 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 4
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 4
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 4 and CONTENT: 86
+DEBUG (5): Sending packet of type 0 at time 0:0:40.039062510 toward node 65535
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 4 and CONTENT: 143
+DEBUG (2): Sending packet of type 0 at time 0:0:40.039062510 toward node 65535
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (4): TIME EXPIRED
+DEBUG (4): RESEND MSG with ID: 4 and CONTENT: 172
+DEBUG (4): Sending packet of type 0 at time 0:0:40.039062510 toward node 65535
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 4
+ 			CONTENT:86
+DEBUG (7): Sending packet of type 0 at time 0:0:40.046874964 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 4
+ 			CONTENT:86
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,0,3,0,5
+			ID:4,0,4,0,4
+			CONTENT:28,0,57,0,86
+DEBUG (8): Sending packet of type 1 at time 0:0:40.057037258 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 4
+ 			CONTENT: 86
+DEBUG (7): Sending packet of type 1 at time 0:0:40.066467135 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 4
+DEBUG (5): ACK ARRIVED CORRECTLY!
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 4 and CONTENT: 143
+DEBUG (2): Sending packet of type 0 at time 0:0:41.015625010 toward node 65535
+DEBUG (4): TIME EXPIRED
+DEBUG (4): RESEND MSG with ID: 4 and CONTENT: 172
+DEBUG (4): Sending packet of type 0 at time 0:0:41.015625010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 4
+ 			CONTENT:143
+DEBUG (7): Sending packet of type 0 at time 0:0:41.017166138 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 4
+ 			CONTENT:143
+DEBUG (6): Sending packet of type 0 at time 0:0:41.017166138 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 2
+ 			ID: 4
+ 			CONTENT:143
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,0,5
+			ID:4,4,4,0,4
+			CONTENT:28,143,57,0,86
+DEBUG (8): Sending packet of type 1 at time 0:0:41.020965555 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 2
+ 			ID: 4
+ 			CONTENT: 143
+DEBUG (6): Sending packet of type 1 at time 0:0:41.022262544 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 4
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 2
+ 			ID: 4
+ 			CONTENT:143
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,0,5
+			ID:4,4,4,0,4
+			CONTENT:28,143,57,0,86
+DEBUG (8): Sending packet of type 1 at time 0:0:41.027084293 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 2
+ 			ID: 4
+ 			CONTENT: 143
+DEBUG (7): Sending packet of type 1 at time 0:0:41.031616127 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 4
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (4): TIME EXPIRED
+DEBUG (4): RESEND MSG with ID: 4 and CONTENT: 172
+DEBUG (4): Sending packet of type 0 at time 0:0:41.992187510 toward node 65535
+DEBUG (6): MSG arrived at gat 6 from node 4
+ 			ID: 4
+ 			CONTENT:172
+DEBUG (6): Sending packet of type 0 at time 0:0:42.002380321 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 4
+ 			ID: 4
+ 			CONTENT:172
+DEBUG (7): Sending packet of type 0 at time 0:0:42.002380321 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 4
+ 			ID: 4
+ 			CONTENT:172
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:4,4,4,4,4
+			CONTENT:28,143,57,172,86
+DEBUG (8): Sending packet of type 1 at time 0:0:42.009231477 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 4
+ 			ID: 4
+ 			CONTENT: 172
+DEBUG (7): Sending packet of type 1 at time 0:0:42.013915898 toward node 4
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 4
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 5
+			SENDER: 4
+			CONTENT: 84
+DEBUG (4): Sending packet of type 0 at time 0:0:48.828125010 toward node 65535
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 5
+			SENDER: 2
+			CONTENT: 63
+DEBUG (2): Sending packet of type 0 at time 0:0:48.828125010 toward node 65535
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 5
+			SENDER: 3
+			CONTENT: 42
+DEBUG (3): Sending packet of type 0 at time 0:0:48.828125010 toward node 65535
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 5
+			SENDER: 5
+			CONTENT: 127
+DEBUG (5): Sending packet of type 0 at time 0:0:48.828125010 toward node 65535
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 5
+			SENDER: 1
+			CONTENT: 21
+DEBUG (1): Sending packet of type 0 at time 0:0:48.828125010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 4
+ 			ID: 5
+ 			CONTENT:84
+DEBUG (7): Sending packet of type 0 at time 0:0:48.830154417 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 5
+ 			CONTENT:63
+DEBUG (6): Sending packet of type 0 at time 0:0:48.833114604 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 4
+ 			ID: 5
+ 			CONTENT:84
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,0
+			ID:0,0,0,5,0
+			CONTENT:0,0,0,84,0
+DEBUG (8): Sending packet of type 1 at time 0:0:48.836135827 toward node 7
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 5
+ 			CONTENT:127
+DEBUG (7): Sending packet of type 0 at time 0:0:48.836959797 toward node 8
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 4
+ 			ID: 5
+ 			CONTENT: 84
+DEBUG (7): Sending packet of type 1 at time 0:0:48.840850765 toward node 4
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 2
+ 			ID: 5
+ 			CONTENT:63
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,2,0,4,0
+			ID:0,5,0,5,0
+			CONTENT:0,63,0,84,0
+DEBUG (8): Sending packet of type 1 at time 0:0:48.842330859 toward node 6
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 5
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 2
+ 			ID: 5
+ 			CONTENT: 63
+DEBUG (6): Sending packet of type 1 at time 0:0:48.850677368 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 5
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 5 and CONTENT: 21
+DEBUG (1): Sending packet of type 0 at time 0:0:49.804687510 toward node 65535
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 5 and CONTENT: 42
+DEBUG (3): Sending packet of type 0 at time 0:0:49.804687510 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 5 and CONTENT: 127
+DEBUG (5): Sending packet of type 0 at time 0:0:49.804687510 toward node 65535
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 5
+ 			CONTENT:21
+DEBUG (6): Sending packet of type 0 at time 0:0:49.807250971 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 5
+ 			CONTENT:127
+DEBUG (7): Sending packet of type 0 at time 0:0:49.809753398 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 5
+ 			CONTENT:21
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,0
+			ID:5,5,0,5,0
+			CONTENT:21,63,0,84,0
+DEBUG (8): Sending packet of type 1 at time 0:0:49.812332118 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 5
+ 			CONTENT: 21
+DEBUG (6): Sending packet of type 1 at time 0:0:49.822433378 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 5
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 5 and CONTENT: 42
+DEBUG (3): Sending packet of type 0 at time 0:0:50.781250010 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 5 and CONTENT: 127
+DEBUG (5): Sending packet of type 0 at time 0:0:50.781250010 toward node 65535
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 5
+ 			CONTENT:127
+DEBUG (7): Sending packet of type 0 at time 0:0:50.786712624 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 5
+ 			CONTENT:127
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,5
+			ID:5,5,0,5,5
+			CONTENT:21,63,0,84,127
+DEBUG (8): Sending packet of type 1 at time 0:0:50.794982840 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 5
+ 			CONTENT: 127
+DEBUG (7): Sending packet of type 1 at time 0:0:50.802810553 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 5
+DEBUG (5): ACK ARRIVED CORRECTLY!
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 5 and CONTENT: 42
+DEBUG (3): Sending packet of type 0 at time 0:0:51.757812510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 5
+ 			CONTENT:42
+DEBUG (7): Sending packet of type 0 at time 0:0:51.763839696 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 5
+ 			CONTENT:42
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:5,5,5,5,5
+			CONTENT:21,63,42,84,127
+DEBUG (8): Sending packet of type 1 at time 0:0:51.766448934 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 5
+ 			CONTENT: 42
+DEBUG (7): Sending packet of type 1 at time 0:0:51.774841219 toward node 3
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 5
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 6
+			SENDER: 1
+			CONTENT: 80
+DEBUG (1): Sending packet of type 0 at time 0:0:58.593750010 toward node 65535
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 6
+			SENDER: 3
+			CONTENT: 24
+DEBUG (3): Sending packet of type 0 at time 0:0:58.593750010 toward node 65535
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 6
+			SENDER: 2
+			CONTENT: 152
+DEBUG (2): Sending packet of type 0 at time 0:0:58.593750010 toward node 65535
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 6
+			SENDER: 4
+			CONTENT: 97
+DEBUG (4): Sending packet of type 0 at time 0:0:58.593750010 toward node 65535
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 6
+			SENDER: 5
+			CONTENT: 169
+DEBUG (5): Sending packet of type 0 at time 0:0:58.593750010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 4
+ 			ID: 6
+ 			CONTENT:97
+DEBUG (7): Sending packet of type 0 at time 0:0:58.595214845 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 4
+ 			ID: 6
+ 			CONTENT:97
+DEBUG (6): Sending packet of type 0 at time 0:0:58.595214845 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 4
+ 			ID: 6
+ 			CONTENT:97
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,0
+			ID:0,0,0,6,0
+			CONTENT:0,0,0,97,0
+DEBUG (8): Sending packet of type 1 at time 0:0:58.599853490 toward node 7
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 6
+ 			CONTENT:169
+DEBUG (7): Sending packet of type 0 at time 0:0:58.603530836 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 4
+ 			ID: 6
+ 			CONTENT:97
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,0
+			ID:0,0,0,6,0
+			CONTENT:0,0,0,97,0
+DEBUG (8): Sending packet of type 1 at time 0:0:58.606567318 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 4
+ 			ID: 6
+ 			CONTENT: 97
+DEBUG (6): Sending packet of type 1 at time 0:0:58.611740017 toward node 4
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 6
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 6 and CONTENT: 80
+DEBUG (1): Sending packet of type 0 at time 0:0:59.570312510 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 6 and CONTENT: 169
+DEBUG (5): Sending packet of type 0 at time 0:0:59.570312510 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 6 and CONTENT: 24
+DEBUG (3): Sending packet of type 0 at time 0:0:59.570312510 toward node 65535
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 6 and CONTENT: 152
+DEBUG (2): Sending packet of type 0 at time 0:0:59.570312510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 6
+ 			CONTENT:152
+DEBUG (7): Sending packet of type 0 at time 0:0:59.574508652 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 6
+ 			CONTENT:152
+DEBUG (6): Sending packet of type 0 at time 0:0:59.574508652 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 2
+ 			ID: 6
+ 			CONTENT:152
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,2,0,4,0
+			ID:0,6,0,6,0
+			CONTENT:0,152,0,97,0
+DEBUG (8): Sending packet of type 1 at time 0:0:59.578506431 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 2
+ 			ID: 6
+ 			CONTENT: 152
+DEBUG (7): Sending packet of type 1 at time 0:0:59.580200147 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 6
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 6 and CONTENT: 80
+DEBUG (1): Sending packet of type 0 at time 0:1:0.546875010 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 6 and CONTENT: 24
+DEBUG (3): Sending packet of type 0 at time 0:1:0.546875010 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 6 and CONTENT: 169
+DEBUG (5): Sending packet of type 0 at time 0:1:0.546875010 toward node 65535
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 6
+ 			CONTENT:80
+DEBUG (6): Sending packet of type 0 at time 0:1:0.550399769 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 6
+ 			CONTENT:24
+DEBUG (7): Sending packet of type 0 at time 0:1:0.550521839 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 6
+ 			CONTENT:80
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,0
+			ID:6,6,0,6,0
+			CONTENT:80,152,0,97,0
+DEBUG (8): Sending packet of type 1 at time 0:1:0.555053673 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 6
+ 			CONTENT: 80
+DEBUG (6): Sending packet of type 1 at time 0:1:0.561965864 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 6
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 6 and CONTENT: 24
+DEBUG (3): Sending packet of type 0 at time 0:1:1.523437510 toward node 65535
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 6 and CONTENT: 169
+DEBUG (5): Sending packet of type 0 at time 0:1:1.523437510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 6
+ 			CONTENT:24
+DEBUG (7): Sending packet of type 0 at time 0:1:1.527648911 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 6
+ 			CONTENT:24
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,0
+			ID:6,6,6,6,0
+			CONTENT:80,152,24,97,0
+DEBUG (8): Sending packet of type 1 at time 0:1:1.530731168 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 6
+ 			CONTENT: 24
+DEBUG (7): Sending packet of type 1 at time 0:1:1.535766539 toward node 3
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 6
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 6 and CONTENT: 169
+DEBUG (5): Sending packet of type 0 at time 0:1:2.500000010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 6
+ 			CONTENT:169
+DEBUG (7): Sending packet of type 0 at time 0:1:2.504135117 toward node 8
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 6 and CONTENT: 169
+DEBUG (5): Sending packet of type 0 at time 0:1:3.476562510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 6
+ 			CONTENT:169
+DEBUG (7): Sending packet of type 0 at time 0:1:3.480453478 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 6
+ 			CONTENT:169
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:6,6,6,6,6
+			CONTENT:80,152,24,97,169
+DEBUG (8): Sending packet of type 1 at time 0:1:3.490951464 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 6
+ 			CONTENT: 169
+DEBUG (7): Sending packet of type 1 at time 0:1:3.495162865 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 6
+DEBUG (5): ACK ARRIVED CORRECTLY!
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 7
+			SENDER: 4
+			CONTENT: 168
+DEBUG (4): Sending packet of type 0 at time 0:1:8.359375010 toward node 65535
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 7
+			SENDER: 5
+			CONTENT: 0
+DEBUG (5): Sending packet of type 0 at time 0:1:8.359375010 toward node 65535
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 7
+			SENDER: 3
+			CONTENT: 0
+DEBUG (3): Sending packet of type 0 at time 0:1:8.359375010 toward node 65535
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 7
+			SENDER: 1
+			CONTENT: 0
+DEBUG (1): Sending packet of type 0 at time 0:1:8.359375010 toward node 65535
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 7
+			SENDER: 2
+			CONTENT: 168
+DEBUG (2): Sending packet of type 0 at time 0:1:8.359375010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 7
+ 			CONTENT:168
+DEBUG (7): Sending packet of type 0 at time 0:1:8.363250719 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 7
+ 			CONTENT:168
+DEBUG (6): Sending packet of type 0 at time 0:1:8.363250719 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 2
+ 			ID: 7
+ 			CONTENT:168
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,2,0,0,0
+			ID:0,7,0,0,0
+			CONTENT:0,168,0,0,0
+DEBUG (8): Sending packet of type 1 at time 0:1:8.366394012 toward node 6
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (6): Sending packet of type 0 at time 0:1:8.367233240 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (7): Sending packet of type 0 at time 0:1:8.369613597 toward node 8
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 2
+ 			ID: 7
+ 			CONTENT: 168
+DEBUG (6): Sending packet of type 1 at time 0:1:8.377258206 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 7
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (5): Sending packet of type 0 at time 0:1:9.335937510 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (1): Sending packet of type 0 at time 0:1:9.335937510 toward node 65535
+DEBUG (4): TIME EXPIRED
+DEBUG (4): RESEND MSG with ID: 7 and CONTENT: 168
+DEBUG (4): Sending packet of type 0 at time 0:1:9.335937510 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (3): Sending packet of type 0 at time 0:1:9.335937510 toward node 65535
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (6): Sending packet of type 0 at time 0:1:9.337631225 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (7): Sending packet of type 0 at time 0:1:9.339385976 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,0,0
+			ID:7,7,0,0,0
+			CONTENT:0,168,0,0,0
+DEBUG (8): Sending packet of type 1 at time 0:1:9.343841516 toward node 6
+DEBUG (6): MSG arrived at gat 6 from node 4
+ 			ID: 7
+ 			CONTENT:168
+DEBUG (6): Sending packet of type 0 at time 0:1:9.344741779 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 4
+ 			ID: 7
+ 			CONTENT:168
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,0
+			ID:7,7,0,7,0
+			CONTENT:0,168,0,168,0
+DEBUG (8): Sending packet of type 1 at time 0:1:9.354141139 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 4
+ 			ID: 7
+ 			CONTENT: 168
+DEBUG (6): Sending packet of type 1 at time 0:1:9.357467535 toward node 4
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 7
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (1): Sending packet of type 0 at time 0:1:10.312500010 toward node 65535
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (3): Sending packet of type 0 at time 0:1:10.312500010 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (5): Sending packet of type 0 at time 0:1:10.312500010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (7): Sending packet of type 0 at time 0:1:10.314956660 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,5
+			ID:7,7,0,7,7
+			CONTENT:0,168,0,168,0
+DEBUG (8): Sending packet of type 1 at time 0:1:10.318481420 toward node 7
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (6): Sending packet of type 0 at time 0:1:10.319030733 toward node 8
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 7
+ 			CONTENT: 0
+DEBUG (7): Sending packet of type 1 at time 0:1:10.326751635 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 7
+DEBUG (5): ACK ARRIVED CORRECTLY!
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (3): Sending packet of type 0 at time 0:1:11.289062510 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (1): Sending packet of type 0 at time 0:1:11.289062510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (7): Sending packet of type 0 at time 0:1:11.293182359 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (6): Sending packet of type 0 at time 0:1:11.295104955 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,5
+			ID:7,7,0,7,7
+			CONTENT:0,168,0,168,0
+DEBUG (8): Sending packet of type 1 at time 0:1:11.299453684 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 7
+ 			CONTENT: 0
+DEBUG (6): Sending packet of type 1 at time 0:1:11.301696713 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 7
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 7 and CONTENT: 0
+DEBUG (3): Sending packet of type 0 at time 0:1:12.265625010 toward node 65535
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (7): Sending packet of type 0 at time 0:1:12.268218989 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 7
+ 			CONTENT:0
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:7,7,7,7,7
+			CONTENT:0,168,0,168,0
+DEBUG (8): Sending packet of type 1 at time 0:1:12.276046702 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 7
+ 			CONTENT: 0
+DEBUG (7): Sending packet of type 1 at time 0:1:12.284042260 toward node 3
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 7
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 8
+			SENDER: 2
+			CONTENT: 76
+DEBUG (2): Sending packet of type 0 at time 0:1:18.125000010 toward node 65535
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 8
+			SENDER: 4
+			CONTENT: 193
+DEBUG (4): Sending packet of type 0 at time 0:1:18.125000010 toward node 65535
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 8
+			SENDER: 1
+			CONTENT: 117
+DEBUG (1): Sending packet of type 0 at time 0:1:18.125000010 toward node 65535
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 8
+			SENDER: 5
+			CONTENT: 152
+DEBUG (5): Sending packet of type 0 at time 0:1:18.125000010 toward node 65535
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 8
+			SENDER: 3
+			CONTENT: 34
+DEBUG (3): Sending packet of type 0 at time 0:1:18.125000010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 8
+ 			CONTENT:76
+DEBUG (7): Sending packet of type 0 at time 0:1:18.126571656 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 2
+ 			ID: 8
+ 			CONTENT:76
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,2,0,0,0
+			ID:0,8,0,0,0
+			CONTENT:0,76,0,0,0
+DEBUG (8): Sending packet of type 1 at time 0:1:18.132247892 toward node 7
+DEBUG (6): MSG arrived at gat 6 from node 4
+ 			ID: 8
+ 			CONTENT:193
+DEBUG (6): Sending packet of type 0 at time 0:1:18.132400479 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 8
+ 			CONTENT:152
+DEBUG (7): Sending packet of type 0 at time 0:1:18.133346518 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 4
+ 			ID: 8
+ 			CONTENT:193
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,2,0,4,0
+			ID:0,8,0,8,0
+			CONTENT:0,76,0,193,0
+DEBUG (8): Sending packet of type 1 at time 0:1:18.141952425 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 4
+ 			ID: 8
+ 			CONTENT: 193
+DEBUG (6): Sending packet of type 1 at time 0:1:18.145797618 toward node 4
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 8
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 8 and CONTENT: 76
+DEBUG (2): Sending packet of type 0 at time 0:1:19.101562510 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 8 and CONTENT: 117
+DEBUG (1): Sending packet of type 0 at time 0:1:19.101562510 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 8 and CONTENT: 34
+DEBUG (3): Sending packet of type 0 at time 0:1:19.101562510 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 8 and CONTENT: 152
+DEBUG (5): Sending packet of type 0 at time 0:1:19.101562510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 8
+ 			CONTENT:34
+DEBUG (7): Sending packet of type 0 at time 0:1:19.106384259 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 8
+ 			CONTENT:117
+DEBUG (6): Sending packet of type 0 at time 0:1:19.109146083 toward node 8
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 8 and CONTENT: 152
+DEBUG (5): Sending packet of type 0 at time 0:1:20.078125010 toward node 65535
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 8 and CONTENT: 76
+DEBUG (2): Sending packet of type 0 at time 0:1:20.078125010 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 8 and CONTENT: 34
+DEBUG (3): Sending packet of type 0 at time 0:1:20.078125010 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 8 and CONTENT: 117
+DEBUG (1): Sending packet of type 0 at time 0:1:20.078125010 toward node 65535
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 8
+ 			CONTENT:117
+DEBUG (6): Sending packet of type 0 at time 0:1:20.083099346 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 8
+ 			CONTENT:76
+DEBUG (7): Sending packet of type 0 at time 0:1:20.085678066 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 8
+ 			CONTENT:117
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,0
+			ID:8,8,0,8,0
+			CONTENT:117,76,0,193,0
+DEBUG (8): Sending packet of type 1 at time 0:1:20.091461113 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 8
+ 			CONTENT: 117
+DEBUG (6): Sending packet of type 1 at time 0:1:20.095168977 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 8
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 8 and CONTENT: 76
+DEBUG (2): Sending packet of type 0 at time 0:1:21.054687510 toward node 65535
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 8 and CONTENT: 152
+DEBUG (5): Sending packet of type 0 at time 0:1:21.054687510 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 8 and CONTENT: 34
+DEBUG (3): Sending packet of type 0 at time 0:1:21.054687510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 8
+ 			CONTENT:76
+DEBUG (7): Sending packet of type 0 at time 0:1:21.057479852 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 8
+ 			CONTENT:76
+DEBUG (6): Sending packet of type 0 at time 0:1:21.057479852 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 2
+ 			ID: 8
+ 			CONTENT:76
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,0
+			ID:8,8,0,8,0
+			CONTENT:117,76,0,193,0
+DEBUG (8): Sending packet of type 1 at time 0:1:21.063629108 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 2
+ 			ID: 8
+ 			CONTENT: 76
+DEBUG (7): Sending packet of type 1 at time 0:1:21.071273716 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 8
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 8 and CONTENT: 34
+DEBUG (3): Sending packet of type 0 at time 0:1:22.031250010 toward node 65535
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 8 and CONTENT: 152
+DEBUG (5): Sending packet of type 0 at time 0:1:22.031250010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 8
+ 			CONTENT:152
+DEBUG (7): Sending packet of type 0 at time 0:1:22.039459190 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 8
+ 			CONTENT:152
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,0,4,5
+			ID:8,8,0,8,8
+			CONTENT:117,76,0,193,152
+DEBUG (8): Sending packet of type 1 at time 0:1:22.043533263 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 8
+ 			CONTENT: 152
+DEBUG (7): Sending packet of type 1 at time 0:1:22.052413826 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 8
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 8 and CONTENT: 34
+DEBUG (3): Sending packet of type 0 at time 0:1:23.007812510 toward node 65535
+DEBUG (5): ACK ARRIVED CORRECTLY!
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 8
+ 			CONTENT:34
+DEBUG (7): Sending packet of type 0 at time 0:1:23.009231569 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 8
+ 			CONTENT:34
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:8,8,8,8,8
+			CONTENT:117,76,34,193,152
+DEBUG (8): Sending packet of type 1 at time 0:1:23.014480561 toward node 7
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 8 and CONTENT: 34
+DEBUG (3): Sending packet of type 0 at time 0:1:23.984375010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 8
+ 			CONTENT:34
+DEBUG (7): Sending packet of type 0 at time 0:1:23.989761331 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 8
+ 			CONTENT:34
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:8,8,8,8,8
+			CONTENT:117,76,34,193,152
+DEBUG (8): Sending packet of type 1 at time 0:1:23.991088838 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 8
+ 			CONTENT: 34
+DEBUG (7): Sending packet of type 1 at time 0:1:23.998367237 toward node 3
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 8
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (1): CREATE MESSAGE
+			TYPE: 0
+			ID: 9
+			SENDER: 1
+			CONTENT: 199
+DEBUG (1): Sending packet of type 0 at time 0:1:27.890625010 toward node 65535
+DEBUG (3): CREATE MESSAGE
+			TYPE: 0
+			ID: 9
+			SENDER: 3
+			CONTENT: 198
+DEBUG (3): Sending packet of type 0 at time 0:1:27.890625010 toward node 65535
+DEBUG (4): CREATE MESSAGE
+			TYPE: 0
+			ID: 9
+			SENDER: 4
+			CONTENT: 98
+DEBUG (4): Sending packet of type 0 at time 0:1:27.890625010 toward node 65535
+DEBUG (2): CREATE MESSAGE
+			TYPE: 0
+			ID: 9
+			SENDER: 2
+			CONTENT: 99
+DEBUG (2): Sending packet of type 0 at time 0:1:27.890625010 toward node 65535
+DEBUG (5): CREATE MESSAGE
+			TYPE: 0
+			ID: 9
+			SENDER: 5
+			CONTENT: 62
+DEBUG (5): Sending packet of type 0 at time 0:1:27.890625010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 4
+ 			ID: 9
+ 			CONTENT:98
+DEBUG (7): Sending packet of type 0 at time 0:1:27.891815188 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 4
+ 			ID: 9
+ 			CONTENT:98
+DEBUG (6): Sending packet of type 0 at time 0:1:27.891815188 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 4
+ 			ID: 9
+ 			CONTENT:98
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,0
+			ID:0,0,0,9,0
+			CONTENT:0,0,0,98,0
+DEBUG (8): Sending packet of type 1 at time 0:1:27.894775376 toward node 7
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 4
+ 			ID: 9
+ 			CONTENT:98
+DEBUG (8): DUPLICATE FOUND!!!
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,0,4,0
+			ID:0,0,0,9,0
+			CONTENT:0,0,0,98,0
+DEBUG (8): Sending packet of type 1 at time 0:1:27.899337727 toward node 6
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 9
+ 			CONTENT:198
+DEBUG (7): Sending packet of type 0 at time 0:1:27.900253249 toward node 8
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 4
+ 			ID: 9
+ 			CONTENT: 98
+DEBUG (6): Sending packet of type 1 at time 0:1:27.904922411 toward node 4
+DEBUG (4): ACK ARRIVED at node 4
+ 			SENDER: 4
+ 			ID: 9
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 9 and CONTENT: 199
+DEBUG (1): Sending packet of type 0 at time 0:1:28.867187510 toward node 65535
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 9 and CONTENT: 99
+DEBUG (2): Sending packet of type 0 at time 0:1:28.867187510 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 9 and CONTENT: 198
+DEBUG (3): Sending packet of type 0 at time 0:1:28.867187510 toward node 65535
+DEBUG (4): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 9 and CONTENT: 62
+DEBUG (5): Sending packet of type 0 at time 0:1:28.867187510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 9
+ 			CONTENT:62
+DEBUG (7): Sending packet of type 0 at time 0:1:28.869934076 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 9
+ 			CONTENT:199
+DEBUG (6): Sending packet of type 0 at time 0:1:28.871124254 toward node 8
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 9 and CONTENT: 99
+DEBUG (2): Sending packet of type 0 at time 0:1:29.843750010 toward node 65535
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 9 and CONTENT: 62
+DEBUG (5): Sending packet of type 0 at time 0:1:29.843750010 toward node 65535
+DEBUG (3): TIME EXPIRED
+DEBUG (3): RESEND MSG with ID: 9 and CONTENT: 198
+DEBUG (3): Sending packet of type 0 at time 0:1:29.843750010 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 9 and CONTENT: 199
+DEBUG (1): Sending packet of type 0 at time 0:1:29.843750010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 3
+ 			ID: 9
+ 			CONTENT:198
+DEBUG (7): Sending packet of type 0 at time 0:1:29.845413208 toward node 8
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 9
+ 			CONTENT:99
+DEBUG (6): Sending packet of type 0 at time 0:1:29.846160884 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 3
+ 			ID: 9
+ 			CONTENT:198
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:0,0,3,4,0
+			ID:0,0,9,9,0
+			CONTENT:0,0,198,98,0
+DEBUG (8): Sending packet of type 1 at time 0:1:29.848571759 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 3
+ 			ID: 9
+ 			CONTENT: 198
+DEBUG (7): Sending packet of type 1 at time 0:1:29.854675239 toward node 3
+DEBUG (3): ACK ARRIVED at node 3
+ 			SENDER: 3
+ 			ID: 9
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 9 and CONTENT: 99
+DEBUG (2): Sending packet of type 0 at time 0:1:30.820312510 toward node 65535
+DEBUG (3): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 9 and CONTENT: 62
+DEBUG (5): Sending packet of type 0 at time 0:1:30.820312510 toward node 65535
+DEBUG (1): TIME EXPIRED
+DEBUG (1): RESEND MSG with ID: 9 and CONTENT: 199
+DEBUG (1): Sending packet of type 0 at time 0:1:30.820312510 toward node 65535
+DEBUG (6): MSG arrived at gat 6 from node 1
+ 			ID: 9
+ 			CONTENT:199
+DEBUG (6): Sending packet of type 0 at time 0:1:30.824310289 toward node 8
+DEBUG (7): MSG arrived at gat 7 from node 2
+ 			ID: 9
+ 			CONTENT:99
+DEBUG (7): Sending packet of type 0 at time 0:1:30.825378398 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 1
+ 			ID: 9
+ 			CONTENT:199
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,0,3,4,0
+			ID:9,0,9,9,0
+			CONTENT:199,0,198,98,0
+DEBUG (8): Sending packet of type 1 at time 0:1:30.828231775 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 1
+ 			ID: 9
+ 			CONTENT: 199
+DEBUG (6): Sending packet of type 1 at time 0:1:30.837493806 toward node 1
+DEBUG (1): ACK ARRIVED at node 1
+ 			SENDER: 1
+ 			ID: 9
+DEBUG (2): TIME EXPIRED
+DEBUG (2): RESEND MSG with ID: 9 and CONTENT: 99
+DEBUG (2): Sending packet of type 0 at time 0:1:31.796875010 toward node 65535
+DEBUG (1): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 9 and CONTENT: 62
+DEBUG (5): Sending packet of type 0 at time 0:1:31.796875010 toward node 65535
+DEBUG (6): MSG arrived at gat 6 from node 2
+ 			ID: 9
+ 			CONTENT:99
+DEBUG (6): Sending packet of type 0 at time 0:1:31.799987784 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 6
+ 			SENDER: 2
+ 			ID: 9
+ 			CONTENT:99
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,0
+			ID:9,9,9,9,0
+			CONTENT:199,99,198,98,0
+DEBUG (8): Sending packet of type 1 at time 0:1:31.806671095 toward node 6
+DEBUG (6): ACK ARRIVED at gateway 6
+ 			GATEWAY: 6
+ 			SENDER: 2
+ 			ID: 9
+ 			CONTENT: 99
+DEBUG (6): Sending packet of type 1 at time 0:1:31.812713540 toward node 2
+DEBUG (2): ACK ARRIVED at node 2
+ 			SENDER: 2
+ 			ID: 9
+DEBUG (2): ACK ARRIVED CORRECTLY!
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 9 and CONTENT: 62
+DEBUG (5): Sending packet of type 0 at time 0:1:32.773437510 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 9
+ 			CONTENT:62
+DEBUG (7): Sending packet of type 0 at time 0:1:32.774520877 toward node 8
+DEBUG (5): TIME EXPIRED
+DEBUG (5): RESEND MSG with ID: 9 and CONTENT: 62
+DEBUG (5): Sending packet of type 0 at time 0:1:33.750000010 toward node 65535
+DEBUG (7): MSG arrived at gat 7 from node 5
+ 			ID: 9
+ 			CONTENT:62
+DEBUG (7): Sending packet of type 0 at time 0:1:33.759918165 toward node 8
+DEBUG (8): MSG arrived at server 8 from gateway 7
+ 			SENDER: 5
+ 			ID: 9
+ 			CONTENT:62
+DEBUG (8): MSG SAVED IN TABLE
+			NODE:1,2,3,4,5
+			ID:9,9,9,9,9
+			CONTENT:199,99,198,98,62
+DEBUG (8): Sending packet of type 1 at time 0:1:33.768737693 toward node 7
+DEBUG (7): ACK ARRIVED at gateway 7
+ 			GATEWAY: 7
+ 			SENDER: 5
+ 			ID: 9
+ 			CONTENT: 62
+DEBUG (7): Sending packet of type 1 at time 0:1:33.777068943 toward node 5
+DEBUG (5): ACK ARRIVED at node 5
+ 			SENDER: 5
+ 			ID: 9
+DEBUG (5): ACK ARRIVED CORRECTLY!
+
+
+
+Simulation finished!
