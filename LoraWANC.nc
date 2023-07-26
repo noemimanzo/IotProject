@@ -76,7 +76,7 @@ implementation {
 	else {	
 		if (call AMSend.send(address, packet, sizeof(lora_msg_t))== SUCCESS) {
 			locked=TRUE;
-			dbg("radio_send", "Sending packet of type %d at time %s toward node %d gateInPkt: %d sender: %d content %d\n",packet_to_send->type,sim_time_string(), address, packet_to_send->gateway, packet_to_send->sender, packet_to_send->content);
+			dbg("radio_send", "Sending packet of type %d at time %s toward node %d",packet_to_send->type,sim_time_string(), address, packet_to_send->gateway);
 
 		}
 	}
@@ -180,8 +180,7 @@ implementation {
 	
 	
 	// 3. invio broadcast +start timer1 (one shot)
-	actual_send(AM_BROADCAST_ADDR, &packet);
-	dbg("radio_rec","	msg sent at node %d\n", TOS_NODE_ID);	
+	actual_send(AM_BROADCAST_ADDR, &packet);	
 	call Timer1.startOneShot(1000);
 	id_index++;
 	
@@ -192,21 +191,20 @@ implementation {
 			nulla
 	   altrimenti
 	   		rinvio messaggio broadcast + start timer 1(one shot) 	
-	*/
-	dbg("radio_rec","	flag : %d\n", flag_ack);	
+	*/	
 	if (!flag_ack){ // flag = false msg is resent
 		lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));	
 		if (msg_to_send == NULL) {
 				return;
 		}
 		dbg("radio_rec","TIME EXPIRED\n");
-		dbg("radio_rec","RESEND MSG: type: %d id: %d sender: %d content: %d\n", current_type, current_id, current_sender, current_content);
+		dbg("radio_rec","RESEND MSG: id: %d content: %d\n", current_id, current_content);
 		fill_pkt(msg_to_send, current_type, current_id, current_sender, current_content,0);
 		actual_send(AM_BROADCAST_ADDR, &packet);
 		call Timer1.startOneShot(1000);
 		
 	} else {
-	dbg("radio_rec","ACK arrived corrected \n");
+	dbg("radio_rec","ACK ARRIVED CORRECTLY!\n");
 	flag_ack= FALSE;	
 	}
   }
@@ -215,24 +213,6 @@ implementation {
  
   event message_t* Receive.receive(message_t* bufPtr, 
 				   void* payload, uint8_t len) {
-	/*
-	case 1: ricezione mess
-		node= gat
-			fowarded to server
-		node = server
-			(check duplicati + salvataggio+invio nodered)
-			invio ack
-	
-	case 2: ricezione ack
-		node = gat
-			fowarded ack (al sender del ack/msg)
-		
-		node = sensor
-			check se ack è quello relativo al messaggio appena inviato
-				flag = true
-			se no flag sempre falso 	
-			
-	*/
 	if (len != sizeof(lora_msg_t) || locked ) {return bufPtr;}
     else {
 	
@@ -285,7 +265,6 @@ implementation {
 					fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender,received_pkt-> content , received_pkt -> gateway);
 					//send ACK to the gateway
 					actual_send(received_pkt->gateway, &packet);
-					dbg("server_node","GATEWAY: %d\n",received_pkt->gateway); 
 				}
 			} 
 			//case2
@@ -293,7 +272,6 @@ implementation {
 				dbg("radio_rec","MSG arrived at gat %d from node %d\n \t\t\tid: %d\n \t\t\tcontent:%d\n",TOS_NODE_ID,received_pkt-> sender,received_pkt-> id, received_pkt-> content );
 				fill_pkt(packet_to_send, MSG, received_pkt-> id, received_pkt-> sender,received_pkt -> content , TOS_NODE_ID);
 				actual_send(server_node, &packet);
-				//dbg("radio_rec","msg sent from gat %d\n", TOS_NODE_ID);
 			}
 			
 		}
@@ -309,12 +287,10 @@ implementation {
 				fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender, 0, 0);
 				//send ACK to the sensor
 				actual_send(received_pkt->sender, &packet);
-				//dbg("radio_rec","ACK sent from gat %d\n", TOS_NODE_ID);
 			} 
 			//case2
 			else if(TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5){ //if i am a sensor (not possible that a ack arrive to the server
 				dbg("radio_rec","ACK arrived at node %d\n \t\t\tsender: %d\n \t\t\tid: %d\n", TOS_NODE_ID,received_pkt->sender,received_pkt -> id );
-				dbg("radio_rec","CHECK ID ACK: id_msgSent: %d  id_ackReceived: %d\n",current_id, received_pkt -> id);  
 				if(current_id == received_pkt -> id && received_pkt->sender ==TOS_NODE_ID) {
 					flag_ack=TRUE;
 				} else {
