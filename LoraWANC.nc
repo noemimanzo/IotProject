@@ -1,5 +1,10 @@
 #include "Timer.h"
 #include "LoraWAN.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
 
 
 module LoraWANC @safe() {
@@ -16,8 +21,6 @@ module LoraWANC @safe() {
 	//Interfaces for timers
 	interface Timer<TMilli> as Timer0;
 	interface Timer<TMilli> as Timer1;
-	//interface Timer<TMilli> as TimerDelay;
-	//interface Timer<TMilli> as Timer2;
 	
     //Other Interfaces;
     interface SplitControl as AMControl;
@@ -34,7 +37,6 @@ implementation {
   uint8_t id_index=1;
   lora_msg_t current_msg;
   uint8_t msg_val;
-  uint16_t time_delays[5]={61,173,267,371,479};
   saved_msg_t saved_msg;
   
   uint8_t current_type;
@@ -45,8 +47,15 @@ implementation {
   uint8_t i=0;
   
   uint8_t server_node =8;
- // uint8_t current_msg_id;
   bool flag_ack = FALSE;
+  
+  
+  //TCP connection
+  int server_fd, new_socket;
+  struct sockaddr_in address;
+  int addrlen = sizeof(address);
+  char message[100];
+  int message_len;
   
   bool actual_send (uint16_t address, message_t* packet);
   
@@ -85,10 +94,45 @@ implementation {
   	
   }
   
+  int open_connection_tcp(){
+
+    // Create TCP socket
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+        perror("Socket creation failed");
+        exit(EXIT_FAILURE);
+    }
+    
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(60002);
+    
+    // Bind the socket to localhost and port 60002
+    if (bind(server_fd, (struct sockaddr*)&address, sizeof(address)) < 0) {
+        perror("Bind failed");
+        exit(EXIT_FAILURE);
+    }
+    
+    // Listen for incoming connections
+    if (listen(server_fd, 3) < 0) {
+        perror("Listen failed");
+        exit(EXIT_FAILURE);
+    }
+    
+    // Accept incoming connection
+    if ((new_socket = accept(server_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen)) < 0) {
+        perror("Accept failed");
+        exit(EXIT_FAILURE);
+    }
+    
+    return new_socket;
+    
+  }
+  
   /******* EVENTS ******/
   event void Boot.booted() {
     dbg("boot","Application booted.\n"); 
     if (TOS_NODE_ID == 8){
+		open_connection_tcp(); //start tcp connection
 		for (i=0; i<5; i++){
 			saved_msg.node[i]=0;
 			saved_msg.id[i]=0;
@@ -102,11 +146,6 @@ implementation {
 	if (err == SUCCESS) {
 		dbg("radio","Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
 	
-		// Just in case of NODE=1,2,3,4,5 the timer is started
-		/*if (TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5 ){
-	  		call Timer0.startPeriodic(10000);
-	  	}
-	  	*/
 	  	if (TOS_NODE_ID == 1 || TOS_NODE_ID == 2 || TOS_NODE_ID == 3 || TOS_NODE_ID == 4 || TOS_NODE_ID == 5 ){
 	  		call Timer0.startPeriodicAt(0,10000);
 	  	}
@@ -120,11 +159,7 @@ implementation {
     dbg("boot", "Radio stopped\n");
   }
   
-  /*event void TimerDelay.fired (){
- 	
-  }
-  */
-  
+
   event void Timer0.fired() { // invio periodico
 	// 1. creazione pack
 	lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
@@ -132,9 +167,6 @@ implementation {
 			return;
 	}
 	msg_val= (call Random.rand16())% 100;
-	//call TimerDelay.startOneShot(time_delays[TOS_NODE_ID-1]);
-
-	dbg("radio_rec","random value at node %d: %d\n", TOS_NODE_ID, msg_val);	
 	fill_pkt(msg_to_send, MSG, id_index, TOS_NODE_ID, msg_val,0);
 	
 	
@@ -179,10 +211,6 @@ implementation {
 	}
   }
   
-  /*event void Timer2.fired() {
- 	actual_send (queue_addr, &queued_packet);
-  }
-  */
 
  
   event message_t* Receive.receive(message_t* bufPtr, 
@@ -209,8 +237,6 @@ implementation {
     else {
 	
 		lora_msg_t* received_pkt = (lora_msg_t*)payload;
-		//printf("Packet received at node %d from node %d\n",TOS_NODE_ID, received_pkt->sender);
-		//printfflush();
 		//MSG CASE
 		if (received_pkt -> type == MSG){
  			lora_msg_t* packet_to_send= (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
@@ -221,6 +247,7 @@ implementation {
 			if (TOS_NODE_ID == server_node) {
 				if(locked){return bufPtr;} 
 				else{//if i am the server
+    				
 					dbg("radio_rec","MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> id, received_pkt->sender,received_pkt-> content );
 					
 					//check duplicates and store message
@@ -228,8 +255,10 @@ implementation {
 						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
 						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
 						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
-						//printf("NODE:%d,ID:%d,CONTENT:%d!\n",saved_msg.node[received_pkt->sender-1], saved_msg.id[received_pkt-> sender -1],saved_msg.content[received_pkt-> sender -1]);
-						//printfflush();
+						sprintf(message, "NODE:%d ID:%d CONTENT:%d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1], saved_msg.content[received_pkt-> sender -1]);
+						message_len = strlen(message);
+						send(new_socket, message, message_len, 0);
+						
 					}
 					else if (saved_msg.id[received_pkt-> sender-1] != received_pkt->id){
 						for (i=0; i<5; i++){
@@ -240,22 +269,14 @@ implementation {
 						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
 						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
 						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
-						//printf("NODE:%d,ID:%d,CONTENT:%d!\n",saved_msg.node[received_pkt->sender-1], saved_msg.id[received_pkt-> sender -1],saved_msg.content[received_pkt-> sender -1]);
-						//printfflush();
+						sprintf(message, "NODE:%d ID:%d CONTENT:%d\n", saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1], saved_msg.content[received_pkt-> sender -1]);
+						message_len = strlen(message);
+						send(new_socket, message, message_len, 0);
 					}
 					else{
 						dbg("radio_rec", "DUPLICATE FOUND!!!\n");
 					}
-						
-					/*if(saved_msg.node[received_pkt-> sender-1] != received_pkt-> sender && saved_msg.id[received_pkt-> sender-1] != received_pkt-> id){
-						saved_msg.node[received_pkt-> sender-1] = received_pkt-> sender;
-						saved_msg.id[received_pkt-> sender -1] = received_pkt-> id;
-						saved_msg.content[received_pkt-> sender -1] = received_pkt -> content;
-						//printf("NODE:%d,ID:%d,CONTENT:%d!\n",saved_msg.node[received_pkt-> sender-1], saved_msg.id[received_pkt-> sender -1],saved_msg.content[received_pkt-> sender -1]);
-						//printfflush();
-					} else {
-						dbg("radio_rec", "DUPLICATE FOUND!!!\n");
-					}*/
+					
 					dbg("radio_rec", "MSG SAVED TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", saved_msg.node[0],saved_msg.node[1],saved_msg.node[2],saved_msg.node[3],saved_msg.node[4]);
 					dbg_clear("radio_rec","\t\t\tID:%d,%d,%d,%d,%d\n",saved_msg.id[0],saved_msg.id[1],saved_msg.id[2],saved_msg.id[3],saved_msg.id[4]);
 					dbg_clear("radio_rec","\t\t\tCONTENT:%d,%d,%d,%d,%d\n",saved_msg.content[0],saved_msg.content[1],saved_msg.content[2],saved_msg.content[3],saved_msg.content[4]);
@@ -265,7 +286,6 @@ implementation {
 					//send ACK to the gateway
 					actual_send(received_pkt->gateway, &packet);
 					dbg("radio_rec","GATEWAY: %d\n",received_pkt->gateway); 
-					//dbg("radio_rec","ACK sent from server %d\n", TOS_NODE_ID);
 				}
 			} 
 			//case2
@@ -297,10 +317,8 @@ implementation {
 				dbg("radio_rec","CHECK ID ACK: id_msgSent: %d  id_ackReceived: %d\n",current_id, received_pkt -> id);  
 				if(current_id == received_pkt -> id && received_pkt->sender ==TOS_NODE_ID) {
 					flag_ack=TRUE;
-					dbg("radio_rec","flag check %d\n", flag_ack);
 				} else {
 					flag_ack=FALSE; 
-					dbg("radio_rec","flag check %d\n", flag_ack);
 				}
 			}
 		}
@@ -313,7 +331,6 @@ implementation {
   event void AMSend.sendDone(message_t* bufPtr, error_t error) {
 	if (&packet==bufPtr) {
       locked = FALSE;
-      //dbg("radio_send", "Packet sent successfully!\n");
     }
   }
 }

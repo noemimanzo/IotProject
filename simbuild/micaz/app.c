@@ -897,8 +897,10 @@ struct drand48_data {
 extern void *malloc(size_t __size) __attribute((__leaf__)) __attribute((__nothrow__)) __attribute((__malloc__)) ;
 #line 483
 extern void free(void *__ptr) __attribute((__leaf__)) __attribute((__nothrow__)) ;
+#line 543
+extern void exit(int __status) __attribute((__leaf__)) __attribute((__nothrow__)) __attribute((__noreturn__)) ;
 #line 741
-typedef int (*__compar_fn_t)(const void *arg_0xb7bb2458, const void *arg_0xb7bb25f0);
+typedef int (*__compar_fn_t)(const void *arg_0xb7b33458, const void *arg_0xb7b335f0);
 #line 779
 __extension__ 
 #line 796
@@ -917,7 +919,7 @@ extern double sqrt(double __x) __attribute((__leaf__)) __attribute((__nothrow__)
 #line 184
 extern double floor(double __x) __attribute((__leaf__)) __attribute((__nothrow__)) __attribute((const)) ;
 #line 260
-extern double erfc(double arg_0xb7b638c8) __attribute((__leaf__)) __attribute((__nothrow__)) ;
+extern double erfc(double arg_0xb7ae48c8) __attribute((__leaf__)) __attribute((__nothrow__)) ;
 #line 336
 __extension__ 
 
@@ -1191,8 +1193,8 @@ const char *__restrict __format, ...);
 
 extern int printf(const char *__restrict __format, ...);
 
-
-
+extern int sprintf(char *__restrict __s, 
+const char *__restrict __format, ...) __attribute((__nothrow__)) ;
 
 
 
@@ -1204,6 +1206,8 @@ __gnuc_va_list __arg);
 extern int snprintf(char *__restrict __s, size_t __maxlen, 
 const char *__restrict __format, ...) 
 __attribute((__nothrow__)) __attribute((__format__(__printf__, 3, 4))) ;
+#line 846
+extern void perror(const char *__s);
 #line 858
 extern int fileno(FILE *__stream) __attribute((__leaf__)) __attribute((__nothrow__)) ;
 # 65 "/opt/tinyos-main-2.1.2/tos/lib/tossim/tos.h"
@@ -1312,8 +1316,8 @@ typedef struct hashtable hashtable_t;
 #line 78
 struct hashtable *
 create_hashtable(unsigned int minsize, 
-unsigned int (*hashfunction)(void *arg_0xb7a0d840), 
-int (*key_eq_fn)(void *arg_0xb7a0dc88, void *arg_0xb7a0de00));
+unsigned int (*hashfunction)(void *arg_0xb798e840), 
+int (*key_eq_fn)(void *arg_0xb798ec88, void *arg_0xb798ee00));
 #line 103
 #line 102
 int 
@@ -1349,7 +1353,7 @@ typedef struct sim_log_channel {
 } sim_log_channel_t;
 
 enum __nesc_unnamed4273 {
-  SIM_LOG_OUTPUT_COUNT = 204U
+  SIM_LOG_OUTPUT_COUNT = 201U
 };
 
 sim_log_output_t outputs[SIM_LOG_OUTPUT_COUNT];
@@ -1926,7 +1930,7 @@ struct tm;
 
 struct tm;
 # 46 "/opt/tinyos-main-2.1.2/tos/lib/tossim/randomlib.h"
-static inline void RandomInitialise(int arg_0xb78dc9b8, int arg_0xb78dcb10);
+static inline void RandomInitialise(int arg_0xb785d9b8, int arg_0xb785db10);
 static double RandomUniform(void );
 # 51 "/opt/tinyos-main-2.1.2/tos/lib/tossim/sim_noise.c"
 int numCase1 = 0;
@@ -3451,8 +3455,1178 @@ typedef struct __nesc_unnamed4300 {
 } 
 #line 44
 TMicro;
-# 52 "/opt/tinyos-main-2.1.2/tos/chips/atm128/timer/Atm128Timer.h"
+# 258 "/usr/include/unistd.h" 3
+typedef __useconds_t useconds_t;
+#line 277
+typedef __socklen_t socklen_t;
+# 24 "/usr/include/i386-linux-gnu/bits/confname.h" 3
 enum __nesc_unnamed4301 {
+
+  _PC_LINK_MAX, 
+
+  _PC_MAX_CANON, 
+
+  _PC_MAX_INPUT, 
+
+  _PC_NAME_MAX, 
+
+  _PC_PATH_MAX, 
+
+  _PC_PIPE_BUF, 
+
+  _PC_CHOWN_RESTRICTED, 
+
+  _PC_NO_TRUNC, 
+
+  _PC_VDISABLE, 
+
+  _PC_SYNC_IO, 
+
+  _PC_ASYNC_IO, 
+
+  _PC_PRIO_IO, 
+
+  _PC_SOCK_MAXBUF, 
+
+  _PC_FILESIZEBITS, 
+
+  _PC_REC_INCR_XFER_SIZE, 
+
+  _PC_REC_MAX_XFER_SIZE, 
+
+  _PC_REC_MIN_XFER_SIZE, 
+
+  _PC_REC_XFER_ALIGN, 
+
+  _PC_ALLOC_SIZE_MIN, 
+
+  _PC_SYMLINK_MAX, 
+
+  _PC_2_SYMLINKS
+};
+
+
+
+enum __nesc_unnamed4302 {
+
+  _SC_ARG_MAX, 
+
+  _SC_CHILD_MAX, 
+
+  _SC_CLK_TCK, 
+
+  _SC_NGROUPS_MAX, 
+
+  _SC_OPEN_MAX, 
+
+  _SC_STREAM_MAX, 
+
+  _SC_TZNAME_MAX, 
+
+  _SC_JOB_CONTROL, 
+
+  _SC_SAVED_IDS, 
+
+  _SC_REALTIME_SIGNALS, 
+
+  _SC_PRIORITY_SCHEDULING, 
+
+  _SC_TIMERS, 
+
+  _SC_ASYNCHRONOUS_IO, 
+
+  _SC_PRIORITIZED_IO, 
+
+  _SC_SYNCHRONIZED_IO, 
+
+  _SC_FSYNC, 
+
+  _SC_MAPPED_FILES, 
+
+  _SC_MEMLOCK, 
+
+  _SC_MEMLOCK_RANGE, 
+
+  _SC_MEMORY_PROTECTION, 
+
+  _SC_MESSAGE_PASSING, 
+
+  _SC_SEMAPHORES, 
+
+  _SC_SHARED_MEMORY_OBJECTS, 
+
+  _SC_AIO_LISTIO_MAX, 
+
+  _SC_AIO_MAX, 
+
+  _SC_AIO_PRIO_DELTA_MAX, 
+
+  _SC_DELAYTIMER_MAX, 
+
+  _SC_MQ_OPEN_MAX, 
+
+  _SC_MQ_PRIO_MAX, 
+
+  _SC_VERSION, 
+
+  _SC_PAGESIZE, 
+
+
+  _SC_RTSIG_MAX, 
+
+  _SC_SEM_NSEMS_MAX, 
+
+  _SC_SEM_VALUE_MAX, 
+
+  _SC_SIGQUEUE_MAX, 
+
+  _SC_TIMER_MAX, 
+
+
+
+
+  _SC_BC_BASE_MAX, 
+
+  _SC_BC_DIM_MAX, 
+
+  _SC_BC_SCALE_MAX, 
+
+  _SC_BC_STRING_MAX, 
+
+  _SC_COLL_WEIGHTS_MAX, 
+
+  _SC_EQUIV_CLASS_MAX, 
+
+  _SC_EXPR_NEST_MAX, 
+
+  _SC_LINE_MAX, 
+
+  _SC_RE_DUP_MAX, 
+
+  _SC_CHARCLASS_NAME_MAX, 
+
+
+  _SC_2_VERSION, 
+
+  _SC_2_C_BIND, 
+
+  _SC_2_C_DEV, 
+
+  _SC_2_FORT_DEV, 
+
+  _SC_2_FORT_RUN, 
+
+  _SC_2_SW_DEV, 
+
+  _SC_2_LOCALEDEF, 
+
+
+  _SC_PII, 
+
+  _SC_PII_XTI, 
+
+  _SC_PII_SOCKET, 
+
+  _SC_PII_INTERNET, 
+
+  _SC_PII_OSI, 
+
+  _SC_POLL, 
+
+  _SC_SELECT, 
+
+  _SC_UIO_MAXIOV, 
+
+  _SC_IOV_MAX = _SC_UIO_MAXIOV, 
+
+  _SC_PII_INTERNET_STREAM, 
+
+  _SC_PII_INTERNET_DGRAM, 
+
+  _SC_PII_OSI_COTS, 
+
+  _SC_PII_OSI_CLTS, 
+
+  _SC_PII_OSI_M, 
+
+  _SC_T_IOV_MAX, 
+
+
+
+  _SC_THREADS, 
+
+  _SC_THREAD_SAFE_FUNCTIONS, 
+
+  _SC_GETGR_R_SIZE_MAX, 
+
+  _SC_GETPW_R_SIZE_MAX, 
+
+  _SC_LOGIN_NAME_MAX, 
+
+  _SC_TTY_NAME_MAX, 
+
+  _SC_THREAD_DESTRUCTOR_ITERATIONS, 
+
+  _SC_THREAD_KEYS_MAX, 
+
+  _SC_THREAD_STACK_MIN, 
+
+  _SC_THREAD_THREADS_MAX, 
+
+  _SC_THREAD_ATTR_STACKADDR, 
+
+  _SC_THREAD_ATTR_STACKSIZE, 
+
+  _SC_THREAD_PRIORITY_SCHEDULING, 
+
+  _SC_THREAD_PRIO_INHERIT, 
+
+  _SC_THREAD_PRIO_PROTECT, 
+
+  _SC_THREAD_PROCESS_SHARED, 
+
+
+  _SC_NPROCESSORS_CONF, 
+
+  _SC_NPROCESSORS_ONLN, 
+
+  _SC_PHYS_PAGES, 
+
+  _SC_AVPHYS_PAGES, 
+
+  _SC_ATEXIT_MAX, 
+
+  _SC_PASS_MAX, 
+
+
+  _SC_XOPEN_VERSION, 
+
+  _SC_XOPEN_XCU_VERSION, 
+
+  _SC_XOPEN_UNIX, 
+
+  _SC_XOPEN_CRYPT, 
+
+  _SC_XOPEN_ENH_I18N, 
+
+  _SC_XOPEN_SHM, 
+
+
+  _SC_2_CHAR_TERM, 
+
+  _SC_2_C_VERSION, 
+
+  _SC_2_UPE, 
+
+
+  _SC_XOPEN_XPG2, 
+
+  _SC_XOPEN_XPG3, 
+
+  _SC_XOPEN_XPG4, 
+
+
+  _SC_CHAR_BIT, 
+
+  _SC_CHAR_MAX, 
+
+  _SC_CHAR_MIN, 
+
+  _SC_INT_MAX, 
+
+  _SC_INT_MIN, 
+
+  _SC_LONG_BIT, 
+
+  _SC_WORD_BIT, 
+
+  _SC_MB_LEN_MAX, 
+
+  _SC_NZERO, 
+
+  _SC_SSIZE_MAX, 
+
+  _SC_SCHAR_MAX, 
+
+  _SC_SCHAR_MIN, 
+
+  _SC_SHRT_MAX, 
+
+  _SC_SHRT_MIN, 
+
+  _SC_UCHAR_MAX, 
+
+  _SC_UINT_MAX, 
+
+  _SC_ULONG_MAX, 
+
+  _SC_USHRT_MAX, 
+
+
+  _SC_NL_ARGMAX, 
+
+  _SC_NL_LANGMAX, 
+
+  _SC_NL_MSGMAX, 
+
+  _SC_NL_NMAX, 
+
+  _SC_NL_SETMAX, 
+
+  _SC_NL_TEXTMAX, 
+
+
+  _SC_XBS5_ILP32_OFF32, 
+
+  _SC_XBS5_ILP32_OFFBIG, 
+
+  _SC_XBS5_LP64_OFF64, 
+
+  _SC_XBS5_LPBIG_OFFBIG, 
+
+
+  _SC_XOPEN_LEGACY, 
+
+  _SC_XOPEN_REALTIME, 
+
+  _SC_XOPEN_REALTIME_THREADS, 
+
+
+  _SC_ADVISORY_INFO, 
+
+  _SC_BARRIERS, 
+
+  _SC_BASE, 
+
+  _SC_C_LANG_SUPPORT, 
+
+  _SC_C_LANG_SUPPORT_R, 
+
+  _SC_CLOCK_SELECTION, 
+
+  _SC_CPUTIME, 
+
+  _SC_THREAD_CPUTIME, 
+
+  _SC_DEVICE_IO, 
+
+  _SC_DEVICE_SPECIFIC, 
+
+  _SC_DEVICE_SPECIFIC_R, 
+
+  _SC_FD_MGMT, 
+
+  _SC_FIFO, 
+
+  _SC_PIPE, 
+
+  _SC_FILE_ATTRIBUTES, 
+
+  _SC_FILE_LOCKING, 
+
+  _SC_FILE_SYSTEM, 
+
+  _SC_MONOTONIC_CLOCK, 
+
+  _SC_MULTI_PROCESS, 
+
+  _SC_SINGLE_PROCESS, 
+
+  _SC_NETWORKING, 
+
+  _SC_READER_WRITER_LOCKS, 
+
+  _SC_SPIN_LOCKS, 
+
+  _SC_REGEXP, 
+
+  _SC_REGEX_VERSION, 
+
+  _SC_SHELL, 
+
+  _SC_SIGNALS, 
+
+  _SC_SPAWN, 
+
+  _SC_SPORADIC_SERVER, 
+
+  _SC_THREAD_SPORADIC_SERVER, 
+
+  _SC_SYSTEM_DATABASE, 
+
+  _SC_SYSTEM_DATABASE_R, 
+
+  _SC_TIMEOUTS, 
+
+  _SC_TYPED_MEMORY_OBJECTS, 
+
+  _SC_USER_GROUPS, 
+
+  _SC_USER_GROUPS_R, 
+
+  _SC_2_PBS, 
+
+  _SC_2_PBS_ACCOUNTING, 
+
+  _SC_2_PBS_LOCATE, 
+
+  _SC_2_PBS_MESSAGE, 
+
+  _SC_2_PBS_TRACK, 
+
+  _SC_SYMLOOP_MAX, 
+
+  _SC_STREAMS, 
+
+  _SC_2_PBS_CHECKPOINT, 
+
+
+  _SC_V6_ILP32_OFF32, 
+
+  _SC_V6_ILP32_OFFBIG, 
+
+  _SC_V6_LP64_OFF64, 
+
+  _SC_V6_LPBIG_OFFBIG, 
+
+
+  _SC_HOST_NAME_MAX, 
+
+  _SC_TRACE, 
+
+  _SC_TRACE_EVENT_FILTER, 
+
+  _SC_TRACE_INHERIT, 
+
+  _SC_TRACE_LOG, 
+
+
+  _SC_LEVEL1_ICACHE_SIZE, 
+
+  _SC_LEVEL1_ICACHE_ASSOC, 
+
+  _SC_LEVEL1_ICACHE_LINESIZE, 
+
+  _SC_LEVEL1_DCACHE_SIZE, 
+
+  _SC_LEVEL1_DCACHE_ASSOC, 
+
+  _SC_LEVEL1_DCACHE_LINESIZE, 
+
+  _SC_LEVEL2_CACHE_SIZE, 
+
+  _SC_LEVEL2_CACHE_ASSOC, 
+
+  _SC_LEVEL2_CACHE_LINESIZE, 
+
+  _SC_LEVEL3_CACHE_SIZE, 
+
+  _SC_LEVEL3_CACHE_ASSOC, 
+
+  _SC_LEVEL3_CACHE_LINESIZE, 
+
+  _SC_LEVEL4_CACHE_SIZE, 
+
+  _SC_LEVEL4_CACHE_ASSOC, 
+
+  _SC_LEVEL4_CACHE_LINESIZE, 
+
+
+
+  _SC_IPV6 = _SC_LEVEL1_ICACHE_SIZE + 50, 
+
+  _SC_RAW_SOCKETS, 
+
+
+  _SC_V7_ILP32_OFF32, 
+
+  _SC_V7_ILP32_OFFBIG, 
+
+  _SC_V7_LP64_OFF64, 
+
+  _SC_V7_LPBIG_OFFBIG, 
+
+
+  _SC_SS_REPL_MAX, 
+
+
+  _SC_TRACE_EVENT_NAME_MAX, 
+
+  _SC_TRACE_NAME_MAX, 
+
+  _SC_TRACE_SYS_MAX, 
+
+  _SC_TRACE_USER_EVENT_MAX, 
+
+
+  _SC_XOPEN_STREAMS, 
+
+
+  _SC_THREAD_ROBUST_PRIO_INHERIT, 
+
+  _SC_THREAD_ROBUST_PRIO_PROTECT
+};
+
+
+
+enum __nesc_unnamed4303 {
+
+  _CS_PATH, 
+
+
+  _CS_V6_WIDTH_RESTRICTED_ENVS, 
+
+
+
+  _CS_GNU_LIBC_VERSION, 
+
+  _CS_GNU_LIBPTHREAD_VERSION, 
+
+
+  _CS_V5_WIDTH_RESTRICTED_ENVS, 
+
+
+
+  _CS_V7_WIDTH_RESTRICTED_ENVS, 
+
+
+
+  _CS_LFS_CFLAGS = 1000, 
+
+  _CS_LFS_LDFLAGS, 
+
+  _CS_LFS_LIBS, 
+
+  _CS_LFS_LINTFLAGS, 
+
+  _CS_LFS64_CFLAGS, 
+
+  _CS_LFS64_LDFLAGS, 
+
+  _CS_LFS64_LIBS, 
+
+  _CS_LFS64_LINTFLAGS, 
+
+
+  _CS_XBS5_ILP32_OFF32_CFLAGS = 1100, 
+
+  _CS_XBS5_ILP32_OFF32_LDFLAGS, 
+
+  _CS_XBS5_ILP32_OFF32_LIBS, 
+
+  _CS_XBS5_ILP32_OFF32_LINTFLAGS, 
+
+  _CS_XBS5_ILP32_OFFBIG_CFLAGS, 
+
+  _CS_XBS5_ILP32_OFFBIG_LDFLAGS, 
+
+  _CS_XBS5_ILP32_OFFBIG_LIBS, 
+
+  _CS_XBS5_ILP32_OFFBIG_LINTFLAGS, 
+
+  _CS_XBS5_LP64_OFF64_CFLAGS, 
+
+  _CS_XBS5_LP64_OFF64_LDFLAGS, 
+
+  _CS_XBS5_LP64_OFF64_LIBS, 
+
+  _CS_XBS5_LP64_OFF64_LINTFLAGS, 
+
+  _CS_XBS5_LPBIG_OFFBIG_CFLAGS, 
+
+  _CS_XBS5_LPBIG_OFFBIG_LDFLAGS, 
+
+  _CS_XBS5_LPBIG_OFFBIG_LIBS, 
+
+  _CS_XBS5_LPBIG_OFFBIG_LINTFLAGS, 
+
+
+  _CS_POSIX_V6_ILP32_OFF32_CFLAGS, 
+
+  _CS_POSIX_V6_ILP32_OFF32_LDFLAGS, 
+
+  _CS_POSIX_V6_ILP32_OFF32_LIBS, 
+
+  _CS_POSIX_V6_ILP32_OFF32_LINTFLAGS, 
+
+  _CS_POSIX_V6_ILP32_OFFBIG_CFLAGS, 
+
+  _CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS, 
+
+  _CS_POSIX_V6_ILP32_OFFBIG_LIBS, 
+
+  _CS_POSIX_V6_ILP32_OFFBIG_LINTFLAGS, 
+
+  _CS_POSIX_V6_LP64_OFF64_CFLAGS, 
+
+  _CS_POSIX_V6_LP64_OFF64_LDFLAGS, 
+
+  _CS_POSIX_V6_LP64_OFF64_LIBS, 
+
+  _CS_POSIX_V6_LP64_OFF64_LINTFLAGS, 
+
+  _CS_POSIX_V6_LPBIG_OFFBIG_CFLAGS, 
+
+  _CS_POSIX_V6_LPBIG_OFFBIG_LDFLAGS, 
+
+  _CS_POSIX_V6_LPBIG_OFFBIG_LIBS, 
+
+  _CS_POSIX_V6_LPBIG_OFFBIG_LINTFLAGS, 
+
+
+  _CS_POSIX_V7_ILP32_OFF32_CFLAGS, 
+
+  _CS_POSIX_V7_ILP32_OFF32_LDFLAGS, 
+
+  _CS_POSIX_V7_ILP32_OFF32_LIBS, 
+
+  _CS_POSIX_V7_ILP32_OFF32_LINTFLAGS, 
+
+  _CS_POSIX_V7_ILP32_OFFBIG_CFLAGS, 
+
+  _CS_POSIX_V7_ILP32_OFFBIG_LDFLAGS, 
+
+  _CS_POSIX_V7_ILP32_OFFBIG_LIBS, 
+
+  _CS_POSIX_V7_ILP32_OFFBIG_LINTFLAGS, 
+
+  _CS_POSIX_V7_LP64_OFF64_CFLAGS, 
+
+  _CS_POSIX_V7_LP64_OFF64_LDFLAGS, 
+
+  _CS_POSIX_V7_LP64_OFF64_LIBS, 
+
+  _CS_POSIX_V7_LP64_OFF64_LINTFLAGS, 
+
+  _CS_POSIX_V7_LPBIG_OFFBIG_CFLAGS, 
+
+  _CS_POSIX_V7_LPBIG_OFFBIG_LDFLAGS, 
+
+  _CS_POSIX_V7_LPBIG_OFFBIG_LIBS, 
+
+  _CS_POSIX_V7_LPBIG_OFFBIG_LINTFLAGS, 
+
+
+  _CS_V6_ENV, 
+
+  _CS_V7_ENV
+};
+# 43 "/usr/include/i386-linux-gnu/bits/uio.h" 3
+struct iovec {
+
+  void *iov_base;
+  size_t iov_len;
+};
+# 24 "/usr/include/i386-linux-gnu/bits/socket_type.h" 3
+enum __socket_type {
+
+  SOCK_STREAM = 1, 
+
+
+  SOCK_DGRAM = 2, 
+
+
+  SOCK_RAW = 3, 
+
+  SOCK_RDM = 4, 
+
+  SOCK_SEQPACKET = 5, 
+
+
+  SOCK_DCCP = 6, 
+
+  SOCK_PACKET = 10, 
+
+
+
+
+
+
+
+  SOCK_CLOEXEC = 02000000, 
+
+
+  SOCK_NONBLOCK = 00004000
+};
+# 28 "/usr/include/i386-linux-gnu/bits/sockaddr.h" 3
+typedef unsigned short int sa_family_t;
+# 153 "/usr/include/i386-linux-gnu/bits/socket.h" 3
+struct sockaddr {
+
+  sa_family_t sa_family;
+  char sa_data[14];
+};
+
+
+
+
+
+
+
+
+struct sockaddr_storage {
+
+  sa_family_t ss_family;
+  char __ss_padding[128 - sizeof(unsigned short int ) - sizeof(unsigned long int )];
+  unsigned long int __ss_align;
+};
+
+
+
+enum __nesc_unnamed4304 {
+
+  MSG_OOB = 0x01, 
+
+  MSG_PEEK = 0x02, 
+
+  MSG_DONTROUTE = 0x04, 
+
+
+
+
+
+
+  MSG_CTRUNC = 0x08, 
+
+  MSG_PROXY = 0x10, 
+
+  MSG_TRUNC = 0x20, 
+
+  MSG_DONTWAIT = 0x40, 
+
+  MSG_EOR = 0x80, 
+
+  MSG_WAITALL = 0x100, 
+
+  MSG_FIN = 0x200, 
+
+  MSG_SYN = 0x400, 
+
+  MSG_CONFIRM = 0x800, 
+
+  MSG_RST = 0x1000, 
+
+  MSG_ERRQUEUE = 0x2000, 
+
+  MSG_NOSIGNAL = 0x4000, 
+
+  MSG_MORE = 0x8000, 
+
+  MSG_WAITFORONE = 0x10000, 
+
+  MSG_FASTOPEN = 0x20000000, 
+
+
+  MSG_CMSG_CLOEXEC = 0x40000000
+};
+
+
+
+
+
+
+
+struct msghdr {
+
+  void *msg_name;
+  socklen_t msg_namelen;
+
+  struct iovec *msg_iov;
+  size_t msg_iovlen;
+
+  void *msg_control;
+  size_t msg_controllen;
+
+
+
+
+  int msg_flags;
+};
+
+
+struct cmsghdr {
+
+  size_t cmsg_len;
+
+
+
+
+  int cmsg_level;
+  int cmsg_type;
+
+  __extension__ unsigned char __cmsg_data[];
+};
+#line 276
+struct cmsghdr;
+#line 303
+enum __nesc_unnamed4305 {
+
+  SCM_RIGHTS = 0x01
+};
+#line 383
+struct linger {
+
+  int l_onoff;
+  int l_linger;
+};
+# 43 "/usr/include/i386-linux-gnu/sys/socket.h" 3
+struct osockaddr {
+
+  unsigned short int sa_family;
+  unsigned char sa_data[14];
+};
+
+
+
+
+enum __nesc_unnamed4306 {
+
+  SHUT_RD = 0, 
+
+  SHUT_WR, 
+
+  SHUT_RDWR
+};
+#line 113
+extern int socket(int __domain, int __type, int __protocol) __attribute((__leaf__)) __attribute((__nothrow__)) ;
+
+
+
+
+
+
+
+
+
+extern int bind(int __fd, const struct sockaddr *__addr, socklen_t __len) 
+__attribute((__leaf__)) __attribute((__nothrow__)) ;
+#line 149
+extern ssize_t send(int __fd, const void *__buf, size_t __n, int __flags);
+#line 233
+extern int listen(int __fd, int __n) __attribute((__leaf__)) __attribute((__nothrow__)) ;
+
+
+
+
+
+
+
+
+
+extern int accept(int __fd, struct sockaddr *__restrict __addr, 
+socklen_t *__restrict __addr_len);
+# 30 "/usr/include/netinet/in.h" 3
+typedef uint32_t in_addr_t;
+struct in_addr {
+
+  in_addr_t s_addr;
+};
+# 133 "/usr/include/i386-linux-gnu/bits/in.h" 3
+struct ip_opts {
+
+  struct in_addr ip_dst;
+  char ip_opts[40];
+};
+
+
+struct ip_mreqn {
+
+  struct in_addr imr_multiaddr;
+  struct in_addr imr_address;
+  int imr_ifindex;
+};
+
+
+struct in_pktinfo {
+
+  int ipi_ifindex;
+  struct in_addr ipi_spec_dst;
+  struct in_addr ipi_addr;
+};
+# 40 "/usr/include/netinet/in.h" 3
+enum __nesc_unnamed4307 {
+
+  IPPROTO_IP = 0, 
+
+  IPPROTO_ICMP = 1, 
+
+  IPPROTO_IGMP = 2, 
+
+  IPPROTO_IPIP = 4, 
+
+  IPPROTO_TCP = 6, 
+
+  IPPROTO_EGP = 8, 
+
+  IPPROTO_PUP = 12, 
+
+  IPPROTO_UDP = 17, 
+
+  IPPROTO_IDP = 22, 
+
+  IPPROTO_TP = 29, 
+
+  IPPROTO_DCCP = 33, 
+
+  IPPROTO_IPV6 = 41, 
+
+  IPPROTO_RSVP = 46, 
+
+  IPPROTO_GRE = 47, 
+
+  IPPROTO_ESP = 50, 
+
+  IPPROTO_AH = 51, 
+
+  IPPROTO_MTP = 92, 
+
+  IPPROTO_BEETPH = 94, 
+
+  IPPROTO_ENCAP = 98, 
+
+  IPPROTO_PIM = 103, 
+
+  IPPROTO_COMP = 108, 
+
+  IPPROTO_SCTP = 132, 
+
+  IPPROTO_UDPLITE = 136, 
+
+  IPPROTO_MPLS = 137, 
+
+  IPPROTO_RAW = 255, 
+
+  IPPROTO_MAX
+};
+
+
+
+
+
+enum __nesc_unnamed4308 {
+
+  IPPROTO_HOPOPTS = 0, 
+
+  IPPROTO_ROUTING = 43, 
+
+  IPPROTO_FRAGMENT = 44, 
+
+  IPPROTO_ICMPV6 = 58, 
+
+  IPPROTO_NONE = 59, 
+
+  IPPROTO_DSTOPTS = 60, 
+
+  IPPROTO_MH = 135
+};
+
+
+
+
+typedef uint16_t in_port_t;
+
+
+enum __nesc_unnamed4309 {
+
+  IPPORT_ECHO = 7, 
+  IPPORT_DISCARD = 9, 
+  IPPORT_SYSTAT = 11, 
+  IPPORT_DAYTIME = 13, 
+  IPPORT_NETSTAT = 15, 
+  IPPORT_FTP = 21, 
+  IPPORT_TELNET = 23, 
+  IPPORT_SMTP = 25, 
+  IPPORT_TIMESERVER = 37, 
+  IPPORT_NAMESERVER = 42, 
+  IPPORT_WHOIS = 43, 
+  IPPORT_MTP = 57, 
+
+  IPPORT_TFTP = 69, 
+  IPPORT_RJE = 77, 
+  IPPORT_FINGER = 79, 
+  IPPORT_TTYLINK = 87, 
+  IPPORT_SUPDUP = 95, 
+
+
+  IPPORT_EXECSERVER = 512, 
+  IPPORT_LOGINSERVER = 513, 
+  IPPORT_CMDSERVER = 514, 
+  IPPORT_EFSSERVER = 520, 
+
+
+  IPPORT_BIFFUDP = 512, 
+  IPPORT_WHOSERVER = 513, 
+  IPPORT_ROUTESERVER = 520, 
+
+
+  IPPORT_RESERVED = 1024, 
+
+
+  IPPORT_USERRESERVED = 5000
+};
+#line 211
+struct in6_addr {
+
+  union __nesc_unnamed4310 {
+
+    uint8_t __u6_addr8[16];
+
+    uint16_t __u6_addr16[8];
+    uint32_t __u6_addr32[4];
+  } 
+  __in6_u;
+};
+
+
+
+
+
+
+
+struct in6_addr;
+struct in6_addr;
+
+
+
+
+
+
+
+
+struct sockaddr_in {
+
+  sa_family_t sin_family;
+  in_port_t sin_port;
+  struct in_addr sin_addr;
+
+
+  unsigned char sin_zero
+
+  [
+#line 246
+  sizeof(struct sockaddr ) - 
+  sizeof(unsigned short int ) - 
+  sizeof(in_port_t ) - 
+  sizeof(struct in_addr )];
+};
+
+
+
+struct sockaddr_in6 {
+
+  sa_family_t sin6_family;
+  in_port_t sin6_port;
+  uint32_t sin6_flowinfo;
+  struct in6_addr sin6_addr;
+  uint32_t sin6_scope_id;
+};
+
+
+
+
+struct ip_mreq {
+
+
+  struct in_addr imr_multiaddr;
+
+
+  struct in_addr imr_interface;
+};
+
+struct ip_mreq_source {
+
+
+  struct in_addr imr_multiaddr;
+
+
+  struct in_addr imr_interface;
+
+
+  struct in_addr imr_sourceaddr;
+};
+
+
+
+
+struct ipv6_mreq {
+
+
+  struct in6_addr ipv6mr_multiaddr;
+
+
+  unsigned int ipv6mr_interface;
+};
+
+
+
+
+struct group_req {
+
+
+  uint32_t gr_interface;
+
+
+  struct sockaddr_storage gr_group;
+};
+
+struct group_source_req {
+
+
+  uint32_t gsr_interface;
+
+
+  struct sockaddr_storage gsr_group;
+
+
+  struct sockaddr_storage gsr_source;
+};
+
+
+
+struct ip_msfilter {
+
+
+  struct in_addr imsf_multiaddr;
+
+
+  struct in_addr imsf_interface;
+
+
+  uint32_t imsf_fmode;
+
+
+  uint32_t imsf_numsrc;
+
+  struct in_addr imsf_slist[1];
+};
+
+
+
+
+
+struct group_filter {
+
+
+  uint32_t gf_interface;
+
+
+  struct sockaddr_storage gf_group;
+
+
+  uint32_t gf_fmode;
+
+
+  uint32_t gf_numsrc;
+
+  struct sockaddr_storage gf_slist[1];
+};
+#line 381
+extern uint16_t htons(uint16_t __hostshort) 
+__attribute((__leaf__)) __attribute((__nothrow__)) __attribute((const)) ;
+# 41 "/usr/include/arpa/inet.h" 3
+struct in_addr;
+# 52 "/opt/tinyos-main-2.1.2/tos/chips/atm128/timer/Atm128Timer.h"
+enum __nesc_unnamed4311 {
   ATM128_CLK8_OFF = 0x0, 
   ATM128_CLK8_NORMAL = 0x1, 
   ATM128_CLK8_DIVIDE_8 = 0x2, 
@@ -3463,7 +4637,7 @@ enum __nesc_unnamed4301 {
   ATM128_CLK8_DIVIDE_1024 = 0x7
 };
 
-enum __nesc_unnamed4302 {
+enum __nesc_unnamed4312 {
   ATM128_CLK16_OFF = 0x0, 
   ATM128_CLK16_NORMAL = 0x1, 
   ATM128_CLK16_DIVIDE_8 = 0x2, 
@@ -3475,14 +4649,14 @@ enum __nesc_unnamed4302 {
 };
 
 
-enum __nesc_unnamed4303 {
+enum __nesc_unnamed4313 {
   AVR_CLOCK_OFF = 0, 
   AVR_CLOCK_ON = 1, 
   AVR_CLOCK_DIVIDE_8 = 2
 };
 
 
-enum __nesc_unnamed4304 {
+enum __nesc_unnamed4314 {
   ATM128_WAVE8_NORMAL = 0, 
   ATM128_WAVE8_PWM, 
   ATM128_WAVE8_CTC, 
@@ -3490,7 +4664,7 @@ enum __nesc_unnamed4304 {
 };
 
 
-enum __nesc_unnamed4305 {
+enum __nesc_unnamed4315 {
   ATM128_COMPARE_OFF = 0, 
   ATM128_COMPARE_TOGGLE, 
   ATM128_COMPARE_CLEAR, 
@@ -3498,10 +4672,10 @@ enum __nesc_unnamed4305 {
 };
 #line 108
 #line 98
-typedef union __nesc_unnamed4306 {
+typedef union __nesc_unnamed4316 {
 
   uint8_t flat;
-  struct __nesc_unnamed4307 {
+  struct __nesc_unnamed4317 {
     uint8_t cs : 3;
     uint8_t wgm1 : 1;
     uint8_t com : 2;
@@ -3519,10 +4693,10 @@ typedef uint8_t Atm128_TCNT2_t;
 typedef uint8_t Atm128_OCR2_t;
 #line 130
 #line 120
-typedef union __nesc_unnamed4308 {
+typedef union __nesc_unnamed4318 {
 
   uint8_t flat;
-  struct __nesc_unnamed4309 {
+  struct __nesc_unnamed4319 {
     uint8_t tcr0ub : 1;
     uint8_t ocr0ub : 1;
     uint8_t tcn0ub : 1;
@@ -3532,10 +4706,10 @@ typedef union __nesc_unnamed4308 {
 } Atm128Assr_t;
 #line 146
 #line 133
-typedef union __nesc_unnamed4310 {
+typedef union __nesc_unnamed4320 {
 
   uint8_t flat;
-  struct __nesc_unnamed4311 {
+  struct __nesc_unnamed4321 {
     uint8_t toie0 : 1;
     uint8_t ocie0 : 1;
     uint8_t toie1 : 1;
@@ -3548,10 +4722,10 @@ typedef union __nesc_unnamed4310 {
 } Atm128_TIMSK_t;
 #line 163
 #line 150
-typedef union __nesc_unnamed4312 {
+typedef union __nesc_unnamed4322 {
 
   uint8_t flat;
-  struct __nesc_unnamed4313 {
+  struct __nesc_unnamed4323 {
     uint8_t tov0 : 1;
     uint8_t ocf0 : 1;
     uint8_t tov1 : 1;
@@ -3564,10 +4738,10 @@ typedef union __nesc_unnamed4312 {
 } Atm128_TIFR_t;
 #line 178
 #line 167
-typedef union __nesc_unnamed4314 {
+typedef union __nesc_unnamed4324 {
 
   uint8_t flat;
-  struct __nesc_unnamed4315 {
+  struct __nesc_unnamed4325 {
     uint8_t psr321 : 1;
     uint8_t psr0 : 1;
     uint8_t pud : 1;
@@ -3582,7 +4756,7 @@ typedef union __nesc_unnamed4314 {
 
 
 
-enum __nesc_unnamed4316 {
+enum __nesc_unnamed4326 {
   ATM128_TIMER_COMPARE_NORMAL = 0, 
   ATM128_TIMER_COMPARE_TOGGLE, 
   ATM128_TIMER_COMPARE_CLEAR, 
@@ -3590,10 +4764,10 @@ enum __nesc_unnamed4316 {
 };
 #line 202
 #line 193
-typedef union __nesc_unnamed4317 {
+typedef union __nesc_unnamed4327 {
 
   uint8_t flat;
-  struct __nesc_unnamed4318 {
+  struct __nesc_unnamed4328 {
     uint8_t wgm10 : 2;
     uint8_t comC : 2;
     uint8_t comB : 2;
@@ -3608,7 +4782,7 @@ typedef Atm128TimerCtrlCompare_t Atm128_TCCR1A_t;
 typedef Atm128TimerCtrlCompare_t Atm128_TCCR3A_t;
 
 
-enum __nesc_unnamed4319 {
+enum __nesc_unnamed4329 {
   ATM128_WAVE16_NORMAL = 0, 
   ATM128_WAVE16_PWM_8BIT, 
   ATM128_WAVE16_PWM_9BIT, 
@@ -3628,10 +4802,10 @@ enum __nesc_unnamed4319 {
 };
 #line 241
 #line 231
-typedef union __nesc_unnamed4320 {
+typedef union __nesc_unnamed4330 {
 
   uint8_t flat;
-  struct __nesc_unnamed4321 {
+  struct __nesc_unnamed4331 {
     uint8_t cs : 3;
     uint8_t wgm32 : 2;
     uint8_t rsvd : 1;
@@ -3647,10 +4821,10 @@ typedef Atm128TimerCtrlCapture_t Atm128_TCCR1B_t;
 typedef Atm128TimerCtrlCapture_t Atm128_TCCR3B_t;
 #line 259
 #line 250
-typedef union __nesc_unnamed4322 {
+typedef union __nesc_unnamed4332 {
 
   uint8_t flat;
-  struct __nesc_unnamed4323 {
+  struct __nesc_unnamed4333 {
     uint8_t rsvd : 5;
     uint8_t focC : 1;
     uint8_t focB : 1;
@@ -3694,10 +4868,10 @@ typedef uint8_t Atm128_ICR3H_t;
 typedef uint8_t Atm128_ICR3L_t;
 #line 309
 #line 297
-typedef union __nesc_unnamed4324 {
+typedef union __nesc_unnamed4334 {
 
   uint8_t flat;
-  struct __nesc_unnamed4325 {
+  struct __nesc_unnamed4335 {
     uint8_t ocie1c : 1;
     uint8_t ocie3c : 1;
     uint8_t toie3 : 1;
@@ -3709,10 +4883,10 @@ typedef union __nesc_unnamed4324 {
 } Atm128_ETIMSK_t;
 #line 324
 #line 312
-typedef union __nesc_unnamed4326 {
+typedef union __nesc_unnamed4336 {
 
   uint8_t flat;
-  struct __nesc_unnamed4327 {
+  struct __nesc_unnamed4337 {
     uint8_t ocf1c : 1;
     uint8_t ocf3c : 1;
     uint8_t tov3 : 1;
@@ -3724,7 +4898,7 @@ typedef union __nesc_unnamed4326 {
 } Atm128_ETIFR_t;
 typedef TMilli LoraWANC$Timer0$precision_tag;
 typedef TMilli LoraWANC$Timer1$precision_tag;
-enum AMQueueP$__nesc_unnamed4328 {
+enum AMQueueP$__nesc_unnamed4338 {
   AMQueueP$NUM_CLIENTS = 1U
 };
 typedef TMilli /*AlarmCounterMilliP.Atm128AlarmAsyncC*/Atm128AlarmAsyncC$0$precision;
@@ -3764,11 +4938,11 @@ static error_t MeasureClockC$Init$init(void );
 # 67 "/opt/tinyos-main-2.1.2/tos/interfaces/TaskBasic.nc"
 static error_t SimSchedulerBasicP$TaskBasic$postTask(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0xb7838650);
+uint8_t arg_0xb77b9650);
 # 75 "/opt/tinyos-main-2.1.2/tos/interfaces/TaskBasic.nc"
 static void SimSchedulerBasicP$TaskBasic$default$runTask(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0xb7838650);
+uint8_t arg_0xb77b9650);
 # 57 "/opt/tinyos-main-2.1.2/tos/interfaces/Scheduler.nc"
 static void SimSchedulerBasicP$Scheduler$init(void );
 
@@ -3798,7 +4972,7 @@ static long long int SimMoteP$SimMote$getStartTime(void );
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static error_t TossimActiveMessageC$AMSend$send(
 # 47 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb767e108, 
+am_id_t arg_0xb75ff108, 
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -3821,7 +4995,7 @@ message_t *
 
 TossimActiveMessageC$Snoop$default$receive(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb767c178, 
+am_id_t arg_0xb75fd178, 
 # 71 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -3868,7 +5042,7 @@ message_t *
 
 TossimActiveMessageC$Receive$default$receive(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb767eac8, 
+am_id_t arg_0xb75ffac8, 
 # 71 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4026,7 +5200,7 @@ error_t error);
 # 110 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(
 # 48 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0xb74f8498, 
+am_id_t arg_0xb73ad9f8, 
 # 103 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4039,7 +5213,7 @@ error_t error);
 # 75 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$send(
 # 46 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0xb74fba98, 
+uint8_t arg_0xb73ad010, 
 # 67 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4053,7 +5227,7 @@ uint8_t len);
 #line 100
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(
 # 46 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0xb74fba98, 
+uint8_t arg_0xb73ad010, 
 # 96 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4130,17 +5304,17 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$TimerFrom$fire
 #line 83
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0xb73783a8);
+uint8_t arg_0xb722fc70);
 # 114 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startPeriodicAt(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0xb73783a8, 
+uint8_t arg_0xb722fc70, 
 # 114 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
 uint32_t t0, uint32_t dt);
 #line 73
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$startOneShot(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0xb73783a8, 
+uint8_t arg_0xb722fc70, 
 # 73 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
 uint32_t dt);
 # 82 "/opt/tinyos-main-2.1.2/tos/lib/timer/Counter.nc"
@@ -4195,11 +5369,11 @@ int sim_main_start_mote(void )   ;
 # 75 "/opt/tinyos-main-2.1.2/tos/interfaces/TaskBasic.nc"
 static void SimSchedulerBasicP$TaskBasic$runTask(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/SimSchedulerBasicP.nc"
-uint8_t arg_0xb7838650);
+uint8_t arg_0xb77b9650);
 
 
 
-enum SimSchedulerBasicP$__nesc_unnamed4329 {
+enum SimSchedulerBasicP$__nesc_unnamed4339 {
 
   SimSchedulerBasicP$NUM_TASKS = 7U, 
   SimSchedulerBasicP$NO_TASK = 255
@@ -4363,7 +5537,7 @@ static am_addr_t TossimActiveMessageC$amAddress(void );
 # 110 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static void TossimActiveMessageC$AMSend$sendDone(
 # 47 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb767e108, 
+am_id_t arg_0xb75ff108, 
 # 103 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4382,7 +5556,7 @@ message_t *
 
 TossimActiveMessageC$Snoop$receive(
 # 49 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb767c178, 
+am_id_t arg_0xb75fd178, 
 # 71 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4401,7 +5575,7 @@ message_t *
 
 TossimActiveMessageC$Receive$receive(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimActiveMessageC.nc"
-am_id_t arg_0xb767eac8, 
+am_id_t arg_0xb75ffac8, 
 # 71 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4536,7 +5710,7 @@ double reverseGain);
 static bool TossimPacketModelC$GainRadioModel$clearChannel(void );
 static void TossimPacketModelC$GainRadioModel$setPendingTransmission(void );
 # 96 "/opt/tinyos-main-2.1.2/tos/lib/tossim/TossimPacketModelC.nc"
-enum TossimPacketModelC$__nesc_unnamed4330 {
+enum TossimPacketModelC$__nesc_unnamed4340 {
 #line 96
   TossimPacketModelC$startDoneTask = 0U
 };
@@ -4546,14 +5720,14 @@ typedef int TossimPacketModelC$__nesc_sillytask_startDoneTask[TossimPacketModelC
 
 
 
-enum TossimPacketModelC$__nesc_unnamed4331 {
+enum TossimPacketModelC$__nesc_unnamed4341 {
 #line 101
   TossimPacketModelC$stopDoneTask = 1U
 };
 #line 101
 typedef int TossimPacketModelC$__nesc_sillytask_stopDoneTask[TossimPacketModelC$stopDoneTask];
 #line 145
-enum TossimPacketModelC$__nesc_unnamed4332 {
+enum TossimPacketModelC$__nesc_unnamed4342 {
 #line 145
   TossimPacketModelC$sendDoneTask = 2U
 };
@@ -4796,7 +5970,7 @@ message_t * msg,
 uint8_t len);
 # 73 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
 static void LoraWANC$Timer1$startOneShot(uint32_t dt);
-# 29 "LoraWANC.nc"
+# 32 "LoraWANC.nc"
 message_t LoraWANC$packet[1000];
 
 bool LoraWANC$locked[1000];
@@ -4805,7 +5979,6 @@ bool LoraWANC$locked[1000];
 uint8_t LoraWANC$id_index[1000];
 
 uint8_t LoraWANC$msg_val[1000];
-
 saved_msg_t LoraWANC$saved_msg[1000];
 
 uint8_t LoraWANC$current_type[1000];
@@ -4816,38 +5989,45 @@ uint8_t LoraWANC$current_content[1000];
 uint8_t LoraWANC$i[1000];
 
 uint8_t LoraWANC$server_node[1000];
-
 bool LoraWANC$flag_ack[1000];
 
+
+
+int LoraWANC$server_fd[1000];
+#line 54
+int LoraWANC$new_socket[1000];
+struct sockaddr_in LoraWANC$address[1000];
+int LoraWANC$addrlen[1000];
+char LoraWANC$message[1000][100];
+int LoraWANC$message_len[1000];
+
 static bool LoraWANC$actual_send(uint16_t address, message_t *packet);
 
 
 
 
 static bool LoraWANC$actual_send(uint16_t address, message_t *packet);
-#line 76
+#line 85
 static void LoraWANC$fill_pkt(lora_msg_t *packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content, uint8_t gateway);
-#line 89
+#line 97
+static inline int LoraWANC$open_connection_tcp(void );
+#line 132
 static inline void LoraWANC$Boot$booted(void );
-#line 101
+#line 145
 static inline void LoraWANC$AMControl$startDone(error_t err);
-#line 119
+#line 158
 static inline void LoraWANC$AMControl$stopDone(error_t err);
 
 
 
 
-
-
-
-
 static inline void LoraWANC$Timer0$fired(void );
-#line 158
+#line 190
 static inline void LoraWANC$Timer1$fired(void );
-#line 188
+#line 216
 static inline message_t *LoraWANC$Receive$receive(message_t *bufPtr, 
 void *payload, uint8_t len);
-#line 313
+#line 331
 static inline void LoraWANC$AMSend$sendDone(message_t *bufPtr, error_t error);
 # 110 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static void /*LoraWANAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP$0$AMSend$sendDone(
@@ -4905,7 +6085,7 @@ static inline void /*LoraWANAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP$
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(
 # 48 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0xb74f8498, 
+am_id_t arg_0xb73ad9f8, 
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -4922,7 +6102,7 @@ uint8_t len);
 # 100 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(
 # 46 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0xb74fba98, 
+uint8_t arg_0xb73ad010, 
 # 96 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4952,14 +6132,14 @@ static am_id_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMPacket$type(
 #line 143
 message_t * amsg);
 # 126 "/opt/tinyos-main-2.1.2/tos/system/AMQueueImplP.nc"
-enum /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_unnamed4333 {
+enum /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_unnamed4343 {
 #line 126
   AMQueueImplP$0$CancelTask = 3U
 };
 #line 126
 typedef int /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_sillytask_CancelTask[/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$CancelTask];
 #line 169
-enum /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_unnamed4334 {
+enum /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_unnamed4344 {
 #line 169
   AMQueueImplP$0$errorTask = 4U
 };
@@ -4967,7 +6147,7 @@ enum /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_unnamed4334 {
 typedef int /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_sillytask_errorTask[/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$errorTask];
 #line 57
 #line 55
-typedef struct /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_unnamed4335 {
+typedef struct /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$__nesc_unnamed4345 {
   message_t * msg;
 } /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue_entry_t;
 
@@ -5042,7 +6222,7 @@ uint32_t /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAs
 
 
 
-enum /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$__nesc_unnamed4336 {
+enum /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$__nesc_unnamed4346 {
   Atm128AlarmAsyncP$0$MINDT = 2, 
   Atm128AlarmAsyncP$0$MAXT = 230
 };
@@ -5280,7 +6460,7 @@ static void /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC$0$Alarm$stop(void );
 # 83 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
 static void /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC$0$Timer$fired(void );
 # 74 "/opt/tinyos-main-2.1.2/tos/lib/timer/AlarmToTimerC.nc"
-enum /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC$0$__nesc_unnamed4337 {
+enum /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC$0$__nesc_unnamed4347 {
 #line 74
   AlarmToTimerC$0$fired = 5U
 };
@@ -5322,16 +6502,16 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$TimerFrom$stop
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(
 # 48 "/opt/tinyos-main-2.1.2/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0xb73783a8);
+uint8_t arg_0xb722fc70);
 #line 71
-enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4338 {
+enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4348 {
 #line 71
   VirtualizeTimerC$0$updateFromTimer = 6U
 };
 #line 71
 typedef int /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_sillytask_updateFromTimer[/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$updateFromTimer];
 #line 53
-enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4339 {
+enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4349 {
 
   VirtualizeTimerC$0$NUM_TIMERS = 2U, 
   VirtualizeTimerC$0$END_OF_LIST = 255
@@ -5345,7 +6525,7 @@ enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4339 {
 
 
 #line 59
-typedef struct /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4340 {
+typedef struct /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$__nesc_unnamed4350 {
 
   uint32_t t0;
   uint32_t dt;
@@ -5799,50 +6979,51 @@ inline static void * LoraWANC$Packet$getPayload(message_t * msg, uint8_t len){
 #line 126
 }
 #line 126
-# 188 "LoraWANC.nc"
+# 216 "LoraWANC.nc"
 static inline message_t *LoraWANC$Receive$receive(message_t *bufPtr, 
 void *payload, uint8_t len)
-#line 189
+#line 217
 {
-#line 208
+#line 236
   if (len != sizeof(lora_msg_t ) || LoraWANC$locked[sim_node()]) {
-#line 208
+#line 236
       return bufPtr;
     }
   else 
-#line 209
+#line 237
     {
 
       lora_msg_t *received_pkt = (lora_msg_t *)payload;
 
-
-
       if (__nesc_ntoh_uint8(received_pkt->type.nxdata) == 0) {
           lora_msg_t *packet_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
 
-#line 217
+#line 243
           if (packet_to_send == (void *)0) {
               return;
             }
 
           if (TOS_NODE_ID == LoraWANC$server_node[sim_node()]) {
               if (LoraWANC$locked[sim_node()]) {
-#line 222
+#line 248
                   return bufPtr;
                 }
               else 
-#line 223
+#line 249
                 {
-                  sim_log_debug(160U, "radio_rec", "MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->gateway.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
+
+                  sim_log_debug(159U, "radio_rec", "MSG arrived at server %d from gateway %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->gateway.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
 
 
                   if (__nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata) == 0 && __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata) == 0) {
                       __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].node[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata, __nesc_ntoh_uint8(received_pkt->sender.nxdata));
                       __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].id[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata, __nesc_ntoh_uint8(received_pkt->id.nxdata));
                       __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].content[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata, __nesc_ntoh_uint8(received_pkt->content.nxdata));
+                      sprintf(LoraWANC$message[sim_node()], "NODE:%d ID:%d CONTENT:%d\n", __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata));
+                      LoraWANC$message_len[sim_node()] = strlen(LoraWANC$message[sim_node()]);
+                      send(LoraWANC$new_socket[sim_node()], LoraWANC$message[sim_node()], LoraWANC$message_len[sim_node()], 0);
                     }
                   else {
-
                     if (__nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata) != __nesc_ntoh_uint8(received_pkt->id.nxdata)) {
                         for (LoraWANC$i[sim_node()] = 0; LoraWANC$i[sim_node()] < 5; LoraWANC$i[sim_node()]++) {
                             __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].node[LoraWANC$i[sim_node()]].nxdata, 0);
@@ -5852,37 +7033,28 @@ void *payload, uint8_t len)
                         __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].node[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata, __nesc_ntoh_uint8(received_pkt->sender.nxdata));
                         __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].id[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata, __nesc_ntoh_uint8(received_pkt->id.nxdata));
                         __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].content[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata, __nesc_ntoh_uint8(received_pkt->content.nxdata));
+                        sprintf(LoraWANC$message[sim_node()], "NODE:%d ID:%d CONTENT:%d\n", __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[__nesc_ntoh_uint8(received_pkt->sender.nxdata) - 1].nxdata));
+                        LoraWANC$message_len[sim_node()] = strlen(LoraWANC$message[sim_node()]);
+                        send(LoraWANC$new_socket[sim_node()], LoraWANC$message[sim_node()], LoraWANC$message_len[sim_node()], 0);
                       }
-                    else 
-
-                      {
-                        sim_log_debug(161U, "radio_rec", "DUPLICATE FOUND!!!\n");
+                    else {
+                        sim_log_debug(160U, "radio_rec", "DUPLICATE FOUND!!!\n");
                       }
                     }
-
-
-
-
-
-
-
-
-
-                  sim_log_debug(162U, "radio_rec", "MSG SAVED TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[0].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[2].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[3].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[4].nxdata));
-                  sim_log_debug_clear(163U, "radio_rec", "\t\t\tID:%d,%d,%d,%d,%d\n", __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[0].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[2].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[3].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[4].nxdata));
-                  sim_log_debug_clear(164U, "radio_rec", "\t\t\tCONTENT:%d,%d,%d,%d,%d\n", __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[0].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[2].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[3].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[4].nxdata));
+                  sim_log_debug(161U, "radio_rec", "MSG SAVED TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[0].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[2].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[3].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].node[4].nxdata));
+                  sim_log_debug_clear(162U, "radio_rec", "\t\t\tID:%d,%d,%d,%d,%d\n", __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[0].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[2].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[3].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].id[4].nxdata));
+                  sim_log_debug_clear(163U, "radio_rec", "\t\t\tCONTENT:%d,%d,%d,%d,%d\n", __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[0].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[1].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[2].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[3].nxdata), __nesc_ntoh_uint8(LoraWANC$saved_msg[sim_node()].content[4].nxdata));
 
 
                   LoraWANC$fill_pkt(packet_to_send, 1, __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata), __nesc_ntoh_uint8(received_pkt->gateway.nxdata));
 
                   LoraWANC$actual_send(__nesc_ntoh_uint8(received_pkt->gateway.nxdata), &LoraWANC$packet[sim_node()]);
-                  sim_log_debug(165U, "radio_rec", "GATEWAY: %d\n", __nesc_ntoh_uint8(received_pkt->gateway.nxdata));
+                  sim_log_debug(164U, "radio_rec", "GATEWAY: %d\n", __nesc_ntoh_uint8(received_pkt->gateway.nxdata));
                 }
             }
           else 
-
             {
-              sim_log_debug(166U, "radio_rec", "MSG arrived at gat %d from node %d\n \t\t\tid: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
+              sim_log_debug(165U, "radio_rec", "MSG arrived at gat %d from node %d\n \t\t\tid: %d\n \t\t\tcontent:%d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
               LoraWANC$fill_pkt(packet_to_send, 0, __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata), TOS_NODE_ID);
               LoraWANC$actual_send(LoraWANC$server_node[sim_node()], &LoraWANC$packet[sim_node()]);
             }
@@ -5893,13 +7065,13 @@ void *payload, uint8_t len)
         {
           lora_msg_t *packet_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
 
-#line 283
+#line 303
           if (packet_to_send == (void *)0) {
               return;
             }
 
           if (TOS_NODE_ID == 6 || TOS_NODE_ID == 7) {
-              sim_log_debug(167U, "radio_rec", "ACK arrived at gat %d\n \t\t\tgateway: %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent: %d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->gateway.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
+              sim_log_debug(166U, "radio_rec", "ACK arrived at gat %d\n \t\t\tgateway: %d\n \t\t\tid: %d\n \t\t\tsender: %d\n \t\t\tcontent: %d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->gateway.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->content.nxdata));
               LoraWANC$fill_pkt(packet_to_send, 1, __nesc_ntoh_uint8(received_pkt->id.nxdata), __nesc_ntoh_uint8(received_pkt->sender.nxdata), 0, 0);
 
               LoraWANC$actual_send(__nesc_ntoh_uint8(received_pkt->sender.nxdata), &LoraWANC$packet[sim_node()]);
@@ -5907,22 +7079,20 @@ void *payload, uint8_t len)
           else {
 
             if ((((TOS_NODE_ID == 1 || TOS_NODE_ID == 2) || TOS_NODE_ID == 3) || TOS_NODE_ID == 4) || TOS_NODE_ID == 5) {
-                sim_log_debug(168U, "radio_rec", "ACK arrived at node %d\n \t\t\tsender: %d\n \t\t\tid: %d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata));
-                sim_log_debug(169U, "radio_rec", "CHECK ID ACK: id_msgSent: %d  id_ackReceived: %d\n", LoraWANC$current_id[sim_node()], __nesc_ntoh_uint8(received_pkt->id.nxdata));
+                sim_log_debug(167U, "radio_rec", "ACK arrived at node %d\n \t\t\tsender: %d\n \t\t\tid: %d\n", TOS_NODE_ID, __nesc_ntoh_uint8(received_pkt->sender.nxdata), __nesc_ntoh_uint8(received_pkt->id.nxdata));
+                sim_log_debug(168U, "radio_rec", "CHECK ID ACK: id_msgSent: %d  id_ackReceived: %d\n", LoraWANC$current_id[sim_node()], __nesc_ntoh_uint8(received_pkt->id.nxdata));
                 if (LoraWANC$current_id[sim_node()] == __nesc_ntoh_uint8(received_pkt->id.nxdata) && __nesc_ntoh_uint8(received_pkt->sender.nxdata) == TOS_NODE_ID) {
                     LoraWANC$flag_ack[sim_node()] = TRUE;
-                    sim_log_debug(170U, "radio_rec", "flag check %d\n", LoraWANC$flag_ack[sim_node()]);
                   }
                 else 
-#line 301
+#line 320
                   {
                     LoraWANC$flag_ack[sim_node()] = FALSE;
-                    sim_log_debug(171U, "radio_rec", "flag check %d\n", LoraWANC$flag_ack[sim_node()]);
                   }
               }
             }
         }
-#line 307
+#line 325
       return bufPtr;
     }
 }
@@ -5935,13 +7105,13 @@ static inline message_t *TossimActiveMessageC$Receive$default$receive(am_id_t id
 }
 
 # 78 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
-inline static message_t * TossimActiveMessageC$Receive$receive(am_id_t arg_0xb767eac8, message_t * msg, void * payload, uint8_t len){
+inline static message_t * TossimActiveMessageC$Receive$receive(am_id_t arg_0xb75ffac8, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-  switch (arg_0xb767eac8) {
+  switch (arg_0xb75ffac8) {
 #line 78
     case 10:
 #line 78
@@ -5951,7 +7121,7 @@ inline static message_t * TossimActiveMessageC$Receive$receive(am_id_t arg_0xb76
 #line 78
     default:
 #line 78
-      __nesc_result = TossimActiveMessageC$Receive$default$receive(arg_0xb767eac8, msg, payload, len);
+      __nesc_result = TossimActiveMessageC$Receive$default$receive(arg_0xb75ffac8, msg, payload, len);
 #line 78
       break;
 #line 78
@@ -5964,13 +7134,13 @@ inline static message_t * TossimActiveMessageC$Receive$receive(am_id_t arg_0xb76
 }
 #line 78
 # 80 "/opt/tinyos-main-2.1.2/tos/interfaces/AMSend.nc"
-inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(am_id_t arg_0xb74f8498, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(am_id_t arg_0xb73ad9f8, am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
   unsigned char __nesc_result;
 #line 80
 
 #line 80
-  __nesc_result = TossimActiveMessageC$AMSend$send(arg_0xb74f8498, addr, msg, len);
+  __nesc_result = TossimActiveMessageC$AMSend$send(arg_0xb73ad9f8, addr, msg, len);
 #line 80
 
 #line 80
@@ -6040,7 +7210,7 @@ uint8_t len)
   if (/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg != (void *)0) {
       return EBUSY;
     }
-  sim_log_debug(172U, "AMQueue", "AMQueue: request to send from %hhu (%p): passed checks\n", clientId, msg);
+  sim_log_debug(169U, "AMQueue", "AMQueue: request to send from %hhu (%p): passed checks\n", clientId, msg);
 
   /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg = msg;
   /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Packet$setPayloadLength(msg, len);
@@ -6050,12 +7220,12 @@ uint8_t len)
       am_id_t amId = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMPacket$type(msg);
       am_addr_t dest = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMPacket$destination(msg);
 
-      sim_log_debug(173U, "AMQueue", "%s: request to send from %hhu (%p): queue empty\n", __FUNCTION__, clientId, msg);
+      sim_log_debug(170U, "AMQueue", "%s: request to send from %hhu (%p): queue empty\n", __FUNCTION__, clientId, msg);
       /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()] = clientId;
 
       err = /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$send(amId, dest, msg, len);
       if (err != SUCCESS) {
-          sim_log_debug(174U, "AMQueue", "%s: underlying send failed.\n", __FUNCTION__);
+          sim_log_debug(171U, "AMQueue", "%s: underlying send failed.\n", __FUNCTION__);
           /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()] = 1;
           /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][clientId].msg = (void *)0;
         }
@@ -6063,7 +7233,7 @@ uint8_t len)
       return err;
     }
   else {
-      sim_log_debug(175U, "AMQueue", "AMQueue: request to send from %hhu (%p): queue not empty\n", clientId, msg);
+      sim_log_debug(172U, "AMQueue", "AMQueue: request to send from %hhu (%p): queue not empty\n", clientId, msg);
     }
   return SUCCESS;
 }
@@ -6156,9 +7326,9 @@ inline static error_t LoraWANC$AMSend$send(am_addr_t addr, message_t * msg, uint
 }
 #line 80
 #line 110
-inline static void TossimActiveMessageC$AMSend$sendDone(am_id_t arg_0xb767e108, message_t * msg, error_t error){
+inline static void TossimActiveMessageC$AMSend$sendDone(am_id_t arg_0xb75ff108, message_t * msg, error_t error){
 #line 110
-  /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(arg_0xb767e108, msg, error);
+  /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(arg_0xb75ff108, msg, error);
 #line 110
 }
 #line 110
@@ -6988,13 +8158,13 @@ static inline message_t *TossimActiveMessageC$Snoop$default$receive(am_id_t id, 
 }
 
 # 78 "/opt/tinyos-main-2.1.2/tos/interfaces/Receive.nc"
-inline static message_t * TossimActiveMessageC$Snoop$receive(am_id_t arg_0xb767c178, message_t * msg, void * payload, uint8_t len){
+inline static message_t * TossimActiveMessageC$Snoop$receive(am_id_t arg_0xb75fd178, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-    __nesc_result = TossimActiveMessageC$Snoop$default$receive(arg_0xb767c178, msg, payload, len);
+    __nesc_result = TossimActiveMessageC$Snoop$default$receive(arg_0xb75fd178, msg, payload, len);
 #line 78
 
 #line 78
@@ -7137,17 +8307,12 @@ inline static void LoraWANC$Timer0$startPeriodicAt(uint32_t t0, uint32_t dt){
 #line 114
 }
 #line 114
-# 101 "LoraWANC.nc"
+# 145 "LoraWANC.nc"
 static inline void LoraWANC$AMControl$startDone(error_t err)
-#line 101
+#line 145
 {
   if (err == SUCCESS) {
       sim_log_debug(151U, "radio", "Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
-
-
-
-
-
 
       if ((((TOS_NODE_ID == 1 || TOS_NODE_ID == 2) || TOS_NODE_ID == 3) || TOS_NODE_ID == 4) || TOS_NODE_ID == 5) {
           LoraWANC$Timer0$startPeriodicAt(0, 10000);
@@ -7173,9 +8338,9 @@ static inline void TossimPacketModelC$startDoneTask$runTask(void )
   TossimPacketModelC$Control$startDone(SUCCESS);
 }
 
-# 119 "LoraWANC.nc"
+# 158 "LoraWANC.nc"
 static inline void LoraWANC$AMControl$stopDone(error_t err)
-#line 119
+#line 158
 {
   sim_log_debug(152U, "boot", "Radio stopped\n");
 }
@@ -7210,9 +8375,9 @@ static inline void TossimPacketModelC$sendDoneTask$runTask(void )
   TossimPacketModelC$Packet$sendDone(msg, TossimPacketModelC$running[sim_node()] ? SUCCESS : EOFF);
 }
 
-# 313 "LoraWANC.nc"
+# 331 "LoraWANC.nc"
 static inline void LoraWANC$AMSend$sendDone(message_t *bufPtr, error_t error)
-#line 313
+#line 331
 {
   if (&LoraWANC$packet[sim_node()] == bufPtr) {
       LoraWANC$locked[sim_node()] = FALSE;
@@ -7240,9 +8405,9 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone
 }
 
 # 100 "/opt/tinyos-main-2.1.2/tos/interfaces/Send.nc"
-inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t arg_0xb74fba98, message_t * msg, error_t error){
+inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t arg_0xb73ad010, message_t * msg, error_t error){
 #line 100
-  switch (arg_0xb74fba98) {
+  switch (arg_0xb73ad010) {
 #line 100
     case 0U:
 #line 100
@@ -7252,7 +8417,7 @@ inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$sendDone(uint8_t
 #line 100
     default:
 #line 100
-      /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(arg_0xb74fba98, msg, error);
+      /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$Send$default$sendDone(arg_0xb73ad010, msg, error);
 #line 100
       break;
 #line 100
@@ -7527,9 +8692,9 @@ static inline void SimSchedulerBasicP$TaskBasic$default$runTask(uint8_t id)
 }
 
 # 75 "/opt/tinyos-main-2.1.2/tos/interfaces/TaskBasic.nc"
-inline static void SimSchedulerBasicP$TaskBasic$runTask(uint8_t arg_0xb7838650){
+inline static void SimSchedulerBasicP$TaskBasic$runTask(uint8_t arg_0xb77b9650){
 #line 75
-  switch (arg_0xb7838650) {
+  switch (arg_0xb77b9650) {
 #line 75
     case TossimPacketModelC$startDoneTask:
 #line 75
@@ -7575,7 +8740,7 @@ inline static void SimSchedulerBasicP$TaskBasic$runTask(uint8_t arg_0xb7838650){
 #line 75
     default:
 #line 75
-      SimSchedulerBasicP$TaskBasic$default$runTask(arg_0xb7838650);
+      SimSchedulerBasicP$TaskBasic$default$runTask(arg_0xb77b9650);
 #line 75
       break;
 #line 75
@@ -7609,7 +8774,7 @@ static inline sim_time_t HplAtm128Timer0AsyncP$sim_to_clock(sim_time_t t)
 # 53 "/opt/tinyos-main-2.1.2/tos/chips/atm128/timer/HplAtm128TimerCtrl8.nc"
 inline static Atm128_TIFR_t /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$TimerCtrl$getInterruptFlag(void ){
 #line 53
-  union __nesc_unnamed4312 __nesc_result;
+  union __nesc_unnamed4322 __nesc_result;
 #line 53
 
 #line 53
@@ -7650,21 +8815,18 @@ inline static uint16_t LoraWANC$Random$rand16(void ){
 #line 52
 }
 #line 52
-# 128 "LoraWANC.nc"
+# 163 "LoraWANC.nc"
 static inline void LoraWANC$Timer0$fired(void )
-#line 128
+#line 163
 {
 
   lora_msg_t *msg_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
 
-#line 131
+#line 166
   if (msg_to_send == (void *)0) {
       return;
     }
   LoraWANC$msg_val[sim_node()] = LoraWANC$Random$rand16() % 100;
-
-
-  sim_log_debug(153U, "radio_rec", "random value at node %d: %d\n", TOS_NODE_ID, LoraWANC$msg_val[sim_node()]);
   LoraWANC$fill_pkt(msg_to_send, 0, LoraWANC$id_index[sim_node()], TOS_NODE_ID, LoraWANC$msg_val[sim_node()], 0);
 
 
@@ -7674,41 +8836,41 @@ static inline void LoraWANC$Timer0$fired(void )
   LoraWANC$current_sender[sim_node()] = __nesc_ntoh_uint8(msg_to_send->sender.nxdata);
   LoraWANC$current_content[sim_node()] = __nesc_ntoh_uint8(msg_to_send->content.nxdata);
 
-  sim_log_debug(154U, "radio_rec", "current msg -> type: %d id: %d sender: %d content: %d\n", LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()]);
+  sim_log_debug(153U, "radio_rec", "current msg -> type: %d id: %d sender: %d content: %d\n", LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()]);
 
 
 
   LoraWANC$actual_send(AM_BROADCAST_ADDR, &LoraWANC$packet[sim_node()]);
-  sim_log_debug(155U, "radio_rec", "	msg sent at node %d\n", TOS_NODE_ID);
+  sim_log_debug(154U, "radio_rec", "	msg sent at node %d\n", TOS_NODE_ID);
   LoraWANC$Timer1$startOneShot(1000);
   LoraWANC$id_index[sim_node()]++;
 }
 
 
 static inline void LoraWANC$Timer1$fired(void )
-#line 158
+#line 190
 {
 
 
 
 
 
-  sim_log_debug(156U, "radio_rec", "	flag : %d\n", LoraWANC$flag_ack[sim_node()]);
+  sim_log_debug(155U, "radio_rec", "	flag : %d\n", LoraWANC$flag_ack[sim_node()]);
   if (!LoraWANC$flag_ack[sim_node()]) {
       lora_msg_t *msg_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(&LoraWANC$packet[sim_node()], sizeof(lora_msg_t ));
 
-#line 167
+#line 199
       if (msg_to_send == (void *)0) {
           return;
         }
-      sim_log_debug(157U, "radio_rec", "TIME EXPIRED\n");
-      sim_log_debug(158U, "radio_rec", "RESEND MSG: type: %d id: %d sender: %d content: %d\n", LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()]);
+      sim_log_debug(156U, "radio_rec", "TIME EXPIRED\n");
+      sim_log_debug(157U, "radio_rec", "RESEND MSG: type: %d id: %d sender: %d content: %d\n", LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()]);
       LoraWANC$fill_pkt(msg_to_send, LoraWANC$current_type[sim_node()], LoraWANC$current_id[sim_node()], LoraWANC$current_sender[sim_node()], LoraWANC$current_content[sim_node()], 0);
       LoraWANC$actual_send(AM_BROADCAST_ADDR, &LoraWANC$packet[sim_node()]);
       LoraWANC$Timer1$startOneShot(1000);
     }
   else {
-      sim_log_debug(159U, "radio_rec", "ACK arrived corrected \n");
+      sim_log_debug(158U, "radio_rec", "ACK arrived corrected \n");
       LoraWANC$flag_ack[sim_node()] = FALSE;
     }
 }
@@ -7719,9 +8881,9 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$d
 }
 
 # 83 "/opt/tinyos-main-2.1.2/tos/lib/timer/Timer.nc"
-inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(uint8_t arg_0xb73783a8){
+inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$fired(uint8_t arg_0xb722fc70){
 #line 83
-  switch (arg_0xb73783a8) {
+  switch (arg_0xb722fc70) {
 #line 83
     case 0U:
 #line 83
@@ -7737,7 +8899,7 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$f
 #line 83
     default:
 #line 83
-      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(arg_0xb73783a8);
+      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC$0$Timer$default$fired(arg_0xb722fc70);
 #line 83
       break;
 #line 83
@@ -7826,7 +8988,7 @@ static inline void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm
 static inline void HplAtm128Timer0AsyncP$cancel_compare(void )
 #line 577
 {
-  sim_log_debug(203U, "HplAtm128CompareC", "Cancelling compare at 0x%p\n", HplAtm128Timer0AsyncP$compare[sim_node()]);
+  sim_log_debug(200U, "HplAtm128CompareC", "Cancelling compare at 0x%p\n", HplAtm128Timer0AsyncP$compare[sim_node()]);
   if (HplAtm128Timer0AsyncP$compare[sim_node()] != (void *)0) {
       HplAtm128Timer0AsyncP$compare[sim_node()]->cancelled = 1;
       HplAtm128Timer0AsyncP$compare[sim_node()]->cleanup = sim_queue_cleanup_total;
@@ -7855,7 +9017,7 @@ static inline void HplAtm128Timer0AsyncP$cancel_overflow(void )
 {
   if (HplAtm128Timer0AsyncP$overflow[sim_node()] != (void *)0) {
       HplAtm128Timer0AsyncP$overflow[sim_node()]->cancelled = 1;
-      sim_log_debug(202U, "HplAtm128Timer0AsyncP", "Cancelling overflow %p.\n", HplAtm128Timer0AsyncP$overflow[sim_node()]);
+      sim_log_debug(199U, "HplAtm128Timer0AsyncP", "Cancelling overflow %p.\n", HplAtm128Timer0AsyncP$overflow[sim_node()]);
       HplAtm128Timer0AsyncP$overflow[sim_node()]->cleanup = sim_queue_cleanup_total;
     }
 }
@@ -7870,11 +9032,11 @@ static inline void HplAtm128Timer0AsyncP$timer0_overflow_handle(sim_event_t *evt
   else {
       if ((atm128RegFile[sim_node()][ATM128_TIMSK] & (1 << TOIE0)) != 0) {
           atm128RegFile[sim_node()][ATM128_TIFR] &= ~(1 << TOV0);
-          sim_log_debug(199U, "HplAtm128Timer0AsyncP", "Overflow interrupt at %s\n", sim_time_string());
+          sim_log_debug(196U, "HplAtm128Timer0AsyncP", "Overflow interrupt at %s\n", sim_time_string());
           INTERRUPT_16();
         }
       else {
-          sim_log_debug(200U, "HplAtm128Timer0AsyncP", "Setting overflow bit at %s\n", sim_time_string());
+          sim_log_debug(197U, "HplAtm128Timer0AsyncP", "Setting overflow bit at %s\n", sim_time_string());
           atm128RegFile[sim_node()][ATM128_TIFR] |= 1 << TOV0;
         }
       HplAtm128Timer0AsyncP$configure_overflow(evt);
@@ -7924,7 +9086,7 @@ static inline void HplAtm128Timer0AsyncP$Timer0$set(uint8_t newVal)
   uint8_t curVal = HplAtm128Timer0AsyncP$Timer0$get();
 
 #line 299
-  sim_log_debug(192U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting timer: %hhu\n", newVal);
+  sim_log_debug(189U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting timer: %hhu\n", newVal);
   if (newVal == curVal) {
       return;
     }
@@ -7951,7 +9113,7 @@ static inline void HplAtm128Timer0AsyncP$Timer0$set(uint8_t newVal)
 static inline void HplAtm128Timer0AsyncP$timer0_compare_handle(sim_event_t *evt)
 #line 187
 {
-  sim_log_debug(182U, "HplAtm128Timer0AsyncP", "Beginning compare 0x%p at %s\n", evt, sim_time_string());
+  sim_log_debug(179U, "HplAtm128Timer0AsyncP", "Beginning compare 0x%p at %s\n", evt, sim_time_string());
   if (evt->cancelled) {
       return;
     }
@@ -7960,21 +9122,21 @@ static inline void HplAtm128Timer0AsyncP$timer0_compare_handle(sim_event_t *evt)
 
 #line 194
       sim_print_now(timeStr, 128);
-      sim_log_debug(183U, "HplAtm128Timer0AsyncP", "Handling compare at 0x%p @ %s\n", evt, sim_time_string());
+      sim_log_debug(180U, "HplAtm128Timer0AsyncP", "Handling compare at 0x%p @ %s\n", evt, sim_time_string());
 
       if ((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0 && !((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0)) {
-          sim_log_debug(184U, "HplAtm128Timer0AsyncP", "%s: CTC is set, clear timer.\n", __FUNCTION__);
+          sim_log_debug(181U, "HplAtm128Timer0AsyncP", "%s: CTC is set, clear timer.\n", __FUNCTION__);
           HplAtm128Timer0AsyncP$Timer0$set(0);
         }
       else {
-          sim_log_debug(185U, "HplAtm128Timer0AsyncP", "%s: TCCR is 0x%hhx, %i, %i\n", __FUNCTION__, * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33], (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0), (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0));
+          sim_log_debug(182U, "HplAtm128Timer0AsyncP", "%s: TCCR is 0x%hhx, %i, %i\n", __FUNCTION__, * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33], (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM01)) != 0), (int )((atm128RegFile[sim_node()][ATM128_TCCR0] & (1 << WGM00)) != 0));
         }
 
       if ((atm128RegFile[sim_node()][ATM128_TIMSK] & (1 << OCIE0)) != 0) {
-          sim_log_debug(186U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
+          sim_log_debug(183U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
           atm128RegFile[sim_node()][ATM128_TIFR] &= ~(1 << OCF0);
-          sim_log_debug(187U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
-          sim_log_debug(188U, "HplAtm128Timer0AsyncP", "Compare interrupt @ %s\n", timeStr);
+          sim_log_debug(184U, "HplAtm128Timer0AsyncP", "TIFR is %hhx\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x36]);
+          sim_log_debug(185U, "HplAtm128Timer0AsyncP", "Compare interrupt @ %s\n", timeStr);
           INTERRUPT_15();
         }
       else {
@@ -7994,7 +9156,7 @@ static inline sim_event_t *HplAtm128Timer0AsyncP$allocate_compare(void )
   sim_event_t *newEvent = sim_queue_allocate_event();
 
 #line 225
-  sim_log_debug(189U, "HplAtm128Timer0AsyncP", "Allocated compare at 0x%p\n", newEvent);
+  sim_log_debug(186U, "HplAtm128Timer0AsyncP", "Allocated compare at 0x%p\n", newEvent);
   newEvent->handle = HplAtm128Timer0AsyncP$timer0_compare_handle;
   newEvent->cleanup = sim_queue_cleanup_none;
   return newEvent;
@@ -8302,7 +9464,7 @@ inline static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm
 static inline void HplAtm128Timer0AsyncP$Timer0Ctrl$setControl(Atm128TimerControl_t x)
 #line 364
 {
-  sim_log_debug(194U, "HplAtm128Timer0AsyncP", "Setting control to be 0x%hhx\n", x.flat);
+  sim_log_debug(191U, "HplAtm128Timer0AsyncP", "Setting control to be 0x%hhx\n", x.flat);
   * (volatile uint8_t *)&atm128RegFile[sim_node()][0x33] = x.flat;
 }
 
@@ -8377,12 +9539,50 @@ inline static error_t SimMainP$SoftwareInit$init(void ){
 #line 62
 }
 #line 62
-# 89 "LoraWANC.nc"
+# 97 "LoraWANC.nc"
+static inline int LoraWANC$open_connection_tcp(void )
+#line 97
+{
+
+
+  if ((LoraWANC$server_fd[sim_node()] = socket(2, SOCK_STREAM, 0)) == 0) {
+      perror("Socket creation failed");
+      exit(1);
+    }
+
+  LoraWANC$address[sim_node()].sin_family = 2;
+  LoraWANC$address[sim_node()].sin_addr.s_addr = (in_addr_t )0x00000000;
+  LoraWANC$address[sim_node()].sin_port = htons(60002);
+
+
+  if (bind(LoraWANC$server_fd[sim_node()], (struct sockaddr *)&LoraWANC$address[sim_node()], sizeof LoraWANC$address[sim_node()]) < 0) {
+      perror("Bind failed");
+      exit(1);
+    }
+
+
+  if (listen(LoraWANC$server_fd[sim_node()], 3) < 0) {
+      perror("Listen failed");
+      exit(1);
+    }
+
+
+  if ((LoraWANC$new_socket[sim_node()] = accept(LoraWANC$server_fd[sim_node()], (struct sockaddr *)&LoraWANC$address[sim_node()], (socklen_t *)&LoraWANC$addrlen[sim_node()])) < 0) {
+      perror("Accept failed");
+      exit(1);
+    }
+
+  return LoraWANC$new_socket[sim_node()];
+}
+
+
+
 static inline void LoraWANC$Boot$booted(void )
-#line 89
+#line 132
 {
   sim_log_debug(150U, "boot", "Application booted.\n");
   if (TOS_NODE_ID == 8) {
+      LoraWANC$open_connection_tcp();
       for (LoraWANC$i[sim_node()] = 0; LoraWANC$i[sim_node()] < 5; LoraWANC$i[sim_node()]++) {
           __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].node[LoraWANC$i[sim_node()]].nxdata, 0);
           __nesc_hton_uint8(LoraWANC$saved_msg[sim_node()].id[LoraWANC$i[sim_node()]].nxdata, 0);
@@ -9941,9 +11141,9 @@ static am_id_t TossimActiveMessageC$AMPacket$type(message_t *amsg)
   return __nesc_ntoh_uint8(header->type.nxdata);
 }
 
-# 76 "LoraWANC.nc"
+# 85 "LoraWANC.nc"
 static void LoraWANC$fill_pkt(lora_msg_t *packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content, uint8_t gateway)
-#line 76
+#line 85
 {
 
 
@@ -9955,9 +11155,9 @@ static void LoraWANC$fill_pkt(lora_msg_t *packet_to_fill, uint8_t type, uint8_t 
   __nesc_hton_uint8(packet_to_fill->gateway.nxdata, gateway);
 }
 
-#line 56
+#line 65
 static bool LoraWANC$actual_send(uint16_t address, message_t *packet)
-#line 56
+#line 65
 {
 
 
@@ -9966,7 +11166,7 @@ static bool LoraWANC$actual_send(uint16_t address, message_t *packet)
 
   lora_msg_t *packet_to_send = (lora_msg_t *)LoraWANC$Packet$getPayload(packet, sizeof(lora_msg_t ));
 
-#line 63
+#line 72
   if (LoraWANC$locked[sim_node()]) {
       sim_log_debug(148U, "radio_send", "LOCKED!!!!\n");
       return;
@@ -10055,7 +11255,7 @@ static void /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$AMSend$sendDone(am_id_t id, 
       /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$sendDone(/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()], msg, err);
     }
   else {
-      sim_log_debug(176U, "PointerBug", "%s received send done for %p, signaling for %p.\n", __FUNCTION__, msg, /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()]].msg);
+      sim_log_debug(173U, "PointerBug", "%s received send done for %p, signaling for %p.\n", __FUNCTION__, msg, /*AMQueueP.AMQueueImplP*/AMQueueImplP$0$queue[sim_node()][/*AMQueueP.AMQueueImplP*/AMQueueImplP$0$current[sim_node()]].msg);
     }
 }
 
@@ -10305,7 +11505,7 @@ static uint8_t HplAtm128Timer0AsyncP$Timer0$get(void )
   elapsed = HplAtm128Timer0AsyncP$sim_to_clock(elapsed);
   elapsed = elapsed >> HplAtm128Timer0AsyncP$shiftFromScale();
   rval = (uint8_t )(elapsed & 0xff);
-  sim_log_debug(191U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting timer: %hhu\n", rval);
+  sim_log_debug(188U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting timer: %hhu\n", rval);
   return rval;
 }
 
@@ -10384,7 +11584,7 @@ static Atm128_TIFR_t HplAtm128Timer0AsyncP$Timer0Ctrl$getInterruptFlag(void )
 static uint8_t HplAtm128Timer0AsyncP$Compare$get(void )
 #line 457
 {
-  sim_log_debug(197U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting compare: %hhu\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31]);
+  sim_log_debug(194U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Getting compare: %hhu\n", * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31]);
   return * (volatile uint8_t *)&atm128RegFile[sim_node()][0x31];
 }
 
@@ -10498,13 +11698,13 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
       uint8_t tifr = (uint8_t )/*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$TimerCtrl$getInterruptFlag().flat;
 
 #line 101
-      sim_log_debug(177U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: TIFR is %hhx\n", tifr);
+      sim_log_debug(174U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: TIFR is %hhx\n", tifr);
       if ((interrupt_in != 0 && interrupt_in < /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MINDT) || tifr & (1 << OCF0)) {
           if (interrupt_in < /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MINDT) {
-              sim_log_debug(178U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: under min: %hhu.\n", interrupt_in);
+              sim_log_debug(175U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: under min: %hhu.\n", interrupt_in);
             }
           else {
-              sim_log_debug(179U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: OCF set.\n");
+              sim_log_debug(176U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: OCF set.\n");
             }
           {
 #line 109
@@ -10516,14 +11716,14 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
 
       if (!/*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$set[sim_node()]) {
           newOcr0 = /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$MAXT;
-          sim_log_debug(180U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: no alarm set, set at max.\n");
+          sim_log_debug(177U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: no alarm set, set at max.\n");
         }
       else 
         {
           uint32_t now = /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$Counter$get();
 
 #line 120
-          sim_log_debug(181U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: now-t0 = %llu, dt = %llu\n", now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()], /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]);
+          sim_log_debug(178U, "Atm128AlarmAsyncP", "Atm128AlarmAsyncP: now-t0 = %llu, dt = %llu\n", now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()], /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]);
 
           if ((uint32_t )(now - /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$t0[sim_node()]) >= /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128AlarmAsyncP$0$dt[sim_node()]) 
             {
@@ -10567,7 +11767,7 @@ static void /*AlarmCounterMilliP.Atm128AlarmAsyncC.Atm128AlarmAsyncP*/Atm128Alar
 static void HplAtm128Timer0AsyncP$Compare$set(uint8_t t)
 #line 463
 {
-  sim_log_debug(198U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting compare: %hhu\n", t);
+  sim_log_debug(195U, "HplAtm128Timer0AsyncP", "HplAtm128Timer0AsyncP: Setting compare: %hhu\n", t);
   /* atomic removed: atomic calls only */
 #line 465
   {
@@ -10648,7 +11848,7 @@ static void HplAtm128Timer0AsyncP$configure_overflow(sim_event_t *evt)
   overflowTime += sim_time();
   overflowTime -= (sim_time() - HplAtm128Timer0AsyncP$last_zero()) % (1 << HplAtm128Timer0AsyncP$shiftFromScale());
 
-  sim_log_debug(201U, "HplAtm128Timer0AsyncP", "Scheduling new overflow for %i at time %llu\n", sim_node(), overflowTime);
+  sim_log_debug(198U, "HplAtm128Timer0AsyncP", "Scheduling new overflow for %i at time %llu\n", sim_node(), overflowTime);
 
   evt->time = overflowTime;
 }
@@ -10695,7 +11895,7 @@ static void HplAtm128Timer0AsyncP$configure_compare(sim_event_t *evt)
   phaseOffset %= HplAtm128Timer0AsyncP$clock_to_sim(1 << HplAtm128Timer0AsyncP$shiftFromScale());
   compareTime -= phaseOffset;
 
-  sim_log_debug(190U, "HplAtm128Timer0AsyncP", "Configuring new compare of %i for %i at time %llu  (@ %llu)\n", (int )compareVal, sim_node(), compareTime, sim_time());
+  sim_log_debug(187U, "HplAtm128Timer0AsyncP", "Configuring new compare of %i for %i at time %llu  (@ %llu)\n", (int )compareVal, sim_node(), compareTime, sim_time());
 
   evt->time = compareTime;
 }
@@ -11263,6 +12463,42 @@ static int __nesc_nido_resolve(int __nesc_mote,
     *size = sizeof(LoraWANC$flag_ack[__nesc_mote]);
     return 0;
   }
+  if (!strcmp(varname, "LoraWANC$server_fd"))
+  {
+    *addr = (uintptr_t)&LoraWANC$server_fd[__nesc_mote];
+    *size = sizeof(LoraWANC$server_fd[__nesc_mote]);
+    return 0;
+  }
+  if (!strcmp(varname, "LoraWANC$new_socket"))
+  {
+    *addr = (uintptr_t)&LoraWANC$new_socket[__nesc_mote];
+    *size = sizeof(LoraWANC$new_socket[__nesc_mote]);
+    return 0;
+  }
+  if (!strcmp(varname, "LoraWANC$address"))
+  {
+    *addr = (uintptr_t)&LoraWANC$address[__nesc_mote];
+    *size = sizeof(LoraWANC$address[__nesc_mote]);
+    return 0;
+  }
+  if (!strcmp(varname, "LoraWANC$addrlen"))
+  {
+    *addr = (uintptr_t)&LoraWANC$addrlen[__nesc_mote];
+    *size = sizeof(LoraWANC$addrlen[__nesc_mote]);
+    return 0;
+  }
+  if (!strcmp(varname, "LoraWANC$message"))
+  {
+    *addr = (uintptr_t)&LoraWANC$message[__nesc_mote];
+    *size = sizeof(LoraWANC$message[__nesc_mote]);
+    return 0;
+  }
+  if (!strcmp(varname, "LoraWANC$message_len"))
+  {
+    *addr = (uintptr_t)&LoraWANC$message_len[__nesc_mote];
+    *size = sizeof(LoraWANC$message_len[__nesc_mote]);
+    return 0;
+  }
 
   /* Module AMQueueEntryP$0 */
 
@@ -11567,6 +12803,12 @@ static void __nesc_nido_initialise(int __nesc_mote)
   LoraWANC$i[__nesc_mote] = 0;
   LoraWANC$server_node[__nesc_mote] = 8;
   LoraWANC$flag_ack[__nesc_mote] = FALSE;
+  memset((void *)&LoraWANC$server_fd[__nesc_mote], 0, sizeof LoraWANC$server_fd[__nesc_mote]);
+  memset((void *)&LoraWANC$new_socket[__nesc_mote], 0, sizeof LoraWANC$new_socket[__nesc_mote]);
+  memset((void *)&LoraWANC$address[__nesc_mote], 0, sizeof LoraWANC$address[__nesc_mote]);
+  LoraWANC$addrlen[__nesc_mote] = sizeof LoraWANC$address[__nesc_mote];
+  memset((void *)&LoraWANC$message[__nesc_mote], 0, sizeof LoraWANC$message[__nesc_mote]);
+  memset((void *)&LoraWANC$message_len[__nesc_mote], 0, sizeof LoraWANC$message_len[__nesc_mote]);
 
   /* Module AMQueueEntryP$0 */
 

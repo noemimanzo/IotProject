@@ -1,4 +1,3 @@
 COMPONENT=LoraWANAppC
-
 include $(MAKERULES)
 
