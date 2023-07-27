@@ -98,7 +98,11 @@ implementation {
   }
   
   int open_connection_tcp(){
-
+  /*
+  * This function sets up a TCP server by creating a socket, binding it to a specific port. 
+  * Once a connection is established, the function accepts the incoming connection and returns a new socket through which communication with the client can take place.
+  */
+  
     // Create TCP socket
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
         perror("Socket creation failed");
@@ -132,6 +136,11 @@ implementation {
   }
   
   void save_send_msg(saved_msg_t save_msg,lora_msg_t* received_pkt, uint8_t index){
+  /*
+  * This function processes the received message and saves it into the structure saved_msg_t at the specific index.  
+  * Additionally, it sends a message containing the saved data to a connected client via a previously established TCP socket
+  */
+  
   	saved_msg.node[index] = received_pkt-> sender;
 	saved_msg.id[index] = received_pkt-> id;
 	saved_msg.content[index] = received_pkt -> content;
@@ -142,13 +151,21 @@ implementation {
   }
   
   void handle_msg(saved_msg_t save_msg,lora_msg_t* received_pkt){
-  	uint8_t sensor_index;
+  /*
+  * This function handles the received messages. It determines whether to save and send the packet, overwrite previous data from the same sender if it's a new message, or handle a
+  * duplicate message.
+  */
+  
+  	uint8_t sensor_index  = received_pkt-> sender-1;
   	
-  	sensor_index = received_pkt-> sender-1;
+  	// sensor_index = received_pkt-> sender-1;
+  	
+  	// If table empty -> save msg
   	if(saved_msg.node[sensor_index]==0 && saved_msg.id[sensor_index]==0){
 		save_send_msg(saved_msg,received_pkt,sensor_index);
 				
 	}
+	// New msg arrived -> table whitened and new msg saved
 	else if (saved_msg.id[sensor_index] != received_pkt->id){
 		for (i=0; i<5; i++){
 			saved_msg.node[i]=0;
@@ -157,6 +174,7 @@ implementation {
 		}
 		save_send_msg(saved_msg,received_pkt,sensor_index);
 	}
+	// Duplicate arrived -> nothing
 	else{
 		dbg("server_node", "DUPLICATE FOUND!!!\n");
 	}
@@ -200,6 +218,9 @@ implementation {
 
   //***************** TIMERS CONTROL *****************//
   event void Timer0.fired() { //timer for message creation
+  /*
+  * Timer for message creation
+  */
   
 	// 1. Creating message with random value
 	lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));
@@ -225,6 +246,9 @@ implementation {
   }
   
   event void Timer1.fired() { // timer for checking ack
+  /*
+  * Timer for checking ack 
+  */
   
   	//CASE 1: ack NOT arrived in time -> resend message 
 	if (!flag_ack){ 
@@ -249,6 +273,11 @@ implementation {
   //***************** RECEIVE INTERFACE *****************//
   event message_t* Receive.receive(message_t* bufPtr, 
 				   void* payload, uint8_t len) {
+  /*
+  *  Here the logic after receiving a message is handled.
+  *  Upon receiving a message, the received packet is parsed and specific actions based on the type of packet received are performed.	
+  */
+  
 	if (len != sizeof(lora_msg_t) || locked ) {return bufPtr;}
     else {
 	
