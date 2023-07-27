@@ -3,7 +3,7 @@
 #ifndef LORAWAN_H
 #define LORAWAN_H
 
-//message structure
+// Message structure
 typedef nx_struct lora_msg {
 	nx_uint8_t type;
 	nx_uint8_t id;
@@ -19,6 +19,7 @@ enum {
   AM_LORA_COUNT_MSG = 10,
 };
 
+// Saved message table structure
 typedef nx_struct saved_msg{
 	nx_uint8_t node[5];
 	nx_uint8_t id[5];

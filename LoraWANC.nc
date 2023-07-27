@@ -36,9 +36,9 @@ implementation {
   
   // Variables to handle messages
   uint8_t id_index=1;
-  lora_msg_t current_msg;
   uint8_t msg_val;
   saved_msg_t saved_msg;
+  lora_msg_t current_msg;
   
   uint8_t current_type;
   uint8_t current_id;
@@ -52,17 +52,21 @@ implementation {
   
   
   // Variables for TCP connection
+  struct sockaddr_in address;  
   int server_fd, new_socket;
-  struct sockaddr_in address;
   int addrlen = sizeof(address);
   char message[100];
   int message_len;
-  
+
   
   //Functions
   bool actual_send (uint16_t address, message_t* packet);
+  void fill_pkt(lora_msg_t* packet_to_fill, uint8_t type, uint8_t id, uint8_t sender, uint8_t content, uint8_t gateway);
+  int open_connection_tcp();  
+  void save_send_msg(saved_msg_t save_msg,lora_msg_t* received_pkt, uint8_t index);
+  void handle_msg(saved_msg_t save_msg,lora_msg_t* received_pkt);
   
-  
+    
 //******************************** FUNCTIONS ********************************//
   //***************** SENDING MESSAGES *****************//
   bool actual_send (uint16_t address, message_t* packet){
@@ -73,13 +77,13 @@ implementation {
   */
   	lora_msg_t* packet_to_send = (lora_msg_t*) call Packet.getPayload(packet, sizeof(lora_msg_t));
 	if (locked){ 
-		dbg("radio_send", "LOCKED!!\n");
+		dbg("radio_send","LOCKED!\n");
 		return;
 	} 
 	else {	
 		if (call AMSend.send(address, packet, sizeof(lora_msg_t))== SUCCESS) {
 			locked=TRUE;
-			dbg("radio_send", "Sending packet of type %d at time %s toward node %d\n",packet_to_send->type,sim_time_string(), address, packet_to_send->gateway);
+			dbg("radio_send","Sending packet of type %d at time %s toward node %d\n",packet_to_send->type,sim_time_string(),address, packet_to_send->gateway);
 
 		}
 	}
@@ -92,9 +96,10 @@ implementation {
   	packet_to_fill -> type = type;
   	packet_to_fill -> id = id;
   	packet_to_fill -> sender = sender;
-  	packet_to_fill -> content = content;
-  	packet_to_fill -> gateway = gateway;
-  	
+  	if (type == MSG) {
+	  	packet_to_fill -> content = content;
+	  	packet_to_fill -> gateway = gateway;
+	}
   }
   
   int open_connection_tcp(){
@@ -138,14 +143,14 @@ implementation {
   void save_send_msg(saved_msg_t save_msg,lora_msg_t* received_pkt, uint8_t index){
   /*
   * This function processes the received message and saves it into the structure saved_msg_t at the specific index.  
-  * Additionally, it sends a message containing the saved data to a connected client via a previously established TCP socket
+  * Additionally, it sends a message containing the saved data to a connected client via a previously established TCP socket.
   */
   
   	saved_msg.node[index] = received_pkt-> sender;
 	saved_msg.id[index] = received_pkt-> id;
 	saved_msg.content[index] = received_pkt -> content;
 	
-	sprintf(message, "NODE: %d ID: %d CONTENT: %d\n", saved_msg.node[index], saved_msg.id[index], saved_msg.content[index]);
+	sprintf(message, "NODE: %d ID: %d CONTENT: %d\n",saved_msg.node[index],saved_msg.id[index],saved_msg.content[index]);
 	message_len = strlen(message);
 	send(new_socket, message, message_len, 0);
   }
@@ -157,9 +162,7 @@ implementation {
   */
   
   	uint8_t sensor_index  = received_pkt-> sender-1;
-  	
-  	// sensor_index = received_pkt-> sender-1;
-  	
+  	  	
   	// If table empty -> save msg
   	if(saved_msg.node[sensor_index]==0 && saved_msg.id[sensor_index]==0){
 		save_send_msg(saved_msg,received_pkt,sensor_index);
@@ -186,7 +189,8 @@ implementation {
   event void Boot.booted() {
     dbg("boot","Application booted.\n"); 
     if (TOS_NODE_ID == 8){
-		open_connection_tcp(); //start tcp connection
+		open_connection_tcp(); // Start tcp connection
+		// Inizialize saved message table
 		for (i=0; i<5; i++){
 			saved_msg.node[i]=0;
 			saved_msg.id[i]=0;
@@ -199,7 +203,7 @@ implementation {
   //***************** AM CONTROL INTERFACE *****************//
   event void AMControl.startDone(error_t err) {
 	if (err == SUCCESS) {
-		dbg("radio","Radio on on node %d! at time %s\n", TOS_NODE_ID, sim_time_string());
+		dbg("radio","Radio on on node %d! at time %s\n",TOS_NODE_ID,sim_time_string());
 		
 		// Just in case of sensor NODE the periodic timer is started
 	  	if (TOS_NODE_ID < 6 ){
@@ -217,7 +221,7 @@ implementation {
   
 
   //***************** TIMERS CONTROL *****************//
-  event void Timer0.fired() { //timer for message creation
+  event void Timer0.fired() { 
   /*
   * Timer for message creation
   */
@@ -236,7 +240,7 @@ implementation {
 	current_sender = msg_to_send->sender;
 	current_content = msg_to_send->content;
 	
-	dbg("sensor_node","CREATE MESSAGE\n\t\t\tTYPE: %d\n\t\t\tID: %d\n\t\t\tSENDER: %d\n\t\t\tCONTENT: %d\n", current_type, current_id, current_sender, current_content);	
+	dbg("sensor_node","CREATE MESSAGE\n\t\t\tTYPE: %d\n\t\t\tID: %d\n\t\t\tSENDER: %d\n\t\t\tCONTENT: %d\n",current_type,current_id,current_sender,current_content);	
 		
 	// 3. Sending message and starting timer
 	actual_send(AM_BROADCAST_ADDR, &packet);	
@@ -245,25 +249,25 @@ implementation {
 	
   }
   
-  event void Timer1.fired() { // timer for checking ack
+  event void Timer1.fired() { 
   /*
   * Timer for checking ack 
   */
   
-  	//CASE 1: ack NOT arrived in time -> resend message 
+  	// CASE 1: ack NOT arrived in time -> resend message 
 	if (!flag_ack){ 
 		lora_msg_t* msg_to_send = (lora_msg_t*) call Packet.getPayload(&packet, sizeof(lora_msg_t));	
 		if (msg_to_send == NULL) {
 				return;
 		}
-		dbg("sensor_node","TIME EXPIRED\n");
-		dbg("sensor_node","RESEND MSG with ID: %d and CONTENT: %d\n", current_id, current_content);
-		fill_pkt(msg_to_send, current_type, current_id, current_sender, current_content,0);
+		dbg("sensor_node","TIME EXPIRED!\n");
+		dbg("sensor_node","RESEND MSG with ID: %d and CONTENT: %d\n",current_id,current_content);
+		fill_pkt(msg_to_send, current_type, current_id, current_sender, current_content, 0);
 		actual_send(AM_BROADCAST_ADDR, &packet);
 		call Timer1.startOneShot(1000);
 		
 	} 
-	//CASE 2: ack arrived in time
+	// CASE 2: ack arrived in time
 	else {
 		dbg("sensor_node","ACK ARRIVED CORRECTLY!\n");
 		flag_ack= FALSE;	
@@ -294,24 +298,24 @@ implementation {
 				if(locked){return bufPtr;} 
 				else{
     				
-					dbg("server_node","MSG arrived at server %d from gateway %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n \t\t\tCONTENT:%d\n", TOS_NODE_ID,received_pkt -> gateway, received_pkt-> sender, received_pkt-> id,received_pkt-> content );
+					dbg("server_node","MSG arrived at server %d from gateway %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n \t\t\tCONTENT:%d\n",TOS_NODE_ID,received_pkt->gateway,received_pkt-> sender,received_pkt->id,received_pkt->content);
 					
 					// 1) Checking and saving MSG
 					handle_msg(saved_msg,received_pkt);
 					
-					dbg("server_node", "MSG SAVED IN TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n", saved_msg.node[0],saved_msg.node[1],saved_msg.node[2],saved_msg.node[3],saved_msg.node[4]);
-					dbg_clear("server_node","\t\t\tID:%d,%d,%d,%d,%d\n",saved_msg.id[0],saved_msg.id[1],saved_msg.id[2],saved_msg.id[3],saved_msg.id[4]);
-					dbg_clear("server_node","\t\t\tCONTENT:%d,%d,%d,%d,%d\n",saved_msg.content[0],saved_msg.content[1],saved_msg.content[2],saved_msg.content[3],saved_msg.content[4]);
+					dbg("server_node", "MSG SAVED IN TABLE\n\t\t\tNODE:%d,%d,%d,%d,%d\n",saved_msg.node[0], saved_msg.node[1], saved_msg.node[2], saved_msg.node[3], saved_msg.node[4]);
+					dbg_clear("server_node","\t\t\tID:%d,%d,%d,%d,%d\n",saved_msg.id[0], saved_msg.id[1], saved_msg.id[2], saved_msg.id[3], saved_msg.id[4]);
+					dbg_clear("server_node","\t\t\tCONTENT:%d,%d,%d,%d,%d\n",saved_msg.content[0], saved_msg.content[1], saved_msg.content[2], saved_msg.content[3], saved_msg.content[4]);
 					
 					// 2) Creating and sending ACK 
-					fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender,received_pkt-> content , received_pkt -> gateway);
+					fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender, 0, 0);
 					actual_send(received_pkt->gateway, &packet);
 				}
 			} 
 			// B. GATEWAY SIDE (not possible that a MSG arrive to a sensor)
 			else { 
 				// 1) Forwarding MSG
-				dbg("gateway_node","MSG arrived at gateway %d from node %d\n \t\t\tID: %d\n \t\t\tCONTENT:%d\n",TOS_NODE_ID,received_pkt-> sender,received_pkt-> id, received_pkt-> content );
+				dbg("gateway_node","MSG arrived at gateway %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n \t\t\tCONTENT:%d\n",TOS_NODE_ID,received_pkt->sender,received_pkt->id, received_pkt-> content);
 				fill_pkt(packet_to_send, MSG, received_pkt-> id, received_pkt-> sender,received_pkt -> content , TOS_NODE_ID);
 				actual_send(server_node, &packet);
 			}
@@ -327,14 +331,14 @@ implementation {
 			// A. GATEWAY SIDE
 			if (TOS_NODE_ID == 6 || TOS_NODE_ID ==7) { 
 				// 1) Forwarding ACK
-				dbg("gateway_node","ACK ARRIVED at gateway %d\n \t\t\tGATEWAY: %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n \t\t\tCONTENT: %d\n",TOS_NODE_ID, received_pkt-> gateway, received_pkt-> sender, received_pkt-> id , received_pkt-> content);
+				dbg("gateway_node","ACK ARRIVED at gateway %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n",TOS_NODE_ID, received_pkt-> sender, received_pkt-> id);
 				fill_pkt(packet_to_send, ACK, received_pkt-> id, received_pkt-> sender, 0, 0);
 				actual_send(received_pkt->sender, &packet);
 			} 
 			// B. SENSOR SIDE (not possible that an ACK arrive to the server)
 			else {
 				// 1) Setting flag for ACK check
-				dbg("sensor_node","ACK ARRIVED at node %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n", TOS_NODE_ID,received_pkt->sender,received_pkt -> id );
+				dbg("sensor_node","ACK ARRIVED at node %d\n \t\t\tSENDER: %d\n \t\t\tID: %d\n", TOS_NODE_ID, received_pkt->sender, received_pkt -> id );
 				if(current_id == received_pkt -> id && received_pkt->sender ==TOS_NODE_ID) {
 					flag_ack=TRUE;
 				} else {

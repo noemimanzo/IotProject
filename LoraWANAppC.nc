@@ -7,15 +7,12 @@ configuration LoraWANAppC {}
 implementation {
 /****** COMPONENTS *****/
   components MainC, LoraWANC as App;
-  //add the other components here
   components new AMSenderC(AM_LORA_COUNT_MSG);
   components new AMReceiverC(AM_LORA_COUNT_MSG);
   components new TimerMilliC() as Timer0;
   components new TimerMilliC() as Timer1;
-  //components new TimerMilliC() as TimerDelay;
   components ActiveMessageC;
   components RandomC;
-  //components SerialPrintfC;
   
   /****** INTERFACES *****/
   App.Boot -> MainC.Boot;
@@ -24,7 +21,6 @@ implementation {
   App.AMControl -> ActiveMessageC;
   App.Timer0 -> Timer0;
   App.Timer1 -> Timer1;
-  //App.TimerDelay -> TimerDelay;
   App.Packet -> AMSenderC;
   App.Random -> RandomC;
 }
