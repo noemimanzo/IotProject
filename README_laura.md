@@ -1,6 +1,6 @@
 # IotProject - LoraWAN Network
 
-This repo contains the solution to project number 2 of the Politecnico di Milano course Internet of things class 2023. 
+This repository contains the solution to project number 2 of the Politecnico di Milano course Internet of things class 2023. 
 
 ## Description 
 
@@ -14,7 +14,7 @@ Sensor nodes 1,2,3,4,5 periodically transmit random data that are received by on
 
 ## Implementation
 
-The project was executed in several steps, each focusing on different aspects of the implementation. The following phases outline the key platforms utilized throughout the project:
+The project was executed in several steps, each focusing on different aspects of the implementation. The key platforms used throughout the project are:
 
 1. TinyOS with TOSSIM simulator for logical implementation: in this phase we were able to logically implement the essential components, including node, communication, ack and duplicated messages management.
 2. Node-RED for MQTT transmission: we integrate Node-RED to establish a MQTT-based connection between the simulated Network Server and an external environment to send sensor nodes data.
