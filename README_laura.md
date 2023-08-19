@@ -23,7 +23,7 @@ Sensor nodes 1,2,3,4,5 periodically transmit random data that are received by on
 
 The project was executed in several steps, each focusing on different aspects of the implementation. The key platforms used throughout the project are:
 
-1. TinyOS with TOSSIM simulator for logical implementation: in this phase we were able to logically implement the essential components, including node, communication, ack and duplicated messages management.
-2. Node-RED for MQTT transmission: we integrate Node-RED to establish a MQTT-based connection between the simulated Network Server and an external environment to send sensor nodes data.
-3. Thingspeak for graphical visualization of sensor data: it enables the real-time display of collected information sent by Node-RED on a public channel
+1. `TinyOS` with TOSSIM simulator for logical implementation: in this phase we were able to logically implement the essential components, including node, communication, ack and duplicated messages management.
+2. `Node-RED` for MQTT transmission: we integrate Node-RED to establish a MQTT-based connection between the simulated Network Server and an external environment to send sensor nodes data.
+3. `Thingspeak` for graphical visualization of sensor data: it enables the real-time display of collected information sent by Node-RED on a public channel
 
