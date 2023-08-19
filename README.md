@@ -19,10 +19,8 @@ The project was executed in several steps, each focusing on different aspects of
 3. `Thingspeak` for graphical visualization of sensor data: it enables the real-time display of collected information sent by Node-RED on a public channel
 
 ## How to run
-
-
 	
-In order to 
+In order to execute the code, follow the steps below:  
 1. Cloning the repository and navigate to the directory using the terminal
 
 ```
@@ -34,30 +32,32 @@ cd IotProject
 
 2. Execute the simulation
 ```
-
 make micaz sim
-
 ```
 3. Open node-red and import the flow contents in the clipboard `nodeRED.txt`. The _Topic setting_ node and the MQTT node contains our channel and our credentials so they need to be updated with your channel ID and your credentials respectively
 4. Launch the simulation by running
 ``` 
 python RunSimulationScript.py
 ```
-Node-RED will receive messages, parse them, and transmit the data to ThingSpeak every 15 seconds. The collected data will become visible on your specified channel.
+Node-RED will receive the messages and transmit them periodically to Thingspeak.
+
+**IMPORTANT:** To ensure proper functionality, Node-RED must remain active throughout the simulation. It is crucial to start Node-RED before initiating the simulation process.
 	
-**IMPORTANT:**To ensure proper functionality, Node-RED must remain active throughout the simulation. It is crucial to start Node-RED before initiating the simulation process.
-	
-Our last simulation is contained in the file TOSSIM_LOG.txt and the public channel is available at the <a href="https://thingspeak.com/channels/2227986">ThingSpeak channel</a>
+Our last simulation is contained in the file  `TOSSIM_LOG.txt` and the public channel is available at the <a href="https://thingspeak.com/channels/2227986">ThingSpeak channel</a>.
 
 If you need to clear all the data from a channel for a better visualisation, you can do so by following these steps. You can utilize the <a href="https://www.postman.com/">POSTMAN </a> site to experiment with HTTP requests via the ThingSpeak RESTful API. The HTTP request format for deletion is as follows:
 <p align="center">
-	DELETE https://api.thingspeak.com/channels/IDchannel/feeds.json
-    api_key=XXXXXXXXXXXXXXXX
+	DELETE https://api.thingspeak.com/channels/IDchannel/feeds.json <br/>
+	api_key=XXXXXXXXXXXXXXXX
 </p>
-1. In POSTMAN, select DELETE from the drop-down list of HTTP verbs.
-2. In the address bar, enter https://api.thingspeak.com/channels/_channelID_/feeds.json, replacing _channelID_ with the ID of the channel you want to clear.
-3. Under the Body, choose x-www-form-urlencoded.
-4. Enter the parameter api_key and your user API Key, which is found in Account > My Profile. 
+
+* In POSTMAN, select DELETE from the drop-down list of HTTP verbs
+
+* In the address bar, enter https://api.thingspeak.com/channels/_channelID_/feeds.json, replacing _channelID_ with the ID of the channel you want to clear
+
+* Under the Body, choose x-www-form-urlencoded
+
+* Enter the parameter api_key and your user API Key, which is found in Account > My Profile
 
 ## Authors
 Noemi Manzo, Laura Pozzi 
