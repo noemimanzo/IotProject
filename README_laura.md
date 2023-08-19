@@ -2,9 +2,9 @@
 
 <p align="center">
 Noemi Manzo
-
+<p align="center">
 Laura Pozzi
-</p>
+
 
 
 This repository contains the solution to project number 2 of the Politecnico di Milano course Internet of things class 2023. 
